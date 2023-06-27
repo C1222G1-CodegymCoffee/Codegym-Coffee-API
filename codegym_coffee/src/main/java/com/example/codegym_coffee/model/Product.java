@@ -3,54 +3,77 @@ package com.example.codegym_coffee.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String description;
-    @Column(columnDefinition = "Varchar(40)")
-    private String name;
+
+    @Column(name = "id_product")
+    private Integer idProduct;
+
+    @Column(name = "code_product",columnDefinition = "Varchar(40)")
+    private String codeProduct;
+
+    @Column(name = "name_product",columnDefinition = "Varchar(40)")
+    private String nameProduct;
+
+    @Column(name = "description", columnDefinition = "MEDIUMTEXT")
+    private String ingredient;
+
+    @Column(name = "price",columnDefinition = "DOUBLE")
     private double price;
-    @Column(columnDefinition = "MEDIUMTEXT")
+
+    @Column(name = "image",columnDefinition = "MEDIUMTEXT")
     private String image;
+
     @ManyToOne
-    @JoinColumn(name = "product_type_id", referencedColumnName = "id")
+    @JoinColumn(name = "id_type", referencedColumnName = "id_type")
     private ProductType productType;
 
     public Product() {
     }
 
-    public Product(int id, String description, String name, double price, String image, ProductType productType) {
-        this.id = id;
-        this.description = description;
-        this.name = name;
+    public Product(Integer idProduct, String codeProduct, String nameProduct,
+                   String ingredient, double price, String image, ProductType productType) {
+        this.idProduct = idProduct;
+        this.codeProduct = codeProduct;
+        this.nameProduct = nameProduct;
+        this.ingredient = ingredient;
         this.price = price;
         this.image = image;
         this.productType = productType;
     }
 
-    public int getId() {
-        return id;
+    public Integer getIdProduct() {
+        return idProduct;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdProduct(Integer idProduct) {
+        this.idProduct = idProduct;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCodeProduct() {
+        return codeProduct;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCodeProduct(String codeProduct) {
+        this.codeProduct = codeProduct;
     }
 
-    public String getName() {
-        return name;
+    public String getNameProduct() {
+        return nameProduct;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameProduct(String nameProduct) {
+        this.nameProduct = nameProduct;
+    }
+
+    public String getIngredient() {
+        return ingredient;
+    }
+
+    public void setIngredient(String ingredient) {
+        this.ingredient = ingredient;
     }
 
     public double getPrice() {

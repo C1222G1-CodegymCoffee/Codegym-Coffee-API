@@ -3,37 +3,44 @@ package com.example.codegym_coffee.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "bill_detail")
 public class BillDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id_bill_detail")
+    private Integer idBillDetail;
+    @Column(name = "quantity_product")
     private int quantityOfProduct;
+
+    @Column(name ="price_of_product",columnDefinition = "DOUBLE")
     private double priceOfProduct;
+
     @ManyToOne
-    @JoinColumn(name = "bill_id", nullable = false)
+    @JoinColumn(name = "id_bill", referencedColumnName = "id_bill", nullable = false)
     private Bill bill;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "id_product",referencedColumnName = "id_product", nullable = false)
     private Product product;
 
     public BillDetail() {
     }
 
-    public BillDetail(int id, int quantityOfProduct, double priceOfProduct, Bill bill, Product product) {
-        this.id = id;
+    public BillDetail(Integer idBillDetail, int quantityOfProduct,
+                      double priceOfProduct, Bill bill, Product product) {
+        this.idBillDetail = idBillDetail;
         this.quantityOfProduct = quantityOfProduct;
         this.priceOfProduct = priceOfProduct;
         this.bill = bill;
         this.product = product;
     }
 
-    public int getId() {
-        return id;
+    public Integer getIdBillDetail() {
+        return idBillDetail;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdBillDetail(Integer idBillDetail) {
+        this.idBillDetail = idBillDetail;
     }
 
     public int getQuantityOfProduct() {

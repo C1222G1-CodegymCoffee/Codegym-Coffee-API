@@ -3,10 +3,14 @@ package com.example.codegym_coffee.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "account_role")
 public class AccountRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+
+    @Column(name = "id_account_role")
+    private Integer idAccountRole;
+
     @ManyToOne
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
@@ -18,18 +22,12 @@ public class AccountRole {
     public AccountRole() {
     }
 
-    public AccountRole(int id, Account account, Role role) {
-        this.id = id;
-        this.account = account;
-        this.role = role;
+    public Integer getIdAccountRole() {
+        return idAccountRole;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setIdAccountRole(Integer idAccountRole) {
+        this.idAccountRole = idAccountRole;
     }
 
     public Account getAccount() {

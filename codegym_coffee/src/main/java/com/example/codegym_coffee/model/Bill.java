@@ -1,48 +1,69 @@
 package com.example.codegym_coffee.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
+@Table(name = "bill")
 public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(columnDefinition = "date")
-    private String dayOfBill;
+    @Column(name = "id_bill")
+    private Integer idBill;
+
+    @Column(name = "code_bill", columnDefinition = "Varchar(40)")
+    private String codeBill;
+
+    @Column(name = "day_of_bill",columnDefinition = "date")
+    private LocalDate dayOfBill;
+
     @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    @JoinColumn(name = "employee_id")
     private Employee employee;
-    @ManyToOne
-    @JoinColumn(name = "feedback_id", referencedColumnName = "id")
-    private Feedback feedback;
-    @ManyToOne
-    @JoinColumn(name = "table_coffee_id", referencedColumnName = "id")
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_table", referencedColumnName = "id_table")
     private TableCoffee tableCoffee;
+
+
+    @OneToOne(optional = true)
+    @JoinColumn(name = "id_feedback", referencedColumnName = "id_feedback")
+    private Feedback feedback;
 
     public Bill() {
     }
 
-    public Bill(int id, String dayOfBill, Employee employee, Feedback feedback, TableCoffee tableCoffee) {
-        this.id = id;
+    public Bill(Integer idBill, String codeBill, LocalDate dayOfBill,
+                Employee employee, TableCoffee tableCoffee, Feedback feedback) {
+        this.idBill = idBill;
+        this.codeBill = codeBill;
         this.dayOfBill = dayOfBill;
         this.employee = employee;
-        this.feedback = feedback;
         this.tableCoffee = tableCoffee;
+        this.feedback = feedback;
     }
 
-    public int getId() {
-        return id;
+    public Integer getIdBill() {
+        return idBill;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdBill(Integer idBill) {
+        this.idBill = idBill;
     }
 
-    public String getDayOfBill() {
+    public String getCodeBill() {
+        return codeBill;
+    }
+
+    public void setCodeBill(String codeBill) {
+        this.codeBill = codeBill;
+    }
+
+    public LocalDate getDayOfBill() {
         return dayOfBill;
     }
 
-    public void setDayOfBill(String dayOfBill) {
+    public void setDayOfBill(LocalDate dayOfBill) {
         this.dayOfBill = dayOfBill;
     }
 
@@ -54,19 +75,19 @@ public class Bill {
         this.employee = employee;
     }
 
-    public Feedback getFeedback() {
-        return feedback;
-    }
-
-    public void setFeedback(Feedback feedback) {
-        this.feedback = feedback;
-    }
-
     public TableCoffee getTableCoffee() {
         return tableCoffee;
     }
 
     public void setTableCoffee(TableCoffee tableCoffee) {
         this.tableCoffee = tableCoffee;
+    }
+
+    public Feedback getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(Feedback feedback) {
+        this.feedback = feedback;
     }
 }

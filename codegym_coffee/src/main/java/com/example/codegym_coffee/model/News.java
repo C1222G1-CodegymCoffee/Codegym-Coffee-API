@@ -1,41 +1,59 @@
 package com.example.codegym_coffee.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
+@Table(name = "news")
 public class News {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String content;
-    @Column(columnDefinition = "date")
-    private String dayPost;
-    @Column(columnDefinition = "MEDIUMTEXT")
-    private String image;
-    @Column(columnDefinition = "Varchar(30)")
+    @Column(name = "id_news")
+    private Integer idNews;
+
+    @Column(name = "title",columnDefinition = "Varchar(30)")
     private String title;
+
+    @Column(name = "content",columnDefinition = "MEDIUMTEXT")
+    private String content;
+
+    @Column(name = "day_post")
+    private LocalDate dayPost;
+
+    @Column(name = "image",columnDefinition = "MEDIUMTEXT")
+    private String image;
+
     @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    @JoinColumn(name = "id_employee", referencedColumnName = "id_employee")
     private Employee employee;
 
     public News() {
     }
 
-    public News(int id, String content, String dayPost, String image, String title, Employee employee) {
-        this.id = id;
+    public News(Integer idNews, String title, String content,
+                LocalDate dayPost, String image, Employee employee) {
+        this.idNews = idNews;
+        this.title = title;
         this.content = content;
         this.dayPost = dayPost;
         this.image = image;
-        this.title = title;
         this.employee = employee;
     }
 
-    public int getId() {
-        return id;
+    public Integer getIdNews() {
+        return idNews;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdNews(Integer idNews) {
+        this.idNews = idNews;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
@@ -46,11 +64,11 @@ public class News {
         this.content = content;
     }
 
-    public String getDayPost() {
+    public LocalDate getDayPost() {
         return dayPost;
     }
 
-    public void setDayPost(String dayPost) {
+    public void setDayPost(LocalDate dayPost) {
         this.dayPost = dayPost;
     }
 
@@ -60,14 +78,6 @@ public class News {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public Employee getEmployee() {

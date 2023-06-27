@@ -1,43 +1,60 @@
 package com.example.codegym_coffee.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
+@Table(name = "employee")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+
+    @Column(name = "id_employee")
+    private Integer idEmployee;
+
     private Boolean gender;
-    @Column(columnDefinition = "date")
-    private String dateOfBirth;
+
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
+
+    @Column(name = "salary", columnDefinition = "DOUBLE PRECISION")
     private double salary;
-    @Column(columnDefinition = "MEDIUMTEXT")
+
+    @Column(name = "image",columnDefinition = "MEDIUMTEXT")
     private String image;
-    @Column(columnDefinition = "Varchar(40)")
-    private String name;
-    @Column(columnDefinition = "Varchar(40)")
+
+    @Column(name = "name_employee",columnDefinition = "Varchar(40)")
+    private String nameEmployee;
+
+    @Column(name = "address",columnDefinition = "Varchar(40)")
     private String address;
-    @Column(columnDefinition = "Varchar(15)")
+
+    @Column(name = "phone_number",columnDefinition = "Varchar(15)")
     private String phoneNumber;
-    @Column(columnDefinition = "Varchar(40)")
+
+    @Column(name = "email",columnDefinition = "Varchar(40)")
     private String email;
+
     @ManyToOne
-    @JoinColumn(name = "position_id", referencedColumnName = "id")
+    @JoinColumn(name = "id_position", referencedColumnName = "id_position")
     private Position position;
-    @ManyToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_account", referencedColumnName = "id_account")
     private Account account;
 
     public Employee() {
     }
 
-    public Employee(int id, Boolean gender, String dateOfBirth, double salary, String image, String name, String address, String phoneNumber, String email, Position position, Account account) {
-        this.id = id;
+    public Employee(Integer idEmployee, Boolean gender, LocalDate dateOfBirth, double salary,
+                    String image, String nameEmployee, String address,
+                    String phoneNumber, String email, Position position, Account account) {
+        this.idEmployee = idEmployee;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.salary = salary;
         this.image = image;
-        this.name = name;
+        this.nameEmployee = nameEmployee;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -45,12 +62,12 @@ public class Employee {
         this.account = account;
     }
 
-    public int getId() {
-        return id;
+    public Integer getIdEmployee() {
+        return idEmployee;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdEmployee(Integer idEmployee) {
+        this.idEmployee = idEmployee;
     }
 
     public Boolean getGender() {
@@ -61,11 +78,11 @@ public class Employee {
         this.gender = gender;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -85,12 +102,12 @@ public class Employee {
         this.image = image;
     }
 
-    public String getName() {
-        return name;
+    public String getNameEmployee() {
+        return nameEmployee;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameEmployee(String nameEmployee) {
+        this.nameEmployee = nameEmployee;
     }
 
     public String getAddress() {

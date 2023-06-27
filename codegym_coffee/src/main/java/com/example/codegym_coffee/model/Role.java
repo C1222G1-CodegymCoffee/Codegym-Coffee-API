@@ -3,34 +3,38 @@ package com.example.codegym_coffee.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(columnDefinition = "Varchar(40)")
-    private String name;
+
+    @Column(name = "id_role")
+    private Integer idRole;
+
+    @Column(name = "name_role",columnDefinition = "Varchar(40)")
+    private String nameRole;
 
     public Role() {
     }
 
-    public Role(int id, String name) {
-        this.id = id;
-        this.name = name;
+    public Role(Integer idRole, String nameRole) {
+        this.idRole = idRole;
+        this.nameRole = nameRole;
     }
 
-    public int getId() {
-        return id;
+    public Integer getIdRole() {
+        return idRole;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdRole(Integer idRole) {
+        this.idRole = idRole;
     }
 
-    public String getName() {
-        return name;
+    public String getNameRole() {
+        return nameRole;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameRole(String nameRole) {
+        this.nameRole = nameRole;
     }
 }

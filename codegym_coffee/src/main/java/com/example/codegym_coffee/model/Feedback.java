@@ -1,48 +1,82 @@
 package com.example.codegym_coffee.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
+@Table(name = "feedback")
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column(columnDefinition = "date")
-    private String dayOfFeedback;
-    @Column(columnDefinition = "MEDIUMTEXT")
-    private String image;
-    @Column(columnDefinition = "Varchar(40)")
-    private String creator;
-    private String content;
-    @Column(columnDefinition = "Varchar(40)")
+    @Column(name = "id_feedback")
+    private Integer idFeedback;
+
+    @Column(name = "code_feedback",columnDefinition = "Varchar(40)")
+    private String codeFeedback;
+
+    @Column(name = "day_of_feedback")
+    private LocalDate dayOfFeedback;
+
+    @Column(name = "email", columnDefinition = "Varchar(40)")
     private String email;
+
+    @Column(name = "image",columnDefinition = "MEDIUMTEXT")
+    private String image;
+
+    @Column(name = "creator",columnDefinition = "Varchar(40)")
+    private String creator;
+
+    @Column(name = "content", columnDefinition = "MEDIUMTEXT")
+    private String content;
+
+    @OneToOne(mappedBy = "feedback")
+    private Bill bill;
 
     public Feedback() {
     }
 
-    public Feedback(int id, String dayOfFeedback, String image, String creator, String content, String email) {
-        this.id = id;
+    public Feedback(Integer idFeedback, String codeFeedback, LocalDate dayOfFeedback,
+                    String email, String image, String creator, String content, Bill bill) {
+        this.idFeedback = idFeedback;
+        this.codeFeedback = codeFeedback;
         this.dayOfFeedback = dayOfFeedback;
+        this.email = email;
         this.image = image;
         this.creator = creator;
         this.content = content;
-        this.email = email;
+        this.bill = bill;
     }
 
-    public int getId() {
-        return id;
+    public Integer getIdFeedback() {
+        return idFeedback;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdFeedback(Integer idFeedback) {
+        this.idFeedback = idFeedback;
     }
 
-    public String getDayOfFeedback() {
+    public String getCodeFeedback() {
+        return codeFeedback;
+    }
+
+    public void setCodeFeedback(String codeFeedback) {
+        this.codeFeedback = codeFeedback;
+    }
+
+    public LocalDate getDayOfFeedback() {
         return dayOfFeedback;
     }
 
-    public void setDayOfFeedback(String dayOfFeedback) {
+    public void setDayOfFeedback(LocalDate dayOfFeedback) {
         this.dayOfFeedback = dayOfFeedback;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getImage() {
@@ -69,11 +103,11 @@ public class Feedback {
         this.content = content;
     }
 
-    public String getEmail() {
-        return email;
+    public Bill getBill() {
+        return bill;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setBill(Bill bill) {
+        this.bill = bill;
     }
 }
