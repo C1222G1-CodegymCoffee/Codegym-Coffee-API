@@ -7,7 +7,6 @@ import javax.persistence.*;
 public class TableCoffee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id_table")
     private Integer idTable;
 
