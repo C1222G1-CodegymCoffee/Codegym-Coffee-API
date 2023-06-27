@@ -1,5 +1,7 @@
 package com.example.codegym_coffee.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,7 +9,6 @@ import javax.persistence.*;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id_account")
     private Integer idAccount;
 
@@ -17,7 +18,8 @@ public class Account {
     @Column(name = "password", columnDefinition = "Varchar(50)")
     private String password;
 
-    @OneToOne(mappedBy = "account")
+    @OneToOne(mappedBy = "account",cascade = CascadeType.ALL)
+    @JsonIgnore
     private Employee employee;
 
     public Account() {

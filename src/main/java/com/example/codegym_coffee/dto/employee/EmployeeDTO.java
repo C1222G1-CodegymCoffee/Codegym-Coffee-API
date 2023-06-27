@@ -1,57 +1,29 @@
-package com.example.codegym_coffee.model;
+package com.example.codegym_coffee.dto.employee;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.example.codegym_coffee.model.Account;
+import com.example.codegym_coffee.model.Position;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "employee")
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name = "id_employee")
+public class EmployeeDTO {
     private Integer idEmployee;
-
     private Boolean gender;
-
-    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
-
-    @Column(name = "salary", columnDefinition = "DOUBLE PRECISION")
     private double salary;
-
-    @Column(name = "image",columnDefinition = "MEDIUMTEXT")
     private String image;
-
-    @Column(name = "name_employee",columnDefinition = "Varchar(40)")
     private String nameEmployee;
-
-    @Column(name = "address",columnDefinition = "Varchar(40)")
     private String address;
-
-    @Column(name = "phone_number",columnDefinition = "Varchar(15)")
     private String phoneNumber;
-
-    @Column(name = "email",columnDefinition = "Varchar(40)")
     private String email;
-
-    @ManyToOne
-    @JoinColumn(name = "id_position", referencedColumnName = "id_position")
     private Position position;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_account", referencedColumnName = "id_account")
-    @JsonManagedReference
     private Account account;
 
-    public Employee() {
+    // Constructors, getters, and setters
+
+    public EmployeeDTO() {
     }
 
-    public Employee(Integer idEmployee, Boolean gender, LocalDate dateOfBirth, double salary,
-                    String image, String nameEmployee, String address,
-                    String phoneNumber, String email, Position position, Account account) {
+    public EmployeeDTO(Integer idEmployee, Boolean gender, LocalDate dateOfBirth, double salary, String image, String nameEmployee, String address, String phoneNumber, String email, Position position, Account account) {
         this.idEmployee = idEmployee;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
@@ -64,6 +36,8 @@ public class Employee {
         this.position = position;
         this.account = account;
     }
+
+    // Getters and Setters
 
     public Integer getIdEmployee() {
         return idEmployee;
@@ -153,3 +127,4 @@ public class Employee {
         this.account = account;
     }
 }
+
