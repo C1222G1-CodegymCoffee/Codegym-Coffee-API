@@ -7,15 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SaleService implements ISaleService {
-    private final ISaleRepository saleRepository;
-
-    public SaleService(ISaleRepository saleRepository) {
-        this.saleRepository = saleRepository;
-    }
+    @Autowired
+    private ISaleRepository saleRepository;
 
     @Override
     public List<TableCoffee> findAll() {
@@ -26,6 +22,4 @@ public class SaleService implements ISaleService {
     public TableCoffee findById(int id) {
         return saleRepository.findById(id);
     }
-
-
 }

@@ -1,6 +1,7 @@
 package com.example.codegym_coffee.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "table_coffee")
@@ -16,18 +17,15 @@ public class TableCoffee {
     @Column(name = "status")
     private int status;
 
-    @OneToOne(mappedBy = "tableCoffee")
-    private Bill bill;
 
     public TableCoffee() {
     }
 
 
-    public TableCoffee(Integer idTable, String nameTable, int status, Bill bill) {
+    public TableCoffee(Integer idTable, String nameTable, int status) {
         this.idTable = idTable;
         this.nameTable = nameTable;
         this.status = status;
-        this.bill = bill;
     }
 
     public Integer getIdTable() {
@@ -52,13 +50,5 @@ public class TableCoffee {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public Bill getBill() {
-        return bill;
-    }
-
-    public void setBill(Bill bill) {
-        this.bill = bill;
     }
 }
