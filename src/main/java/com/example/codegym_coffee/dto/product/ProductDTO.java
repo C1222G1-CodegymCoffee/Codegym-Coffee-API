@@ -1,40 +1,30 @@
-package com.example.codegym_coffee.model;
+package com.example.codegym_coffee.dto.product;
+
+import com.example.codegym_coffee.model.ProductType;
+import org.hibernate.validator.constraints.Length;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
-@Entity
-@Table(name = "product")
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(name = "id_product")
+public class ProductDTO implements Validator {
     private Integer idProduct;
-
-    @Column(name = "code_product",columnDefinition = "Varchar(40)")
     private String codeProduct;
-
-    @Column(name = "name_product",columnDefinition = "Varchar(40)")
+    @NotBlank(message = "Tên món không được để trống")
+    @Length(max = 40,message = "Tên món không dài quá 40 từ")
     private String nameProduct;
-
-    @Column(name = "ingredient", columnDefinition = "MEDIUMTEXT")
+    @NotBlank(message = "Thành phần không được để trống")
     private String ingredient;
-
-    @Column(name = "price",columnDefinition = "DOUBLE")
+    @NotBlank(message = "Giá không được để trống")
     private double price;
-
-    @Column(name = "image",columnDefinition = "MEDIUMTEXT")
+    @NotBlank(message = "Ảnh không được để trống")
     private String image;
-
-    @ManyToOne
-    @JoinColumn(name = "id_type", referencedColumnName = "id_type")
+    @NotBlank(message = "Nhóm món không được để trống")
     private ProductType productType;
 
-    public Product() {
-    }
-
-    public Product(Integer idProduct, String codeProduct, String nameProduct,
-                   String ingredient, double price, String image, ProductType productType) {
+    public ProductDTO(Integer idProduct, String codeProduct, String nameProduct, String ingredient, double price, String image, ProductType productType) {
         this.idProduct = idProduct;
         this.codeProduct = codeProduct;
         this.nameProduct = nameProduct;
@@ -42,6 +32,10 @@ public class Product {
         this.price = price;
         this.image = image;
         this.productType = productType;
+    }
+
+    public ProductDTO() {
+
     }
 
     public Integer getIdProduct() {
@@ -98,5 +92,15 @@ public class Product {
 
     public void setProductType(ProductType productType) {
         this.productType = productType;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }
