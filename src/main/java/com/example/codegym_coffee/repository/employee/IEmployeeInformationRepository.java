@@ -1,30 +1,25 @@
-package com.example.codegym_coffee.repository.account;
+package com.example.codegym_coffee.repository.employee;
 
 import com.example.codegym_coffee.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 
-@Repository
-public interface IAccountInformationRepository extends JpaRepository<Employee, Integer> {
+public interface IEmployeeInformationRepository extends JpaRepository<Employee, Integer> {
     /**
      * Author:QuynhHTN
      * Date create: 27/06/2023
-     * Function: use findbyId method to find out personal information
+     * Function: use findByNameAccount method to find out personal information
      *
-     * @param idEmployee
+     * @param nameAccount
      * @return
      */
-    @Modifying
-    @Transactional
-    @Query(value = "select * from employee where id_employee=:idEmployee", nativeQuery = true)
-    Employee findByEmployeeId(@Param("idEmployee") Integer idEmployee);
-
+    @Query(value = "select * from employee e join account a on e.id_account = a.id_account where a.name_account = :nameAccount", nativeQuery = true)
+    Employee findByNameAccount(@Param("nameAccount") String nameAccount);
     /**
      * Author:QuynhHTN
      * Date create: 27/06/2023
@@ -40,7 +35,7 @@ public interface IAccountInformationRepository extends JpaRepository<Employee, I
      */
     @Modifying
     @Transactional
-    @Query(value = "update employee set name_employee=:nameEmployee,gender=:gender,phone_number=:phoneNumber,salary=:salary,date_of_birth=:dateOfBirth,image=:image,id_position=:idPosition, address=:address where id_employee=:idEmployee", nativeQuery = true)
+    @Query(value = "update employee set name_employee=:nameEmployee,gender=:gender,phone_number=:phoneNumber,salary=:salary,date_of_birth=:dateOfBirth,image=:image,id_position=:idPosition, address=:address where id_employee = :idEmployee", nativeQuery = true)
     void updateEmployee(@Param("nameEmployee") String nameEmployee,
                         @Param("gender") Boolean gender,
                         @Param("phoneNumber") String phoneNumber,
@@ -48,6 +43,11 @@ public interface IAccountInformationRepository extends JpaRepository<Employee, I
                         @Param("salary") double salary,
                         @Param("idPosition") Integer idPosition,
                         @Param("address") String address,
-                        @Param("image") String image);
+                        @Param("image") String image,
+                        @Param("idEmployee") Integer idEmployee);
 
+//    @Modifying
+//    @Transactional
+//    @Query(value = "UPDATE account SET password = :newPassword WHERE id_account = :id",nativeQuery = true)
+//    void updatePassword(@Param("newPassword")String newPassword,@Param("id")Integer id);
 }

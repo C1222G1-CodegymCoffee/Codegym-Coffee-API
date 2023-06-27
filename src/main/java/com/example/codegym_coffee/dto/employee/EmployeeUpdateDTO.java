@@ -1,27 +1,26 @@
-package com.example.codegym_coffee.dto.account;
+package com.example.codegym_coffee.dto.employee;
 
+import com.example.codegym_coffee.dto.account.PositionDTO;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import javax.validation.ConstraintViolation;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Set;
 
 public class EmployeeUpdateDTO implements Validator {
-    private Integer idEmployee;
+    private String nameAccount;
     @NotNull(message = "Vui lòng chọn giới tính")
     private Boolean gender;
-    @NotBlank(message = "Không được bỏ trống")
+    @NotNull(message = "Không được bỏ trống")
     private LocalDate dateOfBirth;
-    @NotBlank(message = "Không được bỏ trống")
+    @NotNull(message = "Không được bỏ trống")
     private double salary;
     @NotBlank(message = "Không được bỏ trống")
-    @Pattern(regexp = "^.{0,}(.png|.jpg|.jpeg)[?](alt=media&token=).{0,}$",message = "Sai định dạng ảnh, phải có dạng đuôi .jpg, .jpeg, .png")
+//    @Pattern(regexp = "^.{0,}(.png|.jpg|.jpeg)[?](alt=media&token=).{0,}$",message = "Sai định dạng ảnh, phải có dạng đuôi .jpg, .jpeg, .png")
     private String image;
     @NotBlank(message = "Không được bỏ trống")
     @Pattern(regexp = "^([a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+)$",message = "Tên phải nhập đúng định dạng. VD: Nguyễn Văn A")
@@ -39,15 +38,16 @@ public class EmployeeUpdateDTO implements Validator {
     }
     public int getAge() {
         LocalDate currentDate = LocalDate.now();
-        LocalDate birthDate = dateOfBirth;
+        LocalDate birthDate = getDateOfBirth();
         return Period.between(birthDate, currentDate).getYears();
     }
-    public Integer getIdEmployee() {
-        return idEmployee;
+
+    public String getNameAccount() {
+        return nameAccount;
     }
 
-    public void setIdEmployee(Integer idEmployee) {
-        this.idEmployee = idEmployee;
+    public void setNameAccount(String nameAccount) {
+        this.nameAccount = nameAccount;
     }
 
     public Boolean getGender() {

@@ -22,6 +22,10 @@ public class Position {
         this.name = name;
     }
 
+    public Position(Integer idPosition) {
+        this.idPosition = idPosition;
+    }
+
     public Integer getIdPosition() {
         return idPosition;
     }

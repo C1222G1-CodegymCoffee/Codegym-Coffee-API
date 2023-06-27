@@ -1,5 +1,7 @@
 package com.example.codegym_coffee.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,17 +9,14 @@ import javax.persistence.*;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id_account")
     private Integer idAccount;
-
     @Column(name = "name_account",columnDefinition = "Varchar(40)")
     private String nameAccount;
-
     @Column(name = "password", columnDefinition = "Varchar(50)")
     private String password;
-
     @OneToOne(mappedBy = "account")
+    @JsonBackReference
     private Employee employee;
 
     public Account() {
@@ -61,4 +60,6 @@ public class Account {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
+
 }
