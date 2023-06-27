@@ -16,7 +16,7 @@ public class BillDetail {
     private double priceOfProduct;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bill_id")
+    @JoinColumn(name = "id_bill")
     private Bill bill;
 
     @ManyToOne

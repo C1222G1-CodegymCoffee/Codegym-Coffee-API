@@ -22,4 +22,9 @@ public class SaleService implements ISaleService {
     public TableCoffee findById(int id) {
         return saleRepository.findById(id);
     }
+
+    @Override
+    public void saveWithStatusReset(int id) {
+        saleRepository.saveWithStatusReset(id);
+    }
 }
