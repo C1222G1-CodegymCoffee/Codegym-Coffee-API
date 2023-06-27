@@ -40,7 +40,13 @@ public class FeedbackController {
         }
         return new ResponseEntity<>(listFeedback, HttpStatus.OK);
     }
-
+    /**
+     * @param dayOfFeedback
+     * @return ResponseEntity<>(listFeedbackDay,HttpStatus.OK)
+     * @Author TrinhCHT
+     * @Date_create: 27/06/2023
+     * @Usage_method The method used to search feedback by dayOfFeedback
+     */
     @GetMapping("/search/{dayOfFeedback}")
     public ResponseEntity<Page<Feedback>> getFeedbackByDay(@PathVariable("dayOfFeedback")
                                                            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -51,6 +57,14 @@ public class FeedbackController {
         }
         return new ResponseEntity<>(listFeedbackDay, HttpStatus.OK);
     }
+
+    /**
+     * @param id
+     * @return ResponseEntity<>(feedback, HttpStatus.OK)
+     * @Author TrinhCHT
+     * @Date_create: 27/06/2023
+     * @Usage_method The method used to show detail feedback
+     */
     @GetMapping("/detail/{id}")
     public ResponseEntity<Feedback> getFeedbackById(@PathVariable("id") Integer id) {
         Feedback feedback = feedbackService.getFeedbackById(id);
@@ -60,6 +74,14 @@ public class FeedbackController {
         return new ResponseEntity<>(feedback, HttpStatus.OK);
     }
 
+
+    /**
+     * @param searchTerm
+     * @return ResponseEntity<>(feedbackPage, HttpStatus.OK)
+     * @Author TrinhCHT
+     * @Date_create: 27/06/2023
+     * @Usage_method The method used to search feedback by searchTerm
+     */
     @GetMapping("/search1/{searchTerm}")
     public ResponseEntity<Page<Feedback>> searchFeedbackByCreatorOrContent(@PathVariable("searchTerm") String searchTerm,
                                                                            @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
@@ -71,7 +93,5 @@ public class FeedbackController {
         }
         return new ResponseEntity<>(feedbackPage, HttpStatus.OK);
     }
-
-
 }
 
