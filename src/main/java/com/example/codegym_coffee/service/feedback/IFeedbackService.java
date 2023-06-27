@@ -11,5 +11,7 @@ import java.time.LocalDate;
 public interface IFeedbackService {
     Page<Feedback> findAllFeedback( Pageable pageable);
     Page<Feedback> findFeedbackByDay(LocalDate dayOfFeedback, Pageable pageable);
+    Feedback getFeedbackById(Integer id);
+    Page<Feedback> findFeedbackByCreatorOrContent(String searchTerm, Pageable pageable);
 
 }

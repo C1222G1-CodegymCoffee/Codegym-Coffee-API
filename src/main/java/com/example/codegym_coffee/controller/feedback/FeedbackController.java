@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/admin/feedback")
@@ -24,14 +24,15 @@ public class FeedbackController {
     private IFeedbackService feedbackService;
 
     /**
-     * @Author TrinhCHT
-     * @Date_create: 27/06/2023
      * @param pageable (10)
      * @return ResponseEntity<>(listFeedback,HttpStatus.OK)
-     *  @Usage_method The method used to show list feedback
+     * @Author TrinhCHT
+     * @Date_create: 27/06/2023
+     * @Usage_method The method used to show list feedback
      */
     @GetMapping("/")
-    public ResponseEntity<Page<Feedback>> list(@PageableDefault(size = 10) Pageable pageable, @RequestParam(value = "page", defaultValue = "0") int page) {
+    public ResponseEntity<Page<Feedback>> list(@PageableDefault(size = 10) Pageable pageable,
+                                               @RequestParam(value = "page", defaultValue = "0") int page) {
         pageable = PageRequest.of(page, 10);
         Page<Feedback> listFeedback = feedbackService.findAllFeedback(pageable);
         if (listFeedback.isEmpty()) {
@@ -40,14 +41,37 @@ public class FeedbackController {
         return new ResponseEntity<>(listFeedback, HttpStatus.OK);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<Page<Feedback>> getFeedbackByDay(@RequestParam("dayOfFeedback") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dayOfFeedback,
-                                                           Pageable pageable) {
+    @GetMapping("/search/{dayOfFeedback}")
+    public ResponseEntity<Page<Feedback>> getFeedbackByDay(@PathVariable("dayOfFeedback")
+                                                           @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                                           LocalDate dayOfFeedback, Pageable pageable) {
         Page<Feedback> listFeedbackDay = feedbackService.findFeedbackByDay(dayOfFeedback, pageable);
         if (listFeedbackDay.isEmpty()) {
             return new ResponseEntity<>(listFeedbackDay, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(listFeedbackDay, HttpStatus.OK);
     }
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<Feedback> getFeedbackById(@PathVariable("id") Integer id) {
+        Feedback feedback = feedbackService.getFeedbackById(id);
+        if (feedback == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(feedback, HttpStatus.OK);
+    }
+
+    @GetMapping("/search1/{searchTerm}")
+    public ResponseEntity<Page<Feedback>> searchFeedbackByCreatorOrContent(@PathVariable("searchTerm") String searchTerm,
+                                                                           @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+                                                                           Model model) {
+        Pageable pageable = PageRequest.of(page, 10, Sort.by("dayOfFeedback").descending());
+        Page<Feedback> feedbackPage = feedbackService.findFeedbackByCreatorOrContent(searchTerm, pageable);
+        if (feedbackPage.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(feedbackPage, HttpStatus.OK);
+    }
+
+
 }
 

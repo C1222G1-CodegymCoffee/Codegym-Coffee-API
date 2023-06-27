@@ -25,4 +25,13 @@ public class FeedbackService implements IFeedbackService {
         return feedbackRepository.findByDayOfFeedback(dayOfFeedback, pageable);
     }
 
+    @Override
+    public Feedback getFeedbackById(Integer id) {
+        return feedbackRepository.findFeedbackById(id);
+    }
+
+    @Override
+    public Page<Feedback> findFeedbackByCreatorOrContent(String searchTerm, Pageable pageable) {
+        return feedbackRepository.findFeedbackByCreatorOrContent(searchTerm, pageable);
+    }
 }
