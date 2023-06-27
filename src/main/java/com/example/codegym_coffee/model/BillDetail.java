@@ -15,9 +15,9 @@ public class BillDetail {
     @Column(name ="price_of_product",columnDefinition = "DOUBLE")
     private double priceOfProduct;
 
-    @ManyToOne
-    @JoinColumn(name = "id_bill", referencedColumnName = "id_bill", nullable = false)
-    private Bill bill;
+//    @ManyToOne
+//    @JoinColumn(name = "id_bill", referencedColumnName = "id_bill", nullable = false)
+//    private Bill bill;
 
     @ManyToOne
     @JoinColumn(name = "id_product",referencedColumnName = "id_product", nullable = false)
@@ -31,7 +31,7 @@ public class BillDetail {
         this.idBillDetail = idBillDetail;
         this.quantityOfProduct = quantityOfProduct;
         this.priceOfProduct = priceOfProduct;
-        this.bill = bill;
+//        this.bill = bill;
         this.product = product;
     }
 
@@ -59,13 +59,13 @@ public class BillDetail {
         this.priceOfProduct = priceOfProduct;
     }
 
-    public Bill getBill() {
-        return bill;
-    }
-
-    public void setBill(Bill bill) {
-        this.bill = bill;
-    }
+//    public Bill getBill() {
+//        return bill;
+//    }
+//
+//    public void setBill(Bill bill) {
+//        this.bill = bill;
+//    }
 
     public Product getProduct() {
         return product;
