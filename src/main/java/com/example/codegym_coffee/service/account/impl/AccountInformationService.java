@@ -19,7 +19,7 @@ public class AccountInformationService implements IAccountInformationService {
     }
 
     @Override
-    public void updateEmployee(String nameEmployee, Boolean gender, LocalDate dateOfBirth, String phoneNumber, String address, Integer idPosition, String image, String salary) {
-        iAccountInformationRepository.updateEmployee(nameEmployee,gender,phoneNumber,dateOfBirth,salary,idPosition,address,image);
+    public void updateEmployee(String nameEmployee, Boolean gender, LocalDate dateOfBirth, String phoneNumber, String address, Integer idPosition, String image, double salary) {
+        iAccountInformationRepository.updateEmployee(nameEmployee,gender,phoneNumber,dateOfBirth, salary,idPosition,address,image);
     }
 }

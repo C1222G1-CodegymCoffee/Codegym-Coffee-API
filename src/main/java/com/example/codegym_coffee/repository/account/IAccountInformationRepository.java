@@ -45,7 +45,7 @@ public interface IAccountInformationRepository extends JpaRepository<Employee, I
                         @Param("gender") Boolean gender,
                         @Param("phoneNumber") String phoneNumber,
                         @Param("dateOfBirth") LocalDate dateOfBirth,
-                        @Param("salary") String salary,
+                        @Param("salary") double salary,
                         @Param("idPosition") Integer idPosition,
                         @Param("address") String address,
                         @Param("image") String image);

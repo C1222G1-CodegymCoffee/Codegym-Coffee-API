@@ -25,5 +25,5 @@ public interface IAccountInformationService {
      * @param address
      * @param idPosition
      */
-    void updateEmployee(String nameEmployee, Boolean gender, LocalDate dateOfBirth,String phoneNumber,String address,Integer idPosition,String image,String salary);
+    void updateEmployee(String nameEmployee, Boolean gender, LocalDate dateOfBirth,String phoneNumber,String address,Integer idPosition,String image,double salary);
 }

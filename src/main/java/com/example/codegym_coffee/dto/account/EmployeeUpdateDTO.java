@@ -2,14 +2,17 @@ package com.example.codegym_coffee.dto.account;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Set;
 
-public class EmployeeUpdateDTO{
+public class EmployeeUpdateDTO implements Validator {
     private Integer idEmployee;
     @NotNull(message = "Vui lòng chọn giới tính")
     private Boolean gender;
@@ -109,5 +112,15 @@ public class EmployeeUpdateDTO{
 
     public void setPositionDTO(PositionDTO positionDTO) {
         this.positionDTO = positionDTO;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        EmployeeUpdateDTO employeeUpdateDTO=(EmployeeUpdateDTO) target;
     }
 }

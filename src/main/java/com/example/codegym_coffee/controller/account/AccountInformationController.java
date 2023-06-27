@@ -8,14 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/employee")
@@ -23,32 +17,46 @@ import java.util.Map;
 public class AccountInformationController {
     @Autowired
     private IAccountInformationService iAccountInformationService;
+
+    /**
+     * Author:QuynhHTN
+     * Date create: 27/06/2023
+     * Function: use findbyId method to find out personal information
+     * @param idEmployee
+     * @return
+     */
     @GetMapping("/{idEmployee}")
-    public ResponseEntity<Employee>findByEmployeeId(@PathVariable Integer idEmployee){
-        Employee employee= iAccountInformationService.findByEmployeeId(idEmployee);
-        if(employee==null){
+    public ResponseEntity<Employee> findByEmployeeId(@PathVariable Integer idEmployee) {
+        Employee employee = iAccountInformationService.findByEmployeeId(idEmployee);
+        if (employee == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(employee,HttpStatus.OK);
+        return new ResponseEntity<>(employee, HttpStatus.OK);
     }
-@PatchMapping("/update/{idEmployee}")
-public ResponseEntity<?> updateEmployee(HttpServletRequest request, @Validated @RequestBody EmployeeUpdateDTO employeeUpdateDTO, BindingResult bindingResult){
+
+    /**
+     * Author:QuynhHTN
+     * Date create: 27/06/2023
+     * Function:update employee data if ID is not found then return HttpStatus.NOT_FOUND,
+      if found ID then edit data in DB and return HttpStatus.OK
+     * @param idEmployee
+     * @param employeeUpdateDTO
+     * @param bindingResult
+     * @return
+     */
+    @PatchMapping("/update/{idEmployee}")
+    public ResponseEntity<?> updateEmployee(@PathVariable("idEmployee") Integer idEmployee, @Validated @RequestBody EmployeeUpdateDTO employeeUpdateDTO, BindingResult bindingResult) {
+        new EmployeeUpdateDTO().validate(employeeUpdateDTO, bindingResult);
+        employeeUpdateDTO.setIdEmployee(idEmployee);
         if (bindingResult.hasErrors()) {
-        Map<String, String> map = new LinkedHashMap<>();
-        List<FieldError> err = bindingResult.getFieldErrors();
-        for (FieldError error : err) {
-            if (!map.containsKey(error.getField())) {
-                map.put(error.getField(), error.getDefaultMessage());
-            }
+            return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+        Employee employee = iAccountInformationService.findByEmployeeId(idEmployee);
+        if (employee == null) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            iAccountInformationService.updateEmployee(employeeUpdateDTO.getNameEmployee(), employeeUpdateDTO.getGender(), employeeUpdateDTO.getDateOfBirth(), employeeUpdateDTO.getPhoneNumber(), employeeUpdateDTO.getAddress(), employeeUpdateDTO.getPositionDTO().getIdPosition(), employeeUpdateDTO.getImage(), employeeUpdateDTO.getSalary());
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
-
-    int age = employeeUpdateDTO.getAge();
-    if (age < 15) {
-        return new ResponseEntity<>(new ResponseMessage("Người dùng phải từ 15 tuổi trở lên"),HttpStatus.BAD_REQUEST);
-    }
-Employee employee= iAccountInformationService.findByEmployeeId(
-
-}
 }
