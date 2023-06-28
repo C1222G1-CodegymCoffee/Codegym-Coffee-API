@@ -27,6 +27,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_nameEmployee_19() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee(null);
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -47,6 +48,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_phoneNumber_19() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh");
         employeeUpdateDTO.setPhoneNumber(null);
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -67,6 +69,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_address_19() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress(null);
@@ -87,6 +90,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_dateOfBirth_19() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -107,6 +111,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_image_19() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -127,6 +132,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_salary_19() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -147,6 +153,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_gender_19() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -167,6 +174,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_IdPosition_19() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -187,6 +195,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_nameEmployee_20() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -207,6 +216,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_phoneNumber_20() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh");
         employeeUpdateDTO.setPhoneNumber("");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -227,6 +237,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_address_20() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("");
@@ -247,6 +258,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_dateOfBirth_20() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -266,6 +278,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_image_20() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -286,6 +299,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_salary_20() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -305,6 +319,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_nameEmployee_21() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh#*");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -325,6 +340,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_phoneNumber_21() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh");
         employeeUpdateDTO.setPhoneNumber("0368581566#abc");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -341,9 +357,11 @@ public class EmployeeInformationController_patchUpdateEmployee {
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
     @Test
     public void patchUpdateEmployee_image_21() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -364,6 +382,7 @@ public class EmployeeInformationController_patchUpdateEmployee {
     @Test
     public void patchUpdateEmployee_nameEmployee_22() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoa");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -380,9 +399,11 @@ public class EmployeeInformationController_patchUpdateEmployee {
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
     @Test
     public void patchUpdateEmployee_salary_22() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -399,9 +420,11 @@ public class EmployeeInformationController_patchUpdateEmployee {
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
-@Test
+
+    @Test
     public void patchUpdateEmployee_nameEmployee_23() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -420,8 +443,9 @@ public class EmployeeInformationController_patchUpdateEmployee {
     }
 
     @Test
-    public void patchUpdateEmployee_salary_24() throws Exception {
+    public void patchUpdateEmployee_24() throws Exception {
         EmployeeUpdateDTO employeeUpdateDTO = new EmployeeUpdateDTO();
+        employeeUpdateDTO.setNameAccount("admin1");
         employeeUpdateDTO.setNameEmployee("Hoàng Thị Như Quỳnh");
         employeeUpdateDTO.setPhoneNumber("0368581566");
         employeeUpdateDTO.setAddress("Đà Nẵng");
@@ -431,6 +455,8 @@ public class EmployeeInformationController_patchUpdateEmployee {
         employeeUpdateDTO.setGender(true);
         PositionDTO positionDTO = new PositionDTO();
         positionDTO.setIdPosition(1);
+        employeeUpdateDTO.setPositionDTO(positionDTO);
+
         this.mockMvc.perform(MockMvcRequestBuilders
                         .patch("/employee/update")
                         .content(this.objectMapper.writeValueAsString(employeeUpdateDTO))
