@@ -39,7 +39,7 @@ public class BillController {
         pageable = PageRequest.of(page, 10);
         Page<Bill> billPage = billService.showBill(pageable, search);
         if (billPage.isEmpty()) {
-            return new ResponseEntity<>(billPage, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(billPage, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(billPage, HttpStatus.OK);
     }
