@@ -26,8 +26,8 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private IAccountRepository accountRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = this.accountRepository.findByAccountUser(username);
+    public Account loadUserByUsername(String username) throws UsernameNotFoundException {
+        Account account = this.accountRepository.findByNameAccount(username);
         if (account == null) {
             System.out.println("User not found! " + username);
             throw new UsernameNotFoundException("User " + username + " was not found in the database");
@@ -44,9 +44,9 @@ public class UserDetailServiceImpl implements UserDetailsService {
             }
         }
 
-        UserDetails userDetails = (UserDetails) new User(account.getNameAccount(),
+        Account account1 = new Account(account.getUsername(),
                 account.getPassword(), grantList);
 
-        return userDetails;
+        return account1;
     }
 }
