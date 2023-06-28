@@ -15,7 +15,7 @@ public class Account {
     @Column(name = "name_account",columnDefinition = "Varchar(40)")
     private String nameAccount;
 
-    @Column(name = "password", columnDefinition = "Varchar(50)")
+    @Column(name = "password", columnDefinition = "Varchar(255)")
     private String password;
 
     @OneToOne(mappedBy = "account",cascade = CascadeType.ALL)

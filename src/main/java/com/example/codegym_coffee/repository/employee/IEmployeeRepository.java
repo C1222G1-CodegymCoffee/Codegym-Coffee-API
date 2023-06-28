@@ -1,6 +1,5 @@
 package com.example.codegym_coffee.repository.employee;
 
-import com.example.codegym_coffee.dto.employee.EmployeeDTO;
 import com.example.codegym_coffee.model.Account;
 import com.example.codegym_coffee.model.Employee;
 import com.example.codegym_coffee.model.Position;
@@ -21,27 +20,27 @@ import java.util.List;
 
 public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
 
-    @Query(value = "select * from employee where nameEmployee like %:nameEmployee% and account like %:account% and phoneNumber like %:phoneNumber% ", nativeQuery = true)
-    List<Employee> showListByEmployee(String nameEmployee, Account account, String phoneNumber);
+//    @Query(value = "select * from employee where nameEmployee like %:nameEmployee% and account like %:account% and phoneNumber like %:phoneNumber% ", nativeQuery = true)
+//    List<Employee> showListByEmployee(String nameEmployee, Account account, String phoneNumber);
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO employee (nameEmployee, gender, dateOfBirth, salary, image, address, phoneNumber, email, position, account) "
-            + "VALUES (:nameEmployee, :gender, :dateOfBirth, :salary, :image, :address, :phoneNumber, :email, :position, :account)",
+    @Query(value = "INSERT INTO employee ( name_employee,gender,date_of_birth, salary, image, address, phone_number, email, id_position, id_account) "
+            + "VALUES (:name_employee, :gender, :date_of_birth, :salary, :image, :address, :phone_number, :email, :id_position, :id_account)",
             nativeQuery = true)
-    EmployeeDTO addEmployee(
-            @Param("nameEmployee") String nameEmployee,
-            @Param("gender") boolean gender,
-            @Param("dateOfBirth") LocalDate dateOfBirth,
+    void addEmployee(
+            @Param("name_employee") String nameEmployee,
+            @Param("gender") Boolean gender,
+            @Param("date_of_birth") LocalDate dateOfBirth,
             @Param("salary") double salary,
             @Param("image") String image,
             @Param("address") String address,
-            @Param("phoneNumber") String phoneNumber,
+            @Param("phone_number") String phoneNumber,
             @Param("email") String email,
-            @Param("position") Position position,
-            @Param("account") Account account
+            @Param("id_position") Position position,
+            @Param("id_account") Account account
     );
 
-
-
+    @Query(value = "select * from employee",nativeQuery = true)
+    List<Employee> showListEmployee();
 }

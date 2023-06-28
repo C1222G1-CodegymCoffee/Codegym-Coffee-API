@@ -2,21 +2,60 @@ package com.example.codegym_coffee.dto.employee;
 
 import com.example.codegym_coffee.model.Account;
 import com.example.codegym_coffee.model.Position;
+import org.springframework.format.annotation.NumberFormat;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 public class EmployeeDTO {
+
+    @NotNull
     private Integer idEmployee;
+
+    @NotNull
+    @NotBlank(message = "Không được để trống")
     private Boolean gender;
+
+    @NotNull
+    @NotBlank(message = "Không được để trống")
     private LocalDate dateOfBirth;
+    @NotNull
+    @NotBlank(message = "Không được để trống")
+
     private double salary;
+
+    @NotNull
+    @NotBlank(message = "Không được để trống")
+
     private String image;
+
+    @NotNull
+    @NotBlank(message = "Không được để trống")
+
     private String nameEmployee;
+    @NotNull
+    @NotBlank(message = "Không được để trống")
+
     private String address;
+    @NotNull
+    @NotBlank(message = "Không được để trống")
+
     private String phoneNumber;
+    @NotNull
+    @NotBlank(message = "Không được để trống")
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\n")
     private String email;
+    @NotNull
+    @NotBlank(message = "Không được để trống")
     private Position position;
+    @NotNull
+    @NotBlank(message = "Không được để trống")
+
     private Account account;
+
 
     // Constructors, getters, and setters
 

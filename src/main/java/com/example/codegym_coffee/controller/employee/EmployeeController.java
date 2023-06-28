@@ -6,7 +6,10 @@ import com.example.codegym_coffee.model.Account;
 import com.example.codegym_coffee.model.Employee;
 import com.example.codegym_coffee.service.employee.impl.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,14 +31,23 @@ public class EmployeeController {
 
 
     @GetMapping("")
-    public List<Employee> list( @RequestParam(required = false, defaultValue = "") String nameEmployee, Account account,String phoneNumber) {
-        return employeeService.showList(nameEmployee,account,phoneNumber);
+    public List<Employee> list() {
+        return employeeService.showList();
     }
+
+//    @GetMapping("/list-employee")
+//    public Page<Employee> findAllEmployee(
+//            @PageableDefault(size = 2,sort = "id", direction = Sort.Direction.DESC)Pageable pageable,
+//            @RequestParam(required = false, defaultValue = "") String name,Account account ,String phoneNumber) {
+//        Page<Employee> employee = employeeService.findAllEmployee(name,account,phoneNumber, (java.awt.print.Pageable) pageable);
+//        List<Employee> employees = employee.toList();
+//        return new PageImpl<>(employees, pageable,employee.getTotalElements());
+//    }
 
     @PostMapping("")
     public ResponseEntity<?> saveEmployee(@Validated @RequestBody EmployeeDTO employeeDTO, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
-            employeeService.addEmployee(employeeDTO.getGender(),employeeDTO.getDateOfBirth(),employeeDTO.getSalary(),employeeDTO.getNameEmployee(),employeeDTO.getImage(),employeeDTO.getAddress(),employeeDTO.getPhoneNumber(),employeeDTO.getEmail(),employeeDTO.getPosition(),employeeDTO.getAccount());
+            employeeService.addEmployee(employeeDTO.getNameEmployee(),employeeDTO.getGender(),employeeDTO.getDateOfBirth(),employeeDTO.getSalary(),employeeDTO.getImage(),employeeDTO.getAddress(),employeeDTO.getPhoneNumber(),employeeDTO.getEmail(),employeeDTO.getPosition(),employeeDTO.getAccount());
         } else {
             Map<String, String> map = new LinkedHashMap<>();
             List<FieldError> errors = bindingResult.getFieldErrors();
