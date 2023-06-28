@@ -1,4 +1,4 @@
-package com.example.codegym_coffee;
+package com.example.codegym_coffee.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

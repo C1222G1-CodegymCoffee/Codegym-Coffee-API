@@ -1,4 +1,4 @@
-package com.example.codegym_coffee;
+package com.example.codegym_coffee.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class SaleController_getBillDetailsAndTotalAmountByTableId {
     public void getBillDetailsAndTotalAmountByTableId_8() throws Exception {
         this.mockMvc.perform(
                         MockMvcRequestBuilders
-                                .get("/api/sale/bill-details/"))
+                                .get("/api/sale/bill-details/''"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
