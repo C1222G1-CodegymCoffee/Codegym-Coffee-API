@@ -68,7 +68,7 @@ public class AccountController_changePassword {
     /**
      * Author:QuynhHTN
      * Date create: 28/06/2023
-     * Function: test old password min 5
+     * Function: check old password must be at least 5 characters
      * @throws Exception
      */
     @Test
@@ -76,8 +76,8 @@ public class AccountController_changePassword {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
         changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword("a");
-        changePasswordForm.setNewPassword("abc12345");
-        changePasswordForm.setConfirmPassword("abc12345");
+        changePasswordForm.setNewPassword("abc123456");
+        changePasswordForm.setConfirmPassword("abc123456");
         this.mockMvc
                 .perform(MockMvcRequestBuilders
                         .put("/account/change-password")
@@ -87,6 +87,12 @@ public class AccountController_changePassword {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: test old password maximum 20 characters
+     * @throws Exception
+     */
     @Test
     public void changePassword_oldPassWord_23() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
@@ -103,6 +109,12 @@ public class AccountController_changePassword {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: In case the old password does not exist under the database
+     * @throws Exception
+     */
     @Test
     public void changePassword_oldPassWord_99() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
@@ -119,6 +131,12 @@ public class AccountController_changePassword {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: test new password null
+     * @throws Exception
+     */
     @Test
     public void changePassword_newPassWord_19() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
@@ -135,6 +153,12 @@ public class AccountController_changePassword {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: test new password empty
+     * @throws Exception
+     */
     @Test
     public void changePassword_newPassWord_20() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
@@ -151,6 +175,12 @@ public class AccountController_changePassword {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: test the new password must be at least 5 characters
+     * @throws Exception
+     */
     @Test
     public void changePassword_newPassWord_22() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
@@ -167,6 +197,12 @@ public class AccountController_changePassword {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: test the new password maximum 20 characters
+     * @throws Exception
+     */
     @Test
     public void changePassword_newPassWord_23() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
@@ -183,6 +219,12 @@ public class AccountController_changePassword {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: In case the new password does not exist under the database
+     * @throws Exception
+     */
     @Test
     public void changePassword_newPassWord_99() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
@@ -199,6 +241,12 @@ public class AccountController_changePassword {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: test confirm password null
+     * @throws Exception
+     */
     @Test
     public void changePassword_confirmPassword_19() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
@@ -215,6 +263,12 @@ public class AccountController_changePassword {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: test confirm password empty
+     * @throws Exception
+     */
     @Test
     public void changePassword_confirmPassword_20() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
@@ -231,6 +285,12 @@ public class AccountController_changePassword {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: test confirm password must be at least 5 characters
+     * @throws Exception
+     */
     @Test
     public void changePassword_confirmPassword_22() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
@@ -247,6 +307,12 @@ public class AccountController_changePassword {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: test confirm password maximum 20 characters
+     * @throws Exception
+     */
     @Test
     public void changePassword_confirmPassword_23() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
@@ -263,6 +329,12 @@ public class AccountController_changePassword {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: In case confirm password does not exist under the database
+     * @throws Exception
+     */
     @Test
     public void changePassword_confirmPassword_99() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
@@ -279,6 +351,12 @@ public class AccountController_changePassword {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: test the password successful
+     * @throws Exception
+     */
     @Test
     public void changePassword_24() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
@@ -295,6 +373,12 @@ public class AccountController_changePassword {
                 .andExpect(status().is2xxSuccessful());
     }
 
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: test name account null
+     * @throws Exception
+     */
     @Test
     public void changePassword_nameAccount_19() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
@@ -311,6 +395,12 @@ public class AccountController_changePassword {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: test name account empty
+     * @throws Exception
+     */
     @Test
     public void changePassword_nameAccount_20() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();

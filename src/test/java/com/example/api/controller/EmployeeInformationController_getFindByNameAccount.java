@@ -11,40 +11,70 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(classes={com.example.codegym_coffee.SmartCoffeeApplication.class})
+@SpringBootTest(classes = {com.example.codegym_coffee.SmartCoffeeApplication.class})
 @AutoConfigureMockMvc
 public class EmployeeInformationController_getFindByNameAccount {
     @Autowired
     private MockMvc mockMvc;
+
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: test name account null
+     * @throws Exception
+     */
     @Test
     public void getFindByNameAccount_nameAccount_1() throws Exception {
         this.mockMvc.perform(
                         MockMvcRequestBuilders.get(
-                                "/employee/detail?nameAccount={nameAccount}","null"))
+                                "/employee/detail?nameAccount={nameAccount}", "null"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: test name account empty
+     * @throws Exception
+     */
     @Test
     public void getFindByNameAccount_nameAccount_2() throws Exception {
         this.mockMvc.perform(
                         MockMvcRequestBuilders.get(
-                                "/employee/detail?nameAccount={nameAccount}",""))
+                                "/employee/detail?nameAccount={nameAccount}", ""))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: In case the name account does not exist under the database
+     *
+     * @throws Exception
+     */
     @Test
     public void getFindByNameAccount_nameAccount_3() throws Exception {
         this.mockMvc.perform(
                         MockMvcRequestBuilders.get(
-                                "/employee/detail?nameAccount={nameAccount}","quynh"))
+                                "/employee/detail?nameAccount={nameAccount}", "quynh"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
+    /**
+     * Author:QuynhHTN
+     * Date create: 28/06/2023
+     * Function: test find name account is in database
+     * @throws Exception
+     */
+
     @Test
     public void getInfoStudent_id_4() throws Exception {
         this.mockMvc.perform(
                         MockMvcRequestBuilders.get(
-                                "/employee/detail?nameAccount={nameAccount}","admin1"))
+                                "/employee/detail?nameAccount={nameAccount}", "admin1"))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("idEmployee").value(1))

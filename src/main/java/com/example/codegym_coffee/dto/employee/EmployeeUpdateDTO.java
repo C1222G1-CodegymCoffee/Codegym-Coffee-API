@@ -16,7 +16,7 @@ public class EmployeeUpdateDTO implements Validator {
     @NotNull(message = "Không được bỏ trống")
     private LocalDate dateOfBirth;
     @NotNull(message = "Không được bỏ trống")
-    @Min(value = 0,message = "Lương phải lớn hơn 0")
+    @Min(value = 1,message = "Lương phải lớn hơn 1")
     private Double salary;
     @NotBlank(message = "Không được bỏ trống")
 //    @Pattern(regexp = "^.{0,}(.png|.jpg|.jpeg)[?](alt=media&token=).{0,}$",message = "Sai định dạng ảnh, phải có dạng đuôi .jpg, .jpeg, .png")
