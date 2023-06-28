@@ -21,13 +21,13 @@ public class Bill {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_table", referencedColumnName = "id_table")
+    @OneToOne()
+    @JoinColumn(name = "id_table")
     private TableCoffee tableCoffee;
 
 
     @OneToOne(optional = true)
-    @JoinColumn(name = "id_feedback", referencedColumnName = "id_feedback")
+    @JoinColumn(name = "id_feedback")
     private Feedback feedback;
 
     public Bill() {

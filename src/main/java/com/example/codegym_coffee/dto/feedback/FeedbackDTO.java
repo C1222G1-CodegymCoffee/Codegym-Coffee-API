@@ -1,15 +1,33 @@
 package com.example.codegym_coffee.dto.feedback;
 
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class FeedbackDTO {
 
     private Integer idFeedback;
     private String codeFeedback;
-    private String content;
+
+    @NotBlank(message = "Khong duoc bo trong")
+    @Pattern(regexp = "^(?=.*[a-zA-Z\\s])[^!@#$%^&*(),.?\":{}|<>]{4,100}$", message = "Ten khong hop le")
+    @Size(min = 4, max = 99, message = "Ten phai co do dai ty 4 đến 99 ky tu")
     private String creator;
+
+    @NotBlank(message = "khong duoc bo trong")
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email khong hop le")
+    @Size(min = 20, max = 99, message = "email phai co do dai ty 20 đến 99 ky tu")
     private String email;
 
+    @NotBlank(message = "Khong duoc bo trong")
+    @Size(min = 5, max = 200, message = "noi dung phai tu 5 ky tu va khong dai qua 200 ky tu")
+    private String content;
+
+    @NotBlank(message = "Khong duoc bo trong")
+    @Pattern(regexp = "^.{0,}(.png|.jpg|.jpeg)[?](alt=media&token=).{0,}$"
+            ,message = "Sai định dạng ảnh, phải có dạng đuôi .jpg, .jpeg, .png")
     private String image;
 
     private LocalDate dayOfFeedback;

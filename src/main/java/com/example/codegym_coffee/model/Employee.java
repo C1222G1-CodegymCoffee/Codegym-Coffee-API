@@ -18,7 +18,7 @@ public class Employee {
     private LocalDate dateOfBirth;
 
     @Column(name = "salary", columnDefinition = "DOUBLE PRECISION")
-    private double salary;
+    private Double salary;
 
     @Column(name = "image",columnDefinition = "MEDIUMTEXT")
     private String image;
@@ -39,8 +39,8 @@ public class Employee {
     @JoinColumn(name = "id_position", referencedColumnName = "id_position")
     private Position position;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_account", referencedColumnName = "id_account")
+    @OneToOne
+    @JoinColumn(name = "id_account")
     private Account account;
 
     public Employee() {

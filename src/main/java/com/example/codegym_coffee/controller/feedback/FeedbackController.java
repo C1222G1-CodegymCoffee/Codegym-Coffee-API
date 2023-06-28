@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,16 +22,19 @@ public class FeedbackController {
     @Autowired
     private IFeedbackService iFeedbackService;
 
-    @GetMapping("/list")
+    @GetMapping("/admin/list-feedback")
     public ResponseEntity<List<Feedback>> showAll() {
-
         List<Feedback> feedbackList = iFeedbackService.findAllFeedback();
         return new ResponseEntity<>(feedbackList, HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/public/create")
-    public ResponseEntity<?> createFeedback(@Valid @RequestBody FeedbackDTO feedbackDTO) {
+    @PostMapping("/public/create-feedback")
+    public ResponseEntity<?> createFeedback(@Valid @RequestBody FeedbackDTO feedbackDTO,
+                                            BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return new ResponseEntity<>(bindingResult.getFieldError(), HttpStatus.NOT_ACCEPTABLE);
+        }
         iFeedbackService.createFeedback(feedbackDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
