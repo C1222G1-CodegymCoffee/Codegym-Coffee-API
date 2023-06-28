@@ -89,9 +89,9 @@ public class SaleController {
     @GetMapping("/bill-details/{tableId}")
     public ResponseEntity<List<BillDetailDTO>> getBillDetailsAndTotalAmountByTableId(@PathVariable("tableId") int tableId) {
         List<BillDetailDTO> billDetails = billDetailService.getBillDetailsAndTotalAmountByTableId(tableId);
-        if (billDetails == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        if (billDetails.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return new ResponseEntity<>(billDetails,HttpStatus.OK);
+        return ResponseEntity.ok(billDetails);
     }
 }
