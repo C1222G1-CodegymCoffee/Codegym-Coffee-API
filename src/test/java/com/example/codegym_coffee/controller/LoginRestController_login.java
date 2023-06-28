@@ -24,6 +24,11 @@ public class LoginRestController_login {
     @Autowired
     private ObjectMapper objectMapper;
 
+    /**
+     * @void login_nameAccount_13
+     * @throws Exception
+     * test đầu vào là null và kết quả trả về là lỗi 4xx
+     */
     @Test
     public void login_nameAccount_13() throws Exception {
         AuthRequest authRequest = new AuthRequest();
@@ -39,6 +44,11 @@ public class LoginRestController_login {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * @void login_password_13
+     * @throws Exception
+     * test đầu vào là null và kết quả trả về là lỗi 4xx
+     */
     @Test
     public void login_password_13() throws Exception {
         AuthRequest authRequest = new AuthRequest();
@@ -54,6 +64,11 @@ public class LoginRestController_login {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * @void login_nameAccount_14
+     * @throws Exception
+     * test đầu vào là rỗng và kết quả trả về là lỗi 4xx
+     */
     @Test
     public void login_nameAccount_14() throws Exception {
         AuthRequest authRequest = new AuthRequest();
@@ -69,6 +84,11 @@ public class LoginRestController_login {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * @void login_password_14
+     * @throws Exception
+     * test đầu vào là rỗng và kết quả trả về là lỗi 4xx
+     */
     @Test
     public void login_password_14() throws Exception {
         AuthRequest authRequest = new AuthRequest();
@@ -84,6 +104,11 @@ public class LoginRestController_login {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * @void login_password_15
+     * @throws Exception
+     * test đầu vào là sai định dạng và kết quả trả về là lỗi 4xx
+     */
     @Test
     public void login_password_15() throws Exception {
         AuthRequest authRequest = new AuthRequest();
@@ -99,6 +124,11 @@ public class LoginRestController_login {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * @void login_nameAccount_16
+     * @throws Exception
+     * test đầu vào là sai độ dài tên tài khoản và kết quả trả về là lỗi 4xx
+     */
     @Test
     public void login_nameAccount_16() throws Exception {
         AuthRequest authRequest = new AuthRequest();
@@ -114,6 +144,11 @@ public class LoginRestController_login {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * @void login_password_16
+     * @throws Exception
+     * test đầu vào là sai độ dài mật khẩu và kết quả trả về là lỗi 4xx
+     */
     @Test
     public void login_password_16() throws Exception {
         AuthRequest authRequest = new AuthRequest();
@@ -129,6 +164,11 @@ public class LoginRestController_login {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * @void login_nameAccount_17
+     * @throws Exception
+     * test đầu vào là sai độ dài tên tài khoản và kết quả trả về là lỗi 4xx
+     */
     @Test
     public void login_nameAccount_17() throws Exception {
         AuthRequest authRequest = new AuthRequest();
@@ -144,6 +184,11 @@ public class LoginRestController_login {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * @void login_password_17
+     * @throws Exception
+     * test đầu vào là sai độ dài mật khẩu và kết quả trả về là lỗi 4xx
+     */
     @Test
     public void login_password_17() throws Exception {
         AuthRequest authRequest = new AuthRequest();
@@ -159,6 +204,11 @@ public class LoginRestController_login {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * @void login_18
+     * @throws Exception
+     * test đầu vào là hợp lệ và kết quả trả về là thành công 2xx
+     */
     @Test
     public void login_18() throws Exception {
         AuthRequest authRequest = new AuthRequest();
@@ -174,18 +224,11 @@ public class LoginRestController_login {
                 .andExpect(status().is2xxSuccessful());
     }
 
-    @Test
-    public void processForgotPassword_() throws Exception {
-
-        this.mockMvc
-                .perform(MockMvcRequestBuilders
-                        .post("/forgot_password")
-                        .content(this.objectMapper.writeValueAsString(""))
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andDo(print())
-                .andExpect(status().is4xxClientError());
-    }
-
+    /**
+     * @void processForgotPassword_13
+     * @throws Exception
+     * test đầu vào là gmail không có trong dữ liệu và kết quả trả về là lỗi 4xx
+     */
     @Test
     public void processForgotPassword_13() throws Exception {
 
@@ -198,6 +241,11 @@ public class LoginRestController_login {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * @void processForgotPassword_14
+     * @throws Exception
+     * test đầu vào là rỗng và kết quả trả về là lỗi 4xx
+     */
     @Test
     public void processForgotPassword_14() throws Exception {
 
@@ -210,6 +258,11 @@ public class LoginRestController_login {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * @void processForgotPassword_13
+     * @throws Exception
+     * test đầu vào là gmail sai định dạng và kết quả trả về là lỗi 4xx
+     */
     @Test
     public void processForgotPassword_15() throws Exception {
 
@@ -224,6 +277,11 @@ public class LoginRestController_login {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * @void processForgotPassword_13
+     * @throws Exception
+     * test đầu vào là gmail hợp lệ và kết quả trả về là thành công 2xx
+     */
     @Test
     public void processForgotPassword_18() throws Exception {
 
