@@ -1,5 +1,9 @@
 package com.example.codegym_coffee.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,9 +19,6 @@ public class BillDetail {
     @Column(name ="price_of_product",columnDefinition = "DOUBLE")
     private double priceOfProduct;
 
-//    @ManyToOne
-//    @JoinColumn(name = "id_bill", referencedColumnName = "id_bill", nullable = false)
-//    private Bill bill;
 
     @ManyToOne
     @JoinColumn(name = "id_product",referencedColumnName = "id_product", nullable = false)
@@ -26,12 +27,10 @@ public class BillDetail {
     public BillDetail() {
     }
 
-    public BillDetail(Integer idBillDetail, int quantityOfProduct,
-                      double priceOfProduct, Bill bill, Product product) {
+    public BillDetail(Integer idBillDetail, int quantityOfProduct, double priceOfProduct, Bill bill, Product product) {
         this.idBillDetail = idBillDetail;
         this.quantityOfProduct = quantityOfProduct;
         this.priceOfProduct = priceOfProduct;
-//        this.bill = bill;
         this.product = product;
     }
 
@@ -59,13 +58,6 @@ public class BillDetail {
         this.priceOfProduct = priceOfProduct;
     }
 
-//    public Bill getBill() {
-//        return bill;
-//    }
-//
-//    public void setBill(Bill bill) {
-//        this.bill = bill;
-//    }
 
     public Product getProduct() {
         return product;

@@ -5,11 +5,54 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.time.LocalDate;
+
 @Repository
 public interface IBillRepository extends JpaRepository<Bill, Integer> {
-    @Query(value = "select id_bill, code_bill, day_of_bill, employee_id, id_feedback, id_table from bill", nativeQuery = true)
-    Page<Bill> showListBill(Pageable pageable);
+
+    /**
+     * @param pageable (10)
+     * @return findAllBill
+     * @Author ThanhNV
+     * @Date_create: 27/06/2023
+     * @Usage_method findAllBill to show list bill
+     */
+    @Query(value = "select  * from bill"
+            , nativeQuery = true)
+    Page<Bill> showListBill(Pageable pageable, @Param("search") String search);
+
+    /**
+     * @param pageable (10)
+     * @return findByDayOfBill
+     * @Author ThanhNV
+     * @Date_create: 27/06/2023
+     * @Usage_method findByDayOfBill to show list bill where day desiderate
+     */
+    @Query(value = "select * from bill WHERE day_of_bill = :dayOfBill"
+            , nativeQuery = true)
+    Page<Bill> findByDayOfBill(@Param("dayOfBill") LocalDate dayOfBill, Pageable pageable);
+
+
+    /**
+     * @param pageable (10)
+     * @return findByCodeOfBill
+     * @Author ThanhNV
+     * @Date_create: 27/06/2023
+     * @Usage_method findByCodeOfBill to show list bill where code desiderate
+     */
+        @Query(value = "select * from bill WHERE code_bill = :codeBill"
+            , nativeQuery = true)
+    Page<Bill> findByCodeOfBill(@Param("codeBill") String codeBill, Pageable pageable);
+
+
+
+//    @Query(value = "SELECT id_bill, code_bill, day_of_bill, employee_id, id_feedback, id_table, id_bill_detail FROM bill " +
+//            "WHERE code_bill like :search", nativeQuery = true)
+//    Page<Bill> searchBill(Pageable pageable, @Param("search") String search);
+
+//        List<Bill> findByDate(Date day_of_bill);
+
 }

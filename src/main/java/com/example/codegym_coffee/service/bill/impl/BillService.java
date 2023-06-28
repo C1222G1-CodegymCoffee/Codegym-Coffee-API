@@ -8,14 +8,38 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
+
 
 @Service
 public class BillService implements IBillService {
     @Autowired
     private IBillRepository billRepository;
 
-        @Override
-        public Page<Bill> showBill(Pageable pageable) {
-            return billRepository.showListBill(pageable);
-        }
+    @Override
+    public Page<Bill> showBill(Pageable pageable, String search) {
+        return billRepository.showListBill(pageable, search);
+    }
+
+    @Override
+    public Page<Bill> findBillByDay(LocalDate dayOfBill, Pageable pageable) {
+        return billRepository.findByDayOfBill(dayOfBill, pageable);
+    }
+
+    @Override
+    public Page<Bill> findBillByCode(String codeBill, Pageable pageable) {
+        return billRepository.findByCodeOfBill(codeBill, pageable);
+    }
+
+//    @Override
+//    public List<Bill> searchBillByDate(Date day_of_bill) {
+//        return billRepository.findByDate(day_of_bill);
+//    }
+
+//    @Override
+//    public Page<Bill> searchBill(Pageable pageable, String search) {
+//        return billRepository.searchBill(pageable, search);
+//    }
 }

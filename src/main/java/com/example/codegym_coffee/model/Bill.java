@@ -1,5 +1,7 @@
 package com.example.codegym_coffee.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -14,7 +16,7 @@ public class Bill {
     @Column(name = "code_bill", columnDefinition = "Varchar(40)")
     private String codeBill;
 
-    @Column(name = "day_of_bill",columnDefinition = "date")
+    @Column(name = "day_of_bill", columnDefinition = "date")
     private LocalDate dayOfBill;
 
     @ManyToOne
@@ -22,25 +24,29 @@ public class Bill {
     private Employee employee;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_table", referencedColumnName = "id_table")
+    @JoinColumn(name = "id_table")
     private TableCoffee tableCoffee;
 
-
     @OneToOne(optional = true)
-    @JoinColumn(name = "id_feedback", referencedColumnName = "id_feedback")
+    @JoinColumn(name = "id_feedback")
     private Feedback feedback;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_bill_detail")
+    private BillDetail billDetail;
+
 
     public Bill() {
     }
 
-    public Bill(Integer idBill, String codeBill, LocalDate dayOfBill,
-                Employee employee, TableCoffee tableCoffee, Feedback feedback) {
+    public Bill(Integer idBill, String codeBill, LocalDate dayOfBill, Employee employee, TableCoffee tableCoffee, Feedback feedback, BillDetail billDetail) {
         this.idBill = idBill;
         this.codeBill = codeBill;
         this.dayOfBill = dayOfBill;
         this.employee = employee;
         this.tableCoffee = tableCoffee;
         this.feedback = feedback;
+        this.billDetail = billDetail;
     }
 
     public Integer getIdBill() {
@@ -89,5 +95,13 @@ public class Bill {
 
     public void setFeedback(Feedback feedback) {
         this.feedback = feedback;
+    }
+
+    public BillDetail getBillDetail() {
+        return billDetail;
+    }
+
+    public void setBillDetail(BillDetail billDetail) {
+        this.billDetail = billDetail;
     }
 }

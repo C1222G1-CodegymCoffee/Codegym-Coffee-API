@@ -2,13 +2,13 @@ package com.example.codegym_coffee.dto.bill;
 
 import org.springframework.validation.Validator;
 import org.springframework.validation.Errors;
+
 import java.time.LocalDate;
 
 public class BillDTO implements Validator {
     private Integer idBill;
 
     private String codeBill;
-
     private LocalDate dayOfBill;
 
     public BillDTO() {
