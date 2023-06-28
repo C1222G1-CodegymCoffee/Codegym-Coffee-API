@@ -7,11 +7,11 @@ import com.example.codegym_coffee.repository.employee.IEmployeeRepository;
 import com.example.codegym_coffee.service.employee.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
 
-import java.awt.print.Pageable;
 import java.time.LocalDate;
-import java.util.List;
 
 @Service
 public class EmployeeService implements IEmployeeService {
@@ -19,9 +19,11 @@ public class EmployeeService implements IEmployeeService {
     private IEmployeeRepository iEmployeeRepository;
 
     @Override
-    public List<Employee> showList() {
-        return iEmployeeRepository.showListEmployee();
+    public Page<Employee> showList(Pageable pageable) {
+        Pageable validPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), pageable.getSort());
+        return iEmployeeRepository.showListEmployee(validPageable);
     }
+
 //    public Page<EmployeeDTO> findAll(String name , Pageable pageable ) {
 //        Page<Employee> employeePage = iEmployeeRepository.findCustomerByCustomerContaining(name, pageable);
 //        List<EmployeeDTO> customerList = new ArrayList<>();
@@ -37,8 +39,10 @@ public class EmployeeService implements IEmployeeService {
 //        return new PageImpl<>(customerList, pageable, employeePage.getTotalElements());
 
 
-
-
+    @Override
+    public Page<Employee> showList(java.awt.print.Pageable pageable) {
+        return null;
+    }
 
     @Override
     public void addEmployee(String nameEmployee, Boolean gender, LocalDate dateOfBirth, double salary,

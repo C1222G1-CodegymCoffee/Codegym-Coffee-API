@@ -31,22 +31,24 @@ public class EmployeeRestController_listEmployee {
 
     @Test
     public void getListStudent_6() throws Exception {
-        Position position = new Position();
+
         this.mockMvc.perform(
                         MockMvcRequestBuilders
                                 .get("http://localhost:8080/home/admin/employee"))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("[0].nameEmployee").value("Hoàng Anh Thắng"))
-                .andExpect(jsonPath("[0].dateOfBirth").value("2004-03-10"))
-                .andExpect(jsonPath("[0].gender").value(true))
-                .andExpect(jsonPath("[0].salary").value(10000000))
-                .andExpect(jsonPath("[0].image").value("123"))
-                .andExpect(jsonPath("[0].address").value("Đà Nẵng"))
-                .andExpect(jsonPath("[0].phoneNumber").value("0915195883"))
-                .andExpect(jsonPath("[0].email").value("hoanganhthanght@gmail.com"))
-                .andExpect(jsonPath("[0].position").value(1))
-                .andExpect(jsonPath("[0].account").value(1));
+                .andExpect(jsonPath("totalPages").value(1))
+                .andExpect(jsonPath("totalElements").value(1))
+                .andExpect(jsonPath("content[0].nameEmployee").value("Hoàng Anh Thắng"))
+                .andExpect(jsonPath("content[0].dateOfBirth").value("2004-03-10"))
+                .andExpect(jsonPath("content[0].gender").value(true))
+                .andExpect(jsonPath("content[0].salary").value(10000000))
+                .andExpect(jsonPath("content[0].image").value("123"))
+                .andExpect(jsonPath("content[0].address").value("Đà Nẵng"))
+                .andExpect(jsonPath("content[0].phoneNumber").value("0915195883"))
+                .andExpect(jsonPath("content[0].email").value("hoanganhthanght@gmail.com"))
+                .andExpect(jsonPath("content[0].position.idPosition").value(1))
+                .andExpect(jsonPath("content[0].account.idAccount").value(1));
 
     }
 }

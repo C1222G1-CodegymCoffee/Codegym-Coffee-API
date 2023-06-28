@@ -1,58 +1,55 @@
 package com.example.codegym_coffee.dto.employee;
 
+import com.example.codegym_coffee.dto.account.AccountDTO;
+import com.example.codegym_coffee.dto.position.PositionDTO;
 import com.example.codegym_coffee.model.Account;
 import com.example.codegym_coffee.model.Position;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.NumberFormat;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.time.Period;
 
-public class EmployeeDTO {
+public class EmployeeDTO implements Validator {
 
-    @NotNull
+
     private Integer idEmployee;
 
-    @NotNull
-    @NotBlank(message = "Không được để trống")
+    @NotNull(message = "Không được để trống")
     private Boolean gender;
 
-    @NotNull
-    @NotBlank(message = "Không được để trống")
+    @NotNull(message = "Không được bỏ trống")
     private LocalDate dateOfBirth;
-    @NotNull
-    @NotBlank(message = "Không được để trống")
-
+    @NotNull(message = "Không được bỏ trống")
+    @Min(value = 1, message = "Lương phải lớn hơn 1")
     private double salary;
 
-    @NotNull
     @NotBlank(message = "Không được để trống")
-
+    @Length(min = 5, max = 30, message = "Trường này ít nhất 5 ký tự và nhiều nhất 30 ký tự")
     private String image;
 
-    @NotNull
-    @NotBlank(message = "Không được để trống")
-
+    @NotBlank(message = "Không được bỏ trống")
+    @Pattern(regexp = "^([a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+)$", message = "Tên phải nhập đúng định dạng. VD: Nguyễn Văn A")
+    @Length(min = 5, max = 30, message = "Trường này ít nhất 5 ký tự và nhiều nhất 30 ký tự")
     private String nameEmployee;
-    @NotNull
     @NotBlank(message = "Không được để trống")
-
+    @Length(min = 5, max = 100, message = "Trường này ít nhất 5 ký tự và nhiều nhất 100 ký tự")
     private String address;
-    @NotNull
-    @NotBlank(message = "Không được để trống")
-
+    @NotBlank(message = "Không được bỏ trống")
+    @Pattern(regexp = "^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$", message = "Nhập đúng định dạng SĐT. VD: 0905.223.XXX (X là chữ số)")
+    @Length(min = 5, max = 20, message = "Trường này ít nhất 5 ký tự và nhiều nhất 20 ký tự")
     private String phoneNumber;
-    @NotNull
-    @NotBlank(message = "Không được để trống")
-    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\n")
+    @NotBlank(message = "khong duoc bo trong")
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email khong hop le")
+    @Size(min = 8, max = 30, message = "email phai co do dai ty 20 đến 30 ky tu")
     private String email;
-    @NotNull
-    @NotBlank(message = "Không được để trống")
+    @NotNull(message = "khong duoc bo trong")
+
     private Position position;
-    @NotNull
-    @NotBlank(message = "Không được để trống")
+    @NotNull(message = "khong duoc bo trong")
 
     private Account account;
 
@@ -75,8 +72,6 @@ public class EmployeeDTO {
         this.position = position;
         this.account = account;
     }
-
-    // Getters and Setters
 
     public Integer getIdEmployee() {
         return idEmployee;
@@ -164,6 +159,16 @@ public class EmployeeDTO {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }
 

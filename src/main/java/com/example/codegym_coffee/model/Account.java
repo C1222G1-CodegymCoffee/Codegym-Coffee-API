@@ -16,6 +16,7 @@ public class Account {
     private String nameAccount;
 
     @Column(name = "password", columnDefinition = "Varchar(255)")
+
     private String password;
 
     @OneToOne(mappedBy = "account",cascade = CascadeType.ALL)
@@ -63,4 +64,7 @@ public class Account {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
+
+
 }

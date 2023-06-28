@@ -3,6 +3,8 @@ package com.example.codegym_coffee.repository.employee;
 import com.example.codegym_coffee.model.Account;
 import com.example.codegym_coffee.model.Employee;
 import com.example.codegym_coffee.model.Position;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +12,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.List;
 
 /**
  * Creator: THangHA
@@ -20,7 +21,7 @@ import java.util.List;
 
 public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
 
-//    @Query(value = "select * from employee where nameEmployee like %:nameEmployee% and account like %:account% and phoneNumber like %:phoneNumber% ", nativeQuery = true)
+//    @Query(value = "select * from employee ", nativeQuery = true)
 //    List<Employee> showListByEmployee(String nameEmployee, Account account, String phoneNumber);
 
     @Modifying
@@ -37,10 +38,10 @@ public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
             @Param("address") String address,
             @Param("phone_number") String phoneNumber,
             @Param("email") String email,
-            @Param("id_position") Position position,
+            @Param("id_position") Position positionDTO,
             @Param("id_account") Account account
     );
 
     @Query(value = "select * from employee",nativeQuery = true)
-    List<Employee> showListEmployee();
+    Page<Employee> showListEmployee(Pageable pageable);
 }

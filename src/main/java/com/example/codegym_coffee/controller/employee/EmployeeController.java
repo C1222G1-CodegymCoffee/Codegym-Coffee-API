@@ -2,15 +2,10 @@ package com.example.codegym_coffee.controller.employee;
 
 
 import com.example.codegym_coffee.dto.employee.EmployeeDTO;
-import com.example.codegym_coffee.model.Account;
 import com.example.codegym_coffee.model.Employee;
 import com.example.codegym_coffee.service.employee.impl.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -30,11 +25,20 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
 
-    @GetMapping("")
-    public List<Employee> list() {
-        return employeeService.showList();
-    }
+//    @GetMapping("")
+//    public Page<Employee> showList(Pageable pageable) {
+//        return employeeService.showList( pageable);
+//    }
 
+    @GetMapping("")
+    public ResponseEntity<Page<Employee>> listEmployee(@RequestParam(value = "page", defaultValue = "0") int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        Page<Employee> listFeedback = employeeService.showList(pageable);
+        if (listFeedback.isEmpty()) {
+            return new ResponseEntity<>(listFeedback, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(listFeedback, HttpStatus.OK);
+    }
 //    @GetMapping("/list-employee")
 //    public Page<Employee> findAllEmployee(
 //            @PageableDefault(size = 2,sort = "id", direction = Sort.Direction.DESC)Pageable pageable,
