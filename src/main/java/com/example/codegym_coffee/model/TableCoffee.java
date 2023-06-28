@@ -11,24 +11,22 @@ public class TableCoffee {
     @Column(name = "id_table")
     private Integer idTable;
 
-    @Column(name = "name_table",columnDefinition = "Varchar(40)")
+    @Column(name = "name_table", columnDefinition = "Varchar(40)")
     private String nameTable;
 
     @Column(name = "status")
     private int status;
 
-    @OneToOne(mappedBy = "tableCoffee")
-    private Bill bill;
 
     public TableCoffee() {
     }
 
 
-    public TableCoffee(Integer idTable, String nameTable, int status, Bill bill) {
+    public TableCoffee(Integer idTable, String nameTable, int status) {
         this.idTable = idTable;
         this.nameTable = nameTable;
         this.status = status;
-        this.bill = bill;
+
     }
 
     public Integer getIdTable() {
@@ -55,11 +53,4 @@ public class TableCoffee {
         this.status = status;
     }
 
-    public Bill getBill() {
-        return bill;
-    }
-
-    public void setBill(Bill bill) {
-        this.bill = bill;
-    }
 }
