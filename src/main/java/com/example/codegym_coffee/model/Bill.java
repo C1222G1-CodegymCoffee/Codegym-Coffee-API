@@ -2,6 +2,7 @@ package com.example.codegym_coffee.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "bill")
@@ -21,7 +22,7 @@ public class Bill {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    @OneToOne()
+    @ManyToOne
     @JoinColumn(name = "id_table")
     private TableCoffee tableCoffee;
 
@@ -30,17 +31,20 @@ public class Bill {
     @JoinColumn(name = "id_feedback")
     private Feedback feedback;
 
+    @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
+    private List<BillDetail> billDetails;
+
+
     public Bill() {
     }
 
-    public Bill(Integer idBill, String codeBill, LocalDate dayOfBill,
-                Employee employee, TableCoffee tableCoffee, Feedback feedback) {
+    public Bill(Integer idBill, String codeBill, LocalDate dayOfBill, Employee employee, Feedback feedback, List<BillDetail> billDetails) {
         this.idBill = idBill;
         this.codeBill = codeBill;
         this.dayOfBill = dayOfBill;
         this.employee = employee;
-        this.tableCoffee = tableCoffee;
         this.feedback = feedback;
+        this.billDetails = billDetails;
     }
 
     public Integer getIdBill() {
@@ -75,19 +79,19 @@ public class Bill {
         this.employee = employee;
     }
 
-    public TableCoffee getTableCoffee() {
-        return tableCoffee;
-    }
-
-    public void setTableCoffee(TableCoffee tableCoffee) {
-        this.tableCoffee = tableCoffee;
-    }
-
     public Feedback getFeedback() {
         return feedback;
     }
 
     public void setFeedback(Feedback feedback) {
         this.feedback = feedback;
+    }
+
+    public List<BillDetail> getBillDetails() {
+        return billDetails;
+    }
+
+    public void setBillDetails(List<BillDetail> billDetails) {
+        this.billDetails = billDetails;
     }
 }

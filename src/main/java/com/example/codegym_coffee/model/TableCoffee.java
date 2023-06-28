@@ -1,13 +1,13 @@
 package com.example.codegym_coffee.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "table_coffee")
 public class TableCoffee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id_table")
     private Integer idTable;
 
@@ -22,7 +22,7 @@ public class TableCoffee {
     }
 
 
-    public TableCoffee(Integer idTable, String nameTable, int status, Bill bill) {
+    public TableCoffee(Integer idTable, String nameTable, int status) {
         this.idTable = idTable;
         this.nameTable = nameTable;
         this.status = status;
@@ -51,5 +51,4 @@ public class TableCoffee {
     public void setStatus(int status) {
         this.status = status;
     }
-
 }
