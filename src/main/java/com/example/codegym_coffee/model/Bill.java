@@ -22,16 +22,18 @@ public class Bill {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
+    @ManyToOne
+    @JoinColumn(name = "id_table")
+    private TableCoffee tableCoffee;
+
+
     @OneToOne(optional = true)
-    @JoinColumn(name = "id_feedback", referencedColumnName = "id_feedback")
+    @JoinColumn(name = "id_feedback")
     private Feedback feedback;
 
     @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
     private List<BillDetail> billDetails;
 
-    @ManyToOne
-    @JoinColumn(name="id_table")
-    private TableCoffee tableCoffee;
 
     public Bill() {
     }

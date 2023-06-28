@@ -17,9 +17,6 @@ public class Account {
     @Column(name = "password", columnDefinition = "Varchar(50)")
     private String password;
 
-    @OneToOne(mappedBy = "account")
-    private Employee employee;
-
     public Account() {
     }
 
@@ -27,7 +24,6 @@ public class Account {
         this.idAccount = idAccount;
         this.nameAccount = nameAccount;
         this.password = password;
-        this.employee = employee;
     }
 
     public Integer getIdAccount() {
@@ -54,11 +50,4 @@ public class Account {
         this.password = password;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
 }

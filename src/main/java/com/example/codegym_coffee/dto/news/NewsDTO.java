@@ -4,9 +4,12 @@ package com.example.codegym_coffee.dto.news;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import javax.validation.constraints.NotBlank;
+
 public class NewsDTO implements Validator {
     private Integer id;
 
+    @NotBlank
     private String name;
 
     public NewsDTO() {
