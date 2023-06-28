@@ -8,7 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.text.Normalizer;
 import java.time.LocalDate;
+import java.util.regex.Pattern;
 
 @Service
 public class FeedbackService implements IFeedbackService {
@@ -32,6 +34,12 @@ public class FeedbackService implements IFeedbackService {
 
     @Override
     public Page<Feedback> findFeedbackByCreatorOrContent(String searchTerm, Pageable pageable) {
-        return feedbackRepository.findFeedbackByCreatorOrContent(searchTerm, pageable);
+        return feedbackRepository.findFeedbackByCreatorOrContent(deAccent(searchTerm), pageable);
+    }
+
+    public static String deAccent(String str) {
+        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(nfdNormalizedString).replaceAll("");
     }
 }

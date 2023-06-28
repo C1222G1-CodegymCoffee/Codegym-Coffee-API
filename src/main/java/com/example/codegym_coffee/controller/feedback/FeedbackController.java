@@ -30,13 +30,14 @@ public class FeedbackController {
      * @Date_create: 27/06/2023
      * @Usage_method The method used to show list feedback
      */
+
     @GetMapping("/")
-    public ResponseEntity<Page<Feedback>> list(@PageableDefault(size = 10) Pageable pageable,
-                                               @RequestParam(value = "page", defaultValue = "0") int page) {
+    public ResponseEntity<Page<Feedback>> listFeedback(@PageableDefault(size = 10) Pageable pageable,
+                                                       @RequestParam(value = "page", defaultValue = "0") int page) {
         pageable = PageRequest.of(page, 10);
         Page<Feedback> listFeedback = feedbackService.findAllFeedback(pageable);
         if (listFeedback.isEmpty()) {
-            return new ResponseEntity<>(listFeedback, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(listFeedback, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(listFeedback, HttpStatus.OK);
     }
@@ -82,7 +83,7 @@ public class FeedbackController {
      * @Date_create: 27/06/2023
      * @Usage_method The method used to search feedback by searchTerm
      */
-    @GetMapping("/search1/{searchTerm}")
+    @GetMapping("/searchTerm/{searchTerm}")
     public ResponseEntity<Page<Feedback>> searchFeedbackByCreatorOrContent(@PathVariable("searchTerm") String searchTerm,
                                                                            @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
                                                                            Model model) {
