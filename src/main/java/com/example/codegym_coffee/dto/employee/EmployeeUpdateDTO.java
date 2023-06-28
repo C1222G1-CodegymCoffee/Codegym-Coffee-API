@@ -5,9 +5,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -18,7 +16,8 @@ public class EmployeeUpdateDTO implements Validator {
     @NotNull(message = "Không được bỏ trống")
     private LocalDate dateOfBirth;
     @NotNull(message = "Không được bỏ trống")
-    private double salary;
+    @Min(value = 0,message = "Lương phải lớn hơn 0")
+    private Double salary;
     @NotBlank(message = "Không được bỏ trống")
 //    @Pattern(regexp = "^.{0,}(.png|.jpg|.jpeg)[?](alt=media&token=).{0,}$",message = "Sai định dạng ảnh, phải có dạng đuôi .jpg, .jpeg, .png")
     private String image;
@@ -36,10 +35,27 @@ public class EmployeeUpdateDTO implements Validator {
 
     public EmployeeUpdateDTO() {
     }
+//    public void setSalary(String input) {
+//        if (input == null || input.isEmpty()) {
+//            salary = null;
+//            System.out.println("Lương không tồn tại.");
+//        } else {
+//            try {
+//                salary = Double.parseDouble(input);
+//                System.out.println("Lương: " + salary);
+//            } catch (NumberFormatException e) {
+//                salary = null;
+//                System.out.println("Không thể chuyển đổi thành số thực.");
+//            }
+//        }
+//    }
     public int getAge() {
         LocalDate currentDate = LocalDate.now();
         LocalDate birthDate = getDateOfBirth();
-        return Period.between(birthDate, currentDate).getYears();
+        if (birthDate!=null){
+            return Period.between(birthDate, currentDate).getYears();
+        }
+        return 0;
     }
 
     public String getNameAccount() {
@@ -66,11 +82,11 @@ public class EmployeeUpdateDTO implements Validator {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public double getSalary() {
+    public Double getSalary() {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(Double salary) {
         this.salary = salary;
     }
 
