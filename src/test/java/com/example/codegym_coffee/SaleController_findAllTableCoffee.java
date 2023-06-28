@@ -17,6 +17,12 @@ public class SaleController_findAllTableCoffee {
 
     @Autowired
     private MockMvc mockMvc;
+
+    /**
+     * @Author: KhaiNLV
+     * Function to check the case of a list with size 0
+     * @Throws Exception if an error occurs during the test execution
+     */
     @Test
     public void findAllTableCoffee_5() throws Exception {
         this.mockMvc.perform(
@@ -26,6 +32,12 @@ public class SaleController_findAllTableCoffee {
                 .andExpect(status().is4xxClientError());
     }
 
+
+    /**
+     * @Author: KhaiNLV
+     * Function to check the case of a list with size greater than 0
+     * @Throws Success
+     */
     @Test
     public void findAllTableCoffee_6() throws Exception {
 

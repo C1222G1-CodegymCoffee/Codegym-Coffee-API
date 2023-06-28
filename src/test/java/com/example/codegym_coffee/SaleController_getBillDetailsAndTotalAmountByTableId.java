@@ -18,6 +18,11 @@ public class SaleController_getBillDetailsAndTotalAmountByTableId {
     @Autowired
     private MockMvc mockMvc;
 
+    /**
+     * @Author: KhaiNLV
+     * This a method use check the return getBillDetailsAndTotalAmountByTableId which param id = null
+     * @Throws Exception
+     */
     @Test
     public void getBillDetailsAndTotalAmountByTableId_7() throws Exception {
         this.mockMvc.perform(
@@ -27,6 +32,11 @@ public class SaleController_getBillDetailsAndTotalAmountByTableId {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * @Author: KhaiNLV
+     * This a method use check the return getBillDetailsAndTotalAmountByTableId ticket which param id = ''
+     * @Throws Exception
+     */
     @Test
     public void getBillDetailsAndTotalAmountByTableId_8() throws Exception {
         this.mockMvc.perform(
@@ -36,6 +46,11 @@ public class SaleController_getBillDetailsAndTotalAmountByTableId {
                 .andExpect(status().is4xxClientError());
     }
 
+    /**
+     * @Author: KhaiNLV
+     * This a method use check the return getBillDetailsAndTotalAmountByTableId id that is not in the database
+     * @Throws Exception
+     */
     @Test
     public void getBillDetailsAndTotalAmountByTableId_9() throws Exception {
         this.mockMvc.perform(
@@ -44,8 +59,28 @@ public class SaleController_getBillDetailsAndTotalAmountByTableId {
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
+    /**
+     * @Author: KhaiNLV
+     * This a method use check the return getBillDetailsAndTotalAmountByTableId id contained in the database
+     * @Throws Exception
+     */
     @Test
-    public void getListStudent_6() throws Exception {
+    public void getBillDetailsAndTotalAmountByTableId_10() throws Exception {
+        this.mockMvc.perform(
+                        MockMvcRequestBuilders
+                                .get("/api/sale/bill-details/1"))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    /**
+     * @Author: KhaiNLV
+     * This a method use check the return getBillDetailsAndTotalAmountByTableId which param id = 2
+     * @Throws Exception
+     */
+    @Test
+    public void getBillDetailsAndTotalAmountByTableId_11() throws Exception {
 
         this.mockMvc.perform(
                         MockMvcRequestBuilders
