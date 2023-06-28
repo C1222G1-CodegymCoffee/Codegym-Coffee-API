@@ -10,7 +10,6 @@ public class Bill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_bill")
     private Integer idBill;
-
     @Column(name = "code_bill", columnDefinition = "Varchar(40)")
     private String codeBill;
 
