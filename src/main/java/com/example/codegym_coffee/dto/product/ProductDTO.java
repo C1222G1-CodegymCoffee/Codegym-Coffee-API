@@ -7,21 +7,24 @@ import org.springframework.validation.Validator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 
 public class ProductDTO implements Validator {
     private Integer idProduct;
+    @NotBlank(message = "Mã số không được để trống")
     private String codeProduct;
     @NotBlank(message = "Tên món không được để trống")
-    @Length(max = 40,message = "Tên món không dài quá 40 từ")
+    @Length(max = 40, message = "Tên món không dài quá 40 từ")
     private String nameProduct;
     @NotBlank(message = "Thành phần không được để trống")
     private String ingredient;
-    @NotBlank(message = "Giá không được để trống")
     private double price;
-    @NotBlank(message = "Ảnh không được để trống")
+    @NotBlank(message = "Hình ảnh không được để trống")
+    @Pattern(regexp = "^.{0,}(.png|.jpg|.jpeg)[?](alt=media&token=).{0,}$", message = "Sai định dạng ảnh, phải có dạng đuôi .jpg, .jpeg, .png")
     private String image;
-    @NotBlank(message = "Nhóm món không được để trống")
+    @NotNull
     private ProductType productType;
 
     public ProductDTO(Integer idProduct, String codeProduct, String nameProduct, String ingredient, double price, String image, ProductType productType) {

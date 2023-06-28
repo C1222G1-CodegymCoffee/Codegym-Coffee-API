@@ -2,10 +2,8 @@ package com.example.codegym_coffee.service.product;
 
 import com.example.codegym_coffee.dto.product.ProductDTO;
 import com.example.codegym_coffee.model.Product;
-import com.example.codegym_coffee.model.ProductType;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public interface IProductService {
@@ -19,32 +17,25 @@ public interface IProductService {
 //     */
 //    void updateProduct(ProductDTO productDTO, Integer id);
 
-    /**
-     * Created by: NghiaLD
-     * Date created: 27/06/2023
-     * Function : Edit information of product
-     *
-     * @param ingredient
-     * @param nameProduct
-     * @param price
-     * @param image
-     * @param productType
-     */
+//    /**
+//     * Created by: NghiaLD
+//     * Date created: 27/06/2023
+//     * Function : Edit information of product
+//     *
+//     * @param productDTO
+//     * @param id
+//     */
 
-    void updateProduct(String ingredient, String nameProduct, Double price, String image, ProductType productType);
+    void updateProduct(String codeProduct, String ingredient,
+                       String nameProduct, Double price, String image, Integer idType,Integer idProduct );
 
     /**
      * Create by: NghiaLD,
      * Date create : 27/06/2023
      * Function : Create new product
      *
-     * @param ingredient
-     * @param name
-     * @param price
-     * @param image
-     * @param productType
      */
-    void createProduct(String ingredient, String name, Double price, String image, ProductType productType);
+    void createProduct(ProductDTO productDTO);
 
     /**
      * Created by: NghiaLD

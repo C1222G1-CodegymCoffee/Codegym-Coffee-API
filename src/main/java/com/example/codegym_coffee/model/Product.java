@@ -7,23 +7,22 @@ import javax.persistence.*;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id_product")
     private Integer idProduct;
 
-    @Column(name = "code_product",columnDefinition = "Varchar(40)")
+    @Column(name = "code_product", columnDefinition = "Varchar(40)")
     private String codeProduct;
 
-    @Column(name = "name_product",columnDefinition = "Varchar(40)")
+    @Column(name = "name_product", columnDefinition = "Varchar(40)")
     private String nameProduct;
 
     @Column(name = "ingredient", columnDefinition = "MEDIUMTEXT")
     private String ingredient;
 
-    @Column(name = "price",columnDefinition = "DOUBLE")
+    @Column(name = "price", columnDefinition = "DOUBLE")
     private double price;
 
-    @Column(name = "image",columnDefinition = "MEDIUMTEXT")
+    @Column(name = "image", columnDefinition = "MEDIUMTEXT")
     private String image;
 
     @ManyToOne
