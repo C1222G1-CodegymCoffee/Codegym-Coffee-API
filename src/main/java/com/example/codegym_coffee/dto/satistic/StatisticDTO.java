@@ -1,7 +1,10 @@
 package com.example.codegym_coffee.dto.satistic;
 
-public interface StatisticDTO {
-    Integer idBill();
-    
+import java.util.Date;
 
+public interface StatisticDTO {
+    Date getDateAfter();
+    Date getDateBefore();
+    Double getTotalBill();
+    Date getDayOfBill();
 }

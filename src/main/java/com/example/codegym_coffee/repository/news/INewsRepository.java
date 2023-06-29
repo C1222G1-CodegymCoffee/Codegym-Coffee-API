@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public interface INewsRepository extends JpaRepository<News,Integer> {
@@ -18,7 +19,7 @@ public interface INewsRepository extends JpaRepository<News,Integer> {
      *
      * @param title
      * @param content
-     * @param day_post
+     * @param dayPost
      * @param image
      * @Param id_employee
      * @return no return value
@@ -27,5 +28,5 @@ public interface INewsRepository extends JpaRepository<News,Integer> {
     @Modifying
     @Query(value = "insert into news (title,content,day_post,image, id_employee) values (:title,:content,:day_post,:image,:id_employee)",
             nativeQuery = true)
-    void addNews(@Param("title") String title, @Param("content") String content, @Param("day_post") Date day_post, @Param("image") String image, @Param("id_employee") Integer idEmployee);
+    void addNews(@Param("title") String title, @Param("content") String content, @Param("day_post") LocalDate dayPost, @Param("image") String image, @Param("id_employee") Integer idEmployee);
 }

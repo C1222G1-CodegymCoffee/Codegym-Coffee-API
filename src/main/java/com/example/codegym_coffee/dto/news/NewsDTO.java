@@ -6,23 +6,25 @@ import org.springframework.validation.Validator;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class NewsDTO implements Validator {
     private Integer id;
     @NotBlank(message = "không được để trống")
-//    @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "không được chứa ký tự đặc biệt")
+    @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "không được chứa ký tự đặc biệt")
     private String title;
     @NotBlank(message = "không được để trống")
     private String content;
-    private Date dayPost;
+    private LocalDate dayPost;
     @NotBlank(message = "không được để trống")
+
     private String image;
 
     public NewsDTO() {
     }
 
-    public NewsDTO(Integer id, String title, String content, Date day_post, String image) {
+    public NewsDTO(Integer id, String title, String content, LocalDate day_post, String image) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -54,11 +56,11 @@ public class NewsDTO implements Validator {
         this.content = content;
     }
 
-    public Date getDayPost() {
+    public LocalDate getDayPost() {
         return dayPost;
     }
 
-    public void setDayPost(Date dayPost) {
+    public void setDayPost(LocalDate dayPost) {
         this.dayPost = dayPost;
     }
 

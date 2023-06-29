@@ -5,10 +5,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "statistic")
+
 public class EntityStatisticDTO {
-    @Id
+
     private Integer id;
     private double price;
     private int quantity;
@@ -47,5 +46,4 @@ public class EntityStatisticDTO {
 
     public void setDayOfBill(LocalDate dayOfBill) {
         this.dayOfBill = dayOfBill;
-    }
-}
+    }}
