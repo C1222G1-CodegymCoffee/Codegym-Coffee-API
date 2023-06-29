@@ -82,7 +82,7 @@ public class EmployeeInformationController_getFindByNameAccount {
                 .andExpect(jsonPath("dateOfBirth").value("1990-06-01"))
                 .andExpect(jsonPath("email").value("nguyenvana@gmail.com"))
                 .andExpect(jsonPath("gender").value(false))
-                .andExpect(jsonPath("image").value("https://haycafe.vn/hinh-anh-hoat-hinh-de-thuong-cute/"))
+                .andExpect(jsonPath("image").value("https://haycafe.vn/wp-content/uploads/2021/11/hinh-anh-hoat-hinh-de-thuong-cute-dep-nhat-600x600.jpg"))
                 .andExpect(jsonPath("nameEmployee").value("Nguyễn Văn A"))
                 .andExpect(jsonPath("phoneNumber").value("0909889789"))
                 .andExpect(jsonPath("position.idPosition").value(1))
