@@ -30,7 +30,7 @@ public interface IProductRepository extends JpaRepository<Product, Integer> {
      * @param nameProduct
      * @param price
      * @param image
-     * @Param id_type
+     * @param idType
      */
 
     @Modifying
@@ -44,19 +44,19 @@ public interface IProductRepository extends JpaRepository<Product, Integer> {
             @Param("id_type") Integer idType
     );
 
-//    /**
-//     * Create by: NghiaLD,
-//     * Date create : 27/06/2023
-//     * Function : Update product to database
-//     *
-//     * @param codeProduct
-//     * @param ingredient
-//     * @param nameProduct
-//     * @param price
-//     * @param image
-//     * @param idType
-//     * @param idProduct
-//     */
+    /**
+     * Create by: NghiaLD,
+     * Date create : 27/06/2023
+     * Function : Update product to database
+     *
+     * @param codeProduct
+     * @param ingredient
+     * @param nameProduct
+     * @param price
+     * @param image
+     * @param idType
+     * @param idProduct
+     */
 
 
     @Modifying

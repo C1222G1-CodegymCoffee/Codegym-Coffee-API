@@ -21,7 +21,7 @@ public class ProductService implements IProductService {
     @Override
     public void createProduct(ProductDTO productDTO) {
         productRepository.saveProduct(productDTO.getCodeProduct(), productDTO.getIngredient(), productDTO.getNameProduct(),
-                productDTO.getPrice(), productDTO.getImage(), productDTO.getProductType().getIdType());
+                productDTO.getPrice(), productDTO.getImage(), productDTO.getProductTypeDTO().getIdType());
     }
 
 

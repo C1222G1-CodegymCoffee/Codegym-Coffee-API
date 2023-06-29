@@ -15,10 +15,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ProductRestController_createProduct {
+public class ProductRestController_updateProduct {
     @Autowired
     private MockMvc mockMvc;
 
@@ -26,160 +25,134 @@ public class ProductRestController_createProduct {
     private ObjectMapper objectMapper;
 
     /**
-     * test the validation for create product of field nameProduct is null
+     * test the validation for update product of field nameProduct is null
      *
      * @author NghiaLD
      */
     @Test
-    public void createProduct_name_13() throws Exception {
+    public void updateProduct_name_19() throws Exception {
         ProductDTO productDTO = new ProductDTO();
-        productDTO.setCodeProduct("A21");
+        productDTO.setCodeProduct("A12");
+        productDTO.setIngredient("duong");
         productDTO.setNameProduct(null);
-        productDTO.setIngredient("đường,muối");
         productDTO.setPrice(12.3);
-        productDTO.setImage("abcd");
-
-        ProductType productType = new ProductType();
-        productType.setIdType(3);
-        productType.setNameType("cà phê");
+        productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
+        ProductTypeDTO productTypeDTO = new ProductTypeDTO();
+        productTypeDTO.setIdType(1);
+        productTypeDTO.setNameType("Trà sữa");
+        productDTO.setProductTypeDTO(productTypeDTO);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
     /**
-     * test the validation for create product of field price is null
+     * test the validation for update product of field codeProduct is null
      *
      * @author NghiaLD
      */
     @Test
-    public void createProduct_price_13() throws Exception {
-
-        ProductDTO productDTO = new ProductDTO();
-        productDTO.setCodeProduct("A21");
-        productDTO.setNameProduct("Trà Nhài");
-        productDTO.setIngredient("đường,muối");
-        productDTO.setPrice(null);
-        productDTO.setImage("abcd");
-
-        ProductType productType = new ProductType();
-        productType.setIdType(3);
-        productType.setNameType("cà phê");
-
-        this.mockMvc
-                .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
-                        .content(this.objectMapper.writeValueAsString(productDTO))
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andDo(print())
-                .andExpect(status().is4xxClientError());
-    }
-    /**
-     * test the validation for create product of field codeProduct is null
-     *
-     * @author NghiaLD
-     */
-    @Test
-    public void createProduct_codedProduct_13() throws Exception {
-
+    public void updateProduct_codeProduct_19() throws Exception {
         ProductDTO productDTO = new ProductDTO();
         productDTO.setCodeProduct(null);
-        productDTO.setNameProduct("Trà Nhài");
-        productDTO.setIngredient("đường,muối");
+        productDTO.setIngredient("duong");
+        productDTO.setNameProduct("Trà Hoa Nhài");
         productDTO.setPrice(12.3);
-        productDTO.setImage("abcd");
-
-        ProductType productType = new ProductType();
-        productType.setIdType(3);
-        productType.setNameType("cà phê");
+        productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
+        ProductTypeDTO productTypeDTO = new ProductTypeDTO();
+        productTypeDTO.setIdType(1);
+        productTypeDTO.setNameType("Trà sữa");
+        productDTO.setProductTypeDTO(productTypeDTO);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
     /**
-     * test the validation for create product of field ingredient is null
+     * test the validation for update product of field ingredient is null
      *
      * @author NghiaLD
      */
     @Test
-    public void createProduct_ingredient_13() throws Exception {
-
+    public void updateProduct_ingredient_19() throws Exception {
         ProductDTO productDTO = new ProductDTO();
-        productDTO.setCodeProduct("A21");
-        productDTO.setNameProduct("Trà Nhài");
+        productDTO.setCodeProduct("A13");
         productDTO.setIngredient(null);
+        productDTO.setNameProduct("Trà Hoa Nhài");
         productDTO.setPrice(12.3);
-        productDTO.setImage("abcd");
-
-        ProductType productType = new ProductType();
-        productType.setIdType(3);
-        productType.setNameType("cà phê");
+        productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
+        ProductTypeDTO productTypeDTO = new ProductTypeDTO();
+        productTypeDTO.setIdType(1);
+        productTypeDTO.setNameType("Trà sữa");
+        productDTO.setProductTypeDTO(productTypeDTO);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
     /**
-     * test the validation for create product of field image is null
+     * test the validation for update product of field price is null
      *
      * @author NghiaLD
      */
     @Test
-    public void createProduct_image_13() throws Exception {
-
+    public void updateProduct_price_19() throws Exception {
         ProductDTO productDTO = new ProductDTO();
-        productDTO.setCodeProduct("A21");
-        productDTO.setNameProduct("Trà Nhài");
-        productDTO.setIngredient("đường,muối");
+        productDTO.setCodeProduct("A13");
+        productDTO.setIngredient("duong");
+        productDTO.setNameProduct("Trà Hoa Nhài");
+        productDTO.setPrice(null);
+        productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
+        ProductTypeDTO productTypeDTO = new ProductTypeDTO();
+        productTypeDTO.setIdType(1);
+        productTypeDTO.setNameType("Trà sữa");
+        productDTO.setProductTypeDTO(productTypeDTO);
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders
+                        .patch("/api/product/update/1")
+                        .content(this.objectMapper.writeValueAsString(productDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    /**
+     * test the validation for update product of field image is null
+     *
+     * @author NghiaLD
+     */
+    @Test
+    public void updateProduct_image_19() throws Exception {
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setCodeProduct("A13");
+        productDTO.setIngredient("duong");
+        productDTO.setNameProduct("Trà Hoa Nhài");
         productDTO.setPrice(12.3);
         productDTO.setImage(null);
-
-        ProductType productType = new ProductType();
-        productType.setIdType(3);
-        productType.setNameType("cà phê");
-
-        this.mockMvc
-                .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
-                        .content(this.objectMapper.writeValueAsString(productDTO))
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andDo(print())
-                .andExpect(status().is4xxClientError());
-    }
-    /**
-     * test the validation for create product of field productType is null
-     *
-     * @author NghiaLD
-     */
-    @Test
-    public void createProduct_productType_13() throws Exception {
-
-        ProductDTO productDTO = new ProductDTO();
-        productDTO.setCodeProduct("A21");
-        productDTO.setNameProduct("Trà Nhài");
-        productDTO.setIngredient("đường,muối");
-        productDTO.setPrice(12.3);
-        productDTO.setImage("abcd");
-
-        ProductType productType = new ProductType();
-        productType.setIdType(null);
+        ProductTypeDTO productTypeDTO = new ProductTypeDTO();
+        productTypeDTO.setIdType(1);
+        productTypeDTO.setNameType("Trà sữa");
+        productDTO.setProductTypeDTO(productTypeDTO);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -187,100 +160,200 @@ public class ProductRestController_createProduct {
     }
 
     /**
-     * test the validation for create product of field nameProduct is ""
+     * test the validation for update product of field productType is null
      *
      * @author NghiaLD
      */
     @Test
-    public void createProduct_name_14() throws Exception {
-
+    public void updateProduct_productType_19() throws Exception {
         ProductDTO productDTO = new ProductDTO();
-        productDTO.setCodeProduct("A21");
-        productDTO.setNameProduct("");
-        productDTO.setIngredient("đường,muối");
+        productDTO.setCodeProduct(null);
+        productDTO.setIngredient("duong");
+        productDTO.setNameProduct("Trà Hoa Nhài");
         productDTO.setPrice(12.3);
-        productDTO.setImage("abcd");
-
-        ProductType productType = new ProductType();
-        productType.setIdType(3);
-        productType.setNameType("cà phê");
+        productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
+        ProductTypeDTO productTypeDTO = new ProductTypeDTO();
+        productTypeDTO.setIdType(null);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
 
-    @Test
-    public void createProduct_codeProduct_14() throws Exception {
+    /**
+     * test the validation for update product of field codeProduct is ''
+     *
+     * @author NghiaLD
+     */
 
+    @Test
+    public void updateProduct_codeProduct_20() throws Exception {
         ProductDTO productDTO = new ProductDTO();
-        productDTO.setIdProduct(4);
         productDTO.setCodeProduct("");
-        productDTO.setNameProduct("Trà Nhài");
+        productDTO.setIngredient("duong");
+        productDTO.setNameProduct("Trà Hoa Nhài");
+        productDTO.setPrice(12.3);
+        productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
+        ProductTypeDTO productTypeDTO = new ProductTypeDTO();
+        productTypeDTO.setIdType(1);
+        productTypeDTO.setNameType("Trà sữa");
+        productDTO.setProductTypeDTO(productTypeDTO);
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders
+                        .patch("/api/product/update/1")
+                        .content(this.objectMapper.writeValueAsString(productDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    /**
+     * test the validation for update product of field ingredient is ''
+     *
+     * @author NghiaLD
+     */
+
+    @Test
+    public void updateProduct_ingredient_20() throws Exception {
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setCodeProduct("A13");
+        productDTO.setIngredient("");
+        productDTO.setNameProduct("Trà Hoa Nhài");
+        productDTO.setPrice(12.3);
+        productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
+        ProductTypeDTO productTypeDTO = new ProductTypeDTO();
+        productTypeDTO.setIdType(1);
+        productTypeDTO.setNameType("Trà sữa");
+        productDTO.setProductTypeDTO(productTypeDTO);
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders
+                        .patch("/api/product/update/1")
+                        .content(this.objectMapper.writeValueAsString(productDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    /**
+     * test the validation for update product of field nameProduct is ''
+     *
+     * @author NghiaLD
+     */
+
+    @Test
+    public void updateProduct_nameProduct_20() throws Exception {
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setCodeProduct("A13");
         productDTO.setIngredient("đường,muối");
+        productDTO.setNameProduct("");
         productDTO.setPrice(12.3);
-        productDTO.setImage("abcd");
-
-        ProductType productType = new ProductType();
-        productType.setIdType(3);
-        productType.setNameType("cà phê");
+        productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
+        ProductTypeDTO productTypeDTO = new ProductTypeDTO();
+        productTypeDTO.setIdType(1);
+        productTypeDTO.setNameType("Trà sữa");
+        productDTO.setProductTypeDTO(productTypeDTO);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
+    /**
+     * test the validation for update product of field price is ''
+     *
+     * @author NghiaLD
+     */
 
     @Test
-    public void createProduct_price_14() throws Exception {
-
+    public void updateProduct_price_20() throws Exception {
         ProductDTO productDTO = new ProductDTO();
-        productDTO.setCodeProduct("A21");
-        productDTO.setNameProduct("Trà Nhài");
-        productDTO.setImage("abcd");
-        ProductType productType = new ProductType();
-        productType.setIdType(3);
-        productType.setNameType("cà phê");
+        productDTO.setCodeProduct("A13");
+        productDTO.setIngredient("");
+        productDTO.setNameProduct("Trà Hoa Nhài");
+        productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
+        ProductTypeDTO productTypeDTO = new ProductTypeDTO();
+        productTypeDTO.setIdType(1);
+        productTypeDTO.setNameType("Trà sữa");
+        productDTO.setProductTypeDTO(productTypeDTO);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
+    /**
+     * test the validation for update product of field image is ''
+     *
+     * @author NghiaLD
+     */
 
     @Test
-    public void createProduct_productType_14() throws Exception {
+    public void updateProduct_image_20() throws Exception {
         ProductDTO productDTO = new ProductDTO();
-        productDTO.setCodeProduct("A21");
-        productDTO.setNameProduct("Trà Nhài");
+        productDTO.setCodeProduct("A13");
+        productDTO.setIngredient("đường, muối");
+        productDTO.setNameProduct("Trà Hoa Nhài");
         productDTO.setPrice(12.3);
-        productDTO.setImage("abcd");
+        productDTO.setImage("");
+        ProductTypeDTO productTypeDTO = new ProductTypeDTO();
+        productTypeDTO.setIdType(1);
+        productTypeDTO.setNameType("Trà sữa");
+        productDTO.setProductTypeDTO(productTypeDTO);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
+    /**
+     * test the validation for update product of field productType is ''
+     *
+     * @author NghiaLD
+     */
+
+    @Test
+    public void updateProduct_productType_20() throws Exception {
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setCodeProduct("A13");
+        productDTO.setIngredient("");
+        productDTO.setNameProduct("Trà Hoa Nhài");
+        productDTO.setPrice(12.3);
+        productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
+
+        this.mockMvc
+                .perform(MockMvcRequestBuilders
+                        .patch("/api/product/update/1")
+                        .content(this.objectMapper.writeValueAsString(productDTO))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
     /**
      * test the validation of nameProduct have special charactor or number;
      *
      * @author NghiaLD
      */
     @Test
-    public void createProduct_name_15() throws Exception {
+    public void updateProduct_nameProduct_21() throws Exception {
 
         ProductDTO productDTO = new ProductDTO();
         productDTO.setCodeProduct("A21");
@@ -295,24 +368,25 @@ public class ProductRestController_createProduct {
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
     /**
      * test the validation of codeProduct have special charactor or number;
      *
      * @author NghiaLD
      */
     @Test
-    public void createProduct_codeProduct_15() throws Exception {
+    public void updateProduct_codeProduct_21() throws Exception {
 
         ProductDTO productDTO = new ProductDTO();
-        productDTO.setCodeProduct("B211111");
+        productDTO.setCodeProduct("B123456");
         productDTO.setIngredient("duong,muoi");
-        productDTO.setNameProduct("Trà Nhài");
+        productDTO.setNameProduct("Trà đào");
         productDTO.setPrice(12.3);
         productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
         ProductTypeDTO productTypeDTO = new ProductTypeDTO();
@@ -322,24 +396,25 @@ public class ProductRestController_createProduct {
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
-                .andExpect(status().is2xxSuccessful());
+                .andExpect(status().is4xxClientError());
     }
+
     /**
      * test the validation of ingredient have special charactor or number;
      *
      * @author NghiaLD
      */
     @Test
-    public void createProduct_ingredient_15() throws Exception {
+    public void updateProduct_ingredient_21() throws Exception {
 
         ProductDTO productDTO = new ProductDTO();
         productDTO.setCodeProduct("A21");
-        productDTO.setIngredient("duong,dao,muoi");
-        productDTO.setNameProduct("Trà Nhài");
+        productDTO.setIngredient("duong,muoi12");
+        productDTO.setNameProduct("Trà Táo");
         productDTO.setPrice(12.3);
         productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
         ProductTypeDTO productTypeDTO = new ProductTypeDTO();
@@ -349,24 +424,26 @@ public class ProductRestController_createProduct {
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
-                .andExpect(status().is2xxSuccessful());
+                .andExpect(status().is4xxClientError());
     }
+
+
     /**
      * test the validation of nameProduct with min length
      *
      * @author NghiaLD
      */
     @Test
-    public void createProduct_nameProduct_16() throws Exception {
+    public void updateProduct_nameProduct_22() throws Exception {
 
         ProductDTO productDTO = new ProductDTO();
         productDTO.setCodeProduct("A21");
-        productDTO.setIngredient("duong");
-        productDTO.setNameProduct("T");
+        productDTO.setIngredient("duong,muoi");
+        productDTO.setNameProduct("Nghĩa123");
         productDTO.setPrice(12.3);
         productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
         ProductTypeDTO productTypeDTO = new ProductTypeDTO();
@@ -374,27 +451,27 @@ public class ProductRestController_createProduct {
         productTypeDTO.setNameType("Trà sữa");
         productDTO.setProductTypeDTO(productTypeDTO);
 
-
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
     /**
      * test the validation of codeProduct with min length
      *
      * @author NghiaLD
      */
     @Test
-    public void createProduct_codeProduct_16() throws Exception {
+    public void updateProduct_codeProduct_22() throws Exception {
 
         ProductDTO productDTO = new ProductDTO();
-        productDTO.setCodeProduct("A");
-        productDTO.setIngredient("duong");
-        productDTO.setNameProduct("Trà Nhài");
+        productDTO.setCodeProduct("A21");
+        productDTO.setIngredient("duong,muoi");
+        productDTO.setNameProduct("Nghĩa123");
         productDTO.setPrice(12.3);
         productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
         ProductTypeDTO productTypeDTO = new ProductTypeDTO();
@@ -402,27 +479,27 @@ public class ProductRestController_createProduct {
         productTypeDTO.setNameType("Trà sữa");
         productDTO.setProductTypeDTO(productTypeDTO);
 
-
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
     /**
      * test the validation of ingredient with min length
      *
      * @author NghiaLD
      */
     @Test
-    public void createProduct_ingredient_16() throws Exception {
+    public void updateProduct_ingredient_22() throws Exception {
 
         ProductDTO productDTO = new ProductDTO();
         productDTO.setCodeProduct("A21");
-        productDTO.setIngredient("đa");
-        productDTO.setNameProduct("Trà Nhài");
+        productDTO.setIngredient("duong,muoi");
+        productDTO.setNameProduct("Nghĩa123");
         productDTO.setPrice(12.3);
         productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
         ProductTypeDTO productTypeDTO = new ProductTypeDTO();
@@ -430,27 +507,27 @@ public class ProductRestController_createProduct {
         productTypeDTO.setNameType("Trà sữa");
         productDTO.setProductTypeDTO(productTypeDTO);
 
-
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
     /**
      * test the validation of nameProduct with max length
      *
      * @author NghiaLD
      */
     @Test
-    public void createProduct_nameProduct_17() throws Exception {
+    public void updateProduct_nameProduct_23() throws Exception {
 
         ProductDTO productDTO = new ProductDTO();
         productDTO.setCodeProduct("A21");
-        productDTO.setIngredient("đường,muối");
-        productDTO.setNameProduct("Trà Nhàiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+        productDTO.setIngredient("duong,muoi");
+        productDTO.setNameProduct("Trà dauuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
         productDTO.setPrice(12.3);
         productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
         ProductTypeDTO productTypeDTO = new ProductTypeDTO();
@@ -460,24 +537,25 @@ public class ProductRestController_createProduct {
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
-                .andExpect(status().is2xxSuccessful());
+                .andExpect(status().is4xxClientError());
     }
+
     /**
      * test the validation of codeProduct with max length
      *
      * @author NghiaLD
      */
     @Test
-    public void createProduct_codeProduct_17() throws Exception {
+    public void updateProduct_codeProduct_23() throws Exception {
 
         ProductDTO productDTO = new ProductDTO();
-        productDTO.setCodeProduct("A1234567");
-        productDTO.setIngredient("đường, muối");
-        productDTO.setNameProduct("Trà Nhài");
+        productDTO.setCodeProduct("A2111111111111");
+        productDTO.setIngredient("duong,muoi");
+        productDTO.setNameProduct("Trà dâu");
         productDTO.setPrice(12.3);
         productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
         ProductTypeDTO productTypeDTO = new ProductTypeDTO();
@@ -487,24 +565,25 @@ public class ProductRestController_createProduct {
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
+
     /**
      * test the validation of ingredient with max length
      *
      * @author NghiaLD
      */
     @Test
-    public void createProduct_ingredient_17() throws Exception {
+    public void updateProduct_ingredient_23() throws Exception {
 
         ProductDTO productDTO = new ProductDTO();
         productDTO.setCodeProduct("A21");
-        productDTO.setIngredient("duon");
-        productDTO.setNameProduct("Trà Nhài");
+        productDTO.setIngredient("duong,muoiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+        productDTO.setNameProduct("Trà Vải");
         productDTO.setPrice(12.3);
         productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
         ProductTypeDTO productTypeDTO = new ProductTypeDTO();
@@ -514,7 +593,7 @@ public class ProductRestController_createProduct {
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -527,11 +606,11 @@ public class ProductRestController_createProduct {
      * @author NghiaLD
      */
     @Test
-    public void createProduct_name_18() throws Exception {
+    public void createProduct_name_24() throws Exception {
 
         ProductDTO productDTO = new ProductDTO();
         productDTO.setCodeProduct("A21");
-        productDTO.setIngredient("duong");
+        productDTO.setIngredient("trà, hoa nhài");
         productDTO.setNameProduct("Trà Nhài");
         productDTO.setPrice(12.3);
         productDTO.setImage("https://logyfood.com/wp-content/uploads/2021/07/tra-dao.png");
@@ -542,7 +621,7 @@ public class ProductRestController_createProduct {
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
-                        .post("/api/product/create")
+                        .patch("/api/product/update/1")
                         .content(this.objectMapper.writeValueAsString(productDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
@@ -550,4 +629,3 @@ public class ProductRestController_createProduct {
     }
 
 }
-

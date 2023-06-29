@@ -20,7 +20,7 @@ public class Product {
     private String ingredient;
 
     @Column(name = "price", columnDefinition = "DOUBLE")
-    private double price;
+    private Double price;
 
     @Column(name = "image", columnDefinition = "MEDIUMTEXT")
     private String image;
@@ -33,7 +33,7 @@ public class Product {
     }
 
     public Product(Integer idProduct, String codeProduct, String nameProduct,
-                   String ingredient, double price, String image, ProductType productType) {
+                   String ingredient, Double price, String image, ProductType productType) {
         this.idProduct = idProduct;
         this.codeProduct = codeProduct;
         this.nameProduct = nameProduct;
@@ -75,11 +75,11 @@ public class Product {
         this.ingredient = ingredient;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

@@ -6,6 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -14,31 +15,37 @@ import javax.validation.constraints.Pattern;
 public class ProductDTO implements Validator {
     private Integer idProduct;
     @NotBlank(message = "Mã số không được để trống")
+    @Pattern(regexp = "^A.*\\d$",message = "Mã số phải bắt đầu bằng chữ cái A và kết thúc là số ")
+    @Length(max = 6, message = "Mã số không dài quá 6 ký tự")
+    @Length(min = 1,message = "Mã số phải nhiều hơn 1 ký tự")
     private String codeProduct;
     @NotBlank(message = "Tên món không được để trống")
-    @Length(max = 40, message = "Tên món không dài quá 40 từ")
+    @Length(max = 20, message = "Tên món không dài quá 20 từ")
+    @Length(min = 5,message = "Tên món phải nhiều hơn 5 từ")
+    @Pattern(regexp = "^[^0-9]*$",message = "Tên món không được chứa số ")
     private String nameProduct;
     @NotBlank(message = "Thành phần không được để trống")
+    @Length(max = 30, message = "Thành phần không dài quá 30 từ")
+    @Length(min = 5,message = "Thành phần phải nhiều hơn 5 từ")
+    @Pattern(regexp = "^[^0-9]*$",message = "Thành phần không được chứa số ")
     private String ingredient;
-    private double price;
+    private Double price;
     @NotBlank(message = "Hình ảnh không được để trống")
-    @Pattern(regexp = "^.{0,}(.png|.jpg|.jpeg)[?](alt=media&token=).{0,}$", message = "Sai định dạng ảnh, phải có dạng đuôi .jpg, .jpeg, .png")
     private String image;
     @NotNull
-    private ProductType productType;
+    private ProductTypeDTO productTypeDTO;
 
-    public ProductDTO(Integer idProduct, String codeProduct, String nameProduct, String ingredient, double price, String image, ProductType productType) {
+    public ProductDTO(Integer idProduct, String codeProduct, String nameProduct, String ingredient, Double price, String image, ProductTypeDTO productTypeDTO) {
         this.idProduct = idProduct;
         this.codeProduct = codeProduct;
         this.nameProduct = nameProduct;
         this.ingredient = ingredient;
         this.price = price;
         this.image = image;
-        this.productType = productType;
+        this.productTypeDTO = productTypeDTO;
     }
 
     public ProductDTO() {
-
     }
 
     public Integer getIdProduct() {
@@ -73,11 +80,11 @@ public class ProductDTO implements Validator {
         this.ingredient = ingredient;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -89,12 +96,12 @@ public class ProductDTO implements Validator {
         this.image = image;
     }
 
-    public ProductType getProductType() {
-        return productType;
+    public ProductTypeDTO getProductTypeDTO() {
+        return productTypeDTO;
     }
 
-    public void setProductType(ProductType productType) {
-        this.productType = productType;
+    public void setProductTypeDTO(ProductTypeDTO productTypeDTO) {
+        this.productTypeDTO = productTypeDTO;
     }
 
     @Override
@@ -106,4 +113,6 @@ public class ProductDTO implements Validator {
     public void validate(Object target, Errors errors) {
 
     }
+
+
 }
