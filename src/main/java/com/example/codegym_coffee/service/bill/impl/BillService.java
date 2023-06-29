@@ -33,6 +33,11 @@ public class BillService implements IBillService {
         return billRepository.findByCodeOfBill(codeBill, pageable);
     }
 
+    @Override
+    public Bill getBillById(Integer id) {
+        return billRepository.findBillById(id);
+    }
+
 //    @Override
 //    public List<Bill> searchBillByDate(Date day_of_bill) {
 //        return billRepository.findByDate(day_of_bill);

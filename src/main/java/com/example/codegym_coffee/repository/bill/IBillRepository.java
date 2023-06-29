@@ -47,12 +47,7 @@ public interface IBillRepository extends JpaRepository<Bill, Integer> {
             , nativeQuery = true)
     Page<Bill> findByCodeOfBill(@Param("codeBill") String codeBill, Pageable pageable);
 
-
-
-//    @Query(value = "SELECT id_bill, code_bill, day_of_bill, employee_id, id_feedback, id_table, id_bill_detail FROM bill " +
-//            "WHERE code_bill like :search", nativeQuery = true)
-//    Page<Bill> searchBill(Pageable pageable, @Param("search") String search);
-
-//        List<Bill> findByDate(Date day_of_bill);
+    @Query(value = "SELECT * FROM bill WHERE id_bill = :id", nativeQuery = true)
+    Bill findBillById(@Param("id") Integer id);
 
 }

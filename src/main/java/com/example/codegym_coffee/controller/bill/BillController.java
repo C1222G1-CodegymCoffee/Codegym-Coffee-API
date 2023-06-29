@@ -33,36 +33,16 @@ public class BillController {
      */
     @GetMapping("")
     public ResponseEntity<Page<Bill>> listBill(
-            @PageableDefault(size = 10) Pageable pageable,
+            @PageableDefault(size = 5) Pageable pageable,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(required = false, defaultValue = "") String search) {
-        pageable = PageRequest.of(page, 10);
+        pageable = PageRequest.of(page, 5);
         Page<Bill> billPage = billService.showBill(pageable, search);
         if (billPage.isEmpty()) {
             return new ResponseEntity<>(billPage, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(billPage, HttpStatus.OK);
     }
-
-//    @GetMapping("")
-//    public ResponseEntity<Page<Bill>> searchBill(
-//            @PageableDefault(size = 10) Pageable pageable,
-//            @RequestParam(value = "page", defaultValue = "0") int page,
-//            @RequestParam(required = false, defaultValue = "") String search) {
-//        pageable = PageRequest.of(page, 10);
-//
-//        Page<Bill> billPage = billService.searchBill(pageable, search);
-//
-//        if (billPage.isEmpty()) {
-//            return new ResponseEntity<>(billPage, HttpStatus.BAD_REQUEST);
-//        }
-//        return new ResponseEntity<>(billPage, HttpStatus.OK);
-//    }
-
-//    @GetMapping("/search")
-//    public List<Bill> searchBillByDate(@RequestParam("day_of_bill") @DateTimeFormat(pattern = "yyyy-MM-dd") Date day_of_bill) {
-//        return billService.searchBillByDate(day_of_bill);
-//    }
 
     /**
      * @param dayOfBill
@@ -98,6 +78,23 @@ public class BillController {
             return new ResponseEntity<>(listBillCode, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(listBillCode, HttpStatus.OK);
+    }
+
+    /**
+     * @param id
+     * @return ResponseEntity<>(Bill, HttpStatus.OK)
+     * @Author ThanhNV
+     * @Date_create: 27/06/2023
+     * @Usage_method The method used to show detail bill
+     */
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<Bill> getBillById(@PathVariable("id") Integer id) {
+        Bill bill = billService.getBillById(id);
+        if (bill == null) {
+            System.out.println(bill);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(bill, HttpStatus.OK);
     }
 
 }

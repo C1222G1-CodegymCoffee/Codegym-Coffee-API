@@ -15,6 +15,8 @@ public interface IBillService {
     Page<Bill> findBillByDay(LocalDate dayOfFeedback, Pageable pageable);
     Page<Bill> findBillByCode(String codeBill, Pageable pageable);
 
+    Bill getBillById(Integer id);
+
 //    Page<Bill> searchBill(Pageable pageable, String search);
 
 //    List<Bill> searchBillByDate(Date day_of_bill);
