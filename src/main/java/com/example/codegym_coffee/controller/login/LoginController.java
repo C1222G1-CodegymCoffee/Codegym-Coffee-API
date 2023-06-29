@@ -2,10 +2,12 @@ package com.example.codegym_coffee.controller.login;
 
 import com.example.codegym_coffee.dto.accountDTO.AuthRequest;
 import com.example.codegym_coffee.dto.accountDTO.AuthResponse;
+import com.example.codegym_coffee.dto.accountDTO.GenericRequest;
 import com.example.codegym_coffee.dto.accountDTO.Utility;
 import com.example.codegym_coffee.model.Account;
 import com.example.codegym_coffee.service.login.IAccountService;
 import com.example.codegym_coffee.utils.JwtTokenUtil;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -21,11 +23,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import javax.security.auth.login.AccountNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
-import java.util.UUID;
 
 @RestController
 public class LoginController {
@@ -68,39 +68,36 @@ public class LoginController {
     private JavaMailSender mailSender;
 
     @PostMapping("/forgot_password")
-    public ResponseEntity<?> processForgotPassword(HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
-        String email = request.getParameter("email");
-        String token = UUID.randomUUID().toString();
+    public ResponseEntity<?> forgotPassword(@RequestParam String email,HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+
+        String token = RandomString.make(30);
 
         try {
             accountService.updateResetPasswordToken(token, email);
             String resetPasswordLink = Utility.getSiteURL(request) + "/reset_password?token=" + token;
             sendEmail(email, resetPasswordLink);
-//            model.addAttribute("message", "We have sent a reset password link to your email. Please check.");
-
-        } catch (Exception e){
-            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (MessagingException | UnsupportedEncodingException e){
+             e.getStackTrace();
         }
-
-        return (ResponseEntity<?>) ResponseEntity.ok();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     public void sendEmail(String recipientEmail, String link) throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        helper.setFrom("contact@shopme.com", "Shopme Support");
+        helper.setFrom("hoang11761311@gmail.com", "Hỗ trợ dịch vụ");
         helper.setTo(recipientEmail);
 
-        String subject = "Here's the link to reset your password";
+        String subject = "Lấy mật khẩu";
 
-        String content = "<p>Hello,</p>"
-                + "<p>You have requested to reset your password.</p>"
-                + "<p>Click the link below to change your password:</p>"
-                + "<p><a href=\"" + link + "\">Change my password</a></p>"
+        String content = "<p>Chào bạn đến với Codegym Coffee,</p>"
+                + "<p>Bạn có yêu cầu đặt lại mật khẩu của bạn.</p>"
+                + "<p>Nhấn vào đường link để thay đổi mật khẩu:</p>"
+                + "<p><a href=\"" + link + "\">Thay đổi mật khẩu</a></p>"
                 + "<br>"
-                + "<p>Ignore this email if you do remember your password, "
-                + "or you have not made the request.</p>";
+                + "<p>Bỏ qua nếu như bạn nhớ lại mật khẩu. </p> ";
 
         helper.setSubject(subject);
 
@@ -113,33 +110,27 @@ public class LoginController {
     @GetMapping("/reset_password")
     public ResponseEntity<?> showResetPasswordForm(@Param(value = "token") String token, Model model) {
         Account account = accountService.getByResetPasswordToken(token);
-        model.addAttribute("token", token);
 
         if (account == null) {
-            model.addAttribute("message", "Invalid Token");
-            return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        return ResponseEntity.ok().body(token);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/reset_password")
-    public ResponseEntity<?> processResetPassword(HttpServletRequest request) {
-        String token = request.getParameter("token");
-        String password = request.getParameter("password");
+    public ResponseEntity<?> resetPassword(@RequestBody @Valid GenericRequest genericRequest) {
+//        String token = request.getParameter("token");
+//        String password = request.getParameter("password");
 
-        Account account = accountService.getByResetPasswordToken(token);
-//        model.addAttribute("title", "Reset your password");
+        Account account = accountService.getByResetPasswordToken(genericRequest.getToken());
 
         if (account == null) {
-//            model.addAttribute("message", "Invalid Token");
-            return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
-            accountService.updatePassword(account, password);
+            accountService.updatePassword(account, genericRequest.getPassword());
+            return new ResponseEntity<>(HttpStatus.OK);
 
-//            model.addAttribute("message", "You have successfully changed your password.");
         }
-
-        return (ResponseEntity<?>) ResponseEntity.ok();
     }
 }

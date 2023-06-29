@@ -225,17 +225,17 @@ public class LoginRestController_login {
     }
 
     /**
-     * @void processForgotPassword_13
+     * @void forgotPassword_13
      * @throws Exception
      * test đầu vào là gmail không có trong dữ liệu và kết quả trả về là lỗi 4xx
      */
     @Test
-    public void processForgotPassword_13() throws Exception {
-
+    public void forgotPassword_13() throws Exception {
+        String email = "hoang@gmail.com";
         this.mockMvc
                 .perform(MockMvcRequestBuilders
                         .post("/forgot_password")
-                        .content(this.objectMapper.writeValueAsString("hoang@gmail.com"))
+                        .param("email", email)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
@@ -247,50 +247,46 @@ public class LoginRestController_login {
      * test đầu vào là rỗng và kết quả trả về là lỗi 4xx
      */
     @Test
-    public void processForgotPassword_14() throws Exception {
-
+    public void forgotPassword_14() throws Exception {
+        String email = "";
         this.mockMvc
                 .perform(MockMvcRequestBuilders
                         .post("/forgot_password")
-                        .content(this.objectMapper.writeValueAsString(""))
+                        .param("email", email)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
 
     /**
-     * @void processForgotPassword_13
+     * @void forgotPassword_15
      * @throws Exception
      * test đầu vào là gmail sai định dạng và kết quả trả về là lỗi 4xx
      */
     @Test
-    public void processForgotPassword_15() throws Exception {
-
+    public void forgotPassword_15() throws Exception {
+        String email = "nvhoang020100@gmail";
         this.mockMvc
                 .perform(MockMvcRequestBuilders
                         .post("/forgot_password")
-                        .content(this.objectMapper.writeValueAsString("abcxyz"))
-                        .content(this.objectMapper.writeValueAsString("123456"))
-                        .content(this.objectMapper.writeValueAsString("asd@212"))
+                        .param("email", email)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
 
     /**
-     * @void processForgotPassword_13
+     * @void forgotPassword_18
      * @throws Exception
      * test đầu vào là gmail hợp lệ và kết quả trả về là thành công 2xx
      */
     @Test
-    public void processForgotPassword_18() throws Exception {
-
-        this.mockMvc
-                .perform(MockMvcRequestBuilders
+    public void forgotPassword_18() throws Exception {
+        String email = "nvhoang020100@gmail.com";
+        this.mockMvc.perform(MockMvcRequestBuilders
                         .post("/forgot_password")
-                        .content(this.objectMapper.writeValueAsString("nvhoang020100@gmail.com"))
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andDo(print())
+                        .param("email", email)
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful());
     }
 }
