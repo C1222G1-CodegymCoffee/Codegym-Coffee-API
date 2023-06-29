@@ -23,7 +23,7 @@ public class HomePageController {
     public ResponseEntity<List<Product>> getTopProduct() {
         List<Product> topProductList = homePageService.findTopProduct();
         if (topProductList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(topProductList, HttpStatus.OK);
     }
@@ -32,7 +32,7 @@ public class HomePageController {
     public ResponseEntity<List<Product>> getNewProduct() {
         List<Product> newProductList = homePageService.findNewProduct();
         if (newProductList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(newProductList, HttpStatus.OK);
     }
