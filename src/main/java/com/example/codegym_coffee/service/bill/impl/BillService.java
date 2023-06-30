@@ -38,6 +38,16 @@ public class BillService implements IBillService {
         return billRepository.findBillById(id);
     }
 
+    @Override
+    public Page<Bill> searchByCodeOrDayOfBill(String searchTerm, Pageable pageable) {
+        return billRepository.findBillByCodeOrDay(searchTerm, pageable);
+    }
+
+//    @Override
+//    public Page<Bill> searchByCodeOrDayAndBill(String searchTerm, LocalDate dayOfBill, Pageable pageable) {
+//        return billRepository.findBillByCodeAndDay(searchTerm, dayOfBill, pageable);
+//    }
+
 //    @Override
 //    public List<Bill> searchBillByDate(Date day_of_bill) {
 //        return billRepository.findByDate(day_of_bill);

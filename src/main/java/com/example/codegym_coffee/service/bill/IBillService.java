@@ -17,7 +17,8 @@ public interface IBillService {
 
     Bill getBillById(Integer id);
 
-//    Page<Bill> searchBill(Pageable pageable, String search);
+    Page<Bill> searchByCodeOrDayOfBill(String searchTerm, Pageable pageable);
 
-//    List<Bill> searchBillByDate(Date day_of_bill);
+//    Page<Bill> searchByCodeOrDayAndBill(String searchTerm,LocalDate dayOfBill, Pageable pageable);
+
 }

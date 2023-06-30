@@ -33,10 +33,10 @@ public class BillController {
      */
     @GetMapping("")
     public ResponseEntity<Page<Bill>> listBill(
-            @PageableDefault(size = 5) Pageable pageable,
+            @PageableDefault(size = 10) Pageable pageable,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(required = false, defaultValue = "") String search) {
-        pageable = PageRequest.of(page, 5);
+        pageable = PageRequest.of(page, 10);
         Page<Bill> billPage = billService.showBill(pageable, search);
         if (billPage.isEmpty()) {
             return new ResponseEntity<>(billPage, HttpStatus.NOT_FOUND);
@@ -53,8 +53,8 @@ public class BillController {
      */
     @GetMapping("/day/{dayOfBill}")
     public ResponseEntity<Page<Bill>> getBillByDay(@PathVariable("dayOfBill")
-                                                           @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-                                                       LocalDate dayOfBill, Pageable pageable) {
+                                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                                   LocalDate dayOfBill, Pageable pageable) {
         Page<Bill> listBillDay = billService.findBillByDay(dayOfBill, pageable);
         if (listBillDay.isEmpty()) {
             return new ResponseEntity<>(listBillDay, HttpStatus.BAD_REQUEST);
@@ -72,7 +72,7 @@ public class BillController {
      */
     @GetMapping("/code/{codeBill}")
     public ResponseEntity<Page<Bill>> getBillByCode(@PathVariable("codeBill")
-                                                       String codeBill, Pageable pageable) {
+                                                    String codeBill, Pageable pageable) {
         Page<Bill> listBillCode = billService.findBillByCode(codeBill, pageable);
         if (listBillCode.isEmpty()) {
             return new ResponseEntity<>(listBillCode, HttpStatus.BAD_REQUEST);
@@ -97,4 +97,28 @@ public class BillController {
         return new ResponseEntity<>(bill, HttpStatus.OK);
     }
 
+    /**
+     * @param dayOfBill
+     * @return ResponseEntity<>(listFeedbackDay,HttpStatus.OK)
+     * @Author ThanhNV
+     * @Date_create: 27/06/2023
+     * @Usage_method The method used to search bill by dayOfBill
+     */
+    @GetMapping("/search")
+    public ResponseEntity<Page<Bill>> searchBill(
+            @RequestParam(name = "searchTerm", defaultValue = "") String searchTerm,
+            @RequestParam(name = "dayOfBill", required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dayOfBill,
+            Pageable pageable) {
+
+        Page<Bill> bills;
+
+        if (dayOfBill != null) {
+            bills = billService.searchByCodeOrDayOfBill(searchTerm, pageable);
+        } else {
+            bills = billService.searchByCodeOrDayOfBill(searchTerm, pageable);
+        }
+
+        return ResponseEntity.ok(bills);
+    }
 }

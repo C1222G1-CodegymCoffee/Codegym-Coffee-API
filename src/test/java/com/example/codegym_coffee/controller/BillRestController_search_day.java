@@ -38,7 +38,7 @@ public class BillRestController_search_day {
     @Test
     public void search_code_2() throws Exception {
         this.mockMvc.perform(
-                        MockMvcRequestBuilders.get("/api/admin/bill/code?="))
+                        MockMvcRequestBuilders.get("/api/admin/bill/code/"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
@@ -49,9 +49,9 @@ public class BillRestController_search_day {
      * @throws Exception
      */
     @Test
-    public void search_code_4() throws Exception {
+    public void search_code_3() throws Exception {
         this.mockMvc.perform(
-                        MockMvcRequestBuilders.get("/api/admin/bill/code?=non-existing-code"))
+                        MockMvcRequestBuilders.get("/api/admin/bill/code/22-11-2022"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
@@ -62,7 +62,7 @@ public class BillRestController_search_day {
      * @throws Exception
      */
     @Test
-    public void search_code_5() throws Exception {
+    public void search_code_4() throws Exception {
         this.mockMvc.perform(
                         MockMvcRequestBuilders.get("/api/admin/bill/day/2023-02-15"))
                 .andDo(print())

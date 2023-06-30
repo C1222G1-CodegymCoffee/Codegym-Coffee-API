@@ -43,11 +43,22 @@ public interface IBillRepository extends JpaRepository<Bill, Integer> {
      * @Date_create: 27/06/2023
      * @Usage_method findByCodeOfBill to show list bill where code desiderate
      */
-        @Query(value = "select * from bill WHERE code_bill = :codeBill"
+    @Query(value = "select * from bill WHERE code_bill = :codeBill"
             , nativeQuery = true)
     Page<Bill> findByCodeOfBill(@Param("codeBill") String codeBill, Pageable pageable);
 
     @Query(value = "SELECT * FROM bill WHERE id_bill = :id", nativeQuery = true)
     Bill findBillById(@Param("id") Integer id);
+
+
+    @Query(value = "SELECT * FROM Bill WHERE code_bill LIKE CONCAT('%', :searchTerm, '%') OR day_of_bill LIKE CONCAT('%', :searchTerm, '%')"
+            , nativeQuery = true)
+    Page<Bill> findBillByCodeOrDay(@Param("searchTerm") String searchTerm, Pageable pageable);
+
+
+//    @Query(value = "SELECT * FROM Bill WHERE code_bill LIKE CONCAT('%', :searchTerm, '%') AND day_of_bill LIKE CONCAT('%', :searchTerm, '%')"
+//            , nativeQuery = true)
+//    Page<Bill> findBillByCodeAndDay(@Param("searchTerm") String searchTerm, LocalDate dayOfFeedback, Pageable pageable);
+
 
 }

@@ -20,7 +20,7 @@ public class BillRestController_detail {
 
     /**
      * list null, search id (null)
-     *
+     * ThanhNV
      * @throws Exception
      */
     @Test
@@ -33,7 +33,7 @@ public class BillRestController_detail {
 
     /**
      * list hollow, search id ()
-     *
+     *ThanhNV
      * @throws Exception
      */
     @Test
@@ -78,6 +78,5 @@ public class BillRestController_detail {
                 .andExpect(jsonPath("billDetail.priceOfProduct").value(25.0))
         ;
     }
-
 
 }

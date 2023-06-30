@@ -19,7 +19,7 @@ public class BillRestController_getAllList {
 
     /**
      * This method is used to check the returned list is of size 0
-     *
+     * ThanhNV
      * @throws Exception
      */
     @Test
@@ -29,9 +29,10 @@ public class BillRestController_getAllList {
                 .andExpect(status().is4xxClientError());
     }
 
+
     /**
      * This method is used to check the returned list is of size > 0
-     *
+     *ThanhNV
      * @throws Exception
      */
     @Test
