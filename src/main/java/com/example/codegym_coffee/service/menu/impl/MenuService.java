@@ -29,9 +29,8 @@ public class MenuService implements IMenuService {
     }
 
     @Override
-    public List<Product> getProductByTypeProduct(String typeProduct) {
-        return menuRepository.getProductByType(typeProduct);
+    public List<Product> getProductByTypeProduct(String type) {
+        return menuRepository.getProductByType(type);
     }
-
 
 }

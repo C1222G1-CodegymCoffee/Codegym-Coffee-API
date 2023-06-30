@@ -10,5 +10,5 @@ import java.util.List;
 public interface IMenuService {
     List<Product> getAllProduct();
     List<ProductType> getAllTypeProduct();
-    List<Product> getProductByTypeProduct(String typeProduct);
+    List<Product> getProductByTypeProduct(String type);
 }
