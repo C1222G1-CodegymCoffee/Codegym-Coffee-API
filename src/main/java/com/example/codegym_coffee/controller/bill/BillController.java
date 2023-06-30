@@ -114,7 +114,7 @@ public class BillController {
         Page<Bill> bills;
 
         if (dayOfBill != null) {
-            bills = billService.searchByCodeOrDayOfBill(searchTerm, pageable);
+            bills = billService.searchByCodeOrDayAndBill(searchTerm, dayOfBill, pageable);
         } else {
             bills = billService.searchByCodeOrDayOfBill(searchTerm, pageable);
         }

@@ -19,6 +19,6 @@ public interface IBillService {
 
     Page<Bill> searchByCodeOrDayOfBill(String searchTerm, Pageable pageable);
 
-//    Page<Bill> searchByCodeOrDayAndBill(String searchTerm,LocalDate dayOfBill, Pageable pageable);
+    Page<Bill> searchByCodeOrDayAndBill(String searchTerm,LocalDate dayOfBill, Pageable pageable);
 
 }
