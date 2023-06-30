@@ -28,7 +28,7 @@ public class EmployeeDTO implements Validator {
     private double salary;
 
     @NotBlank(message = "Không được để trống")
-    @Length(min = 5, max = 30, message = "Trường này ít nhất 5 ký tự và nhiều nhất 30 ký tự")
+    @Length(min = 5, max = 300, message = "Trường này ít nhất 5 ký tự và nhiều nhất 300 ký tự")
     private String image;
 
     @NotBlank(message = "Không được bỏ trống")
@@ -50,7 +50,6 @@ public class EmployeeDTO implements Validator {
 
     private Position position;
     @NotNull(message = "khong duoc bo trong")
-
     private Account account;
 
 

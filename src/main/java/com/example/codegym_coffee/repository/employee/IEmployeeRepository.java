@@ -21,8 +21,8 @@ import java.time.LocalDate;
 
 public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
 
-//    @Query(value = "select * from employee ", nativeQuery = true)
-//    List<Employee> showListByEmployee(String nameEmployee, Account account, String phoneNumber);
+//    @Query(value = "select * from employee as e left join account as a on e.id_account = a.id_account where e.name_employee like %:namenameEmployee% and a.name_account like %:account.name% and e.phone_number like %:phoneNumber% ", nativeQuery = true)
+//    Page<Employee> showListByEmployee(String nameEmployee, Account account, String phoneNumber);
 
     @Modifying
     @Transactional
@@ -44,4 +44,7 @@ public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
 
     @Query(value = "select * from employee",nativeQuery = true)
     Page<Employee> showListEmployee(Pageable pageable);
+
+    @Query(value = "select * from employee where name_employee like %:name%",nativeQuery = true)
+    Page<Employee> findByName(String name, Pageable pageable);
 }

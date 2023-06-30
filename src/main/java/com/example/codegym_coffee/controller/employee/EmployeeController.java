@@ -39,6 +39,17 @@ public class EmployeeController {
         }
         return new ResponseEntity<>(listFeedback, HttpStatus.OK);
     }
+    @GetMapping("/{name}")
+    public ResponseEntity<Page<Employee>> findByName(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String name) {
+        Pageable pageable = PageRequest.of(page, 10);
+        Page<Employee> listFeedback = employeeService.findByName(name,pageable);
+        if (listFeedback.isEmpty()) {
+            return new ResponseEntity<>(listFeedback, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(listFeedback, HttpStatus.OK);
+    }
+
+
 //    @GetMapping("/list-employee")
 //    public Page<Employee> findAllEmployee(
 //            @PageableDefault(size = 2,sort = "id", direction = Sort.Direction.DESC)Pageable pageable,

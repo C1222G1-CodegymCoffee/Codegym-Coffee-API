@@ -24,6 +24,11 @@ public class EmployeeService implements IEmployeeService {
         return iEmployeeRepository.showListEmployee(validPageable);
     }
 
+//    @Override
+//    public Page<Employee> findByEmployee(String name, Account account, String phoneNumber) {
+//        return iEmployeeRepository.showListByEmployee(name,account,phoneNumber);
+//    }
+
 //    public Page<EmployeeDTO> findAll(String name , Pageable pageable ) {
 //        Page<Employee> employeePage = iEmployeeRepository.findCustomerByCustomerContaining(name, pageable);
 //        List<EmployeeDTO> customerList = new ArrayList<>();
@@ -39,16 +44,18 @@ public class EmployeeService implements IEmployeeService {
 //        return new PageImpl<>(customerList, pageable, employeePage.getTotalElements());
 
 
-    @Override
-    public Page<Employee> showList(java.awt.print.Pageable pageable) {
-        return null;
-    }
+
 
     @Override
     public void addEmployee(String nameEmployee, Boolean gender, LocalDate dateOfBirth, double salary,
                             String image, String address,
                             String phoneNumber, String email, Position position, Account account) {
         iEmployeeRepository.addEmployee(nameEmployee,gender, dateOfBirth, salary, image, address, phoneNumber, email, position, account);
+    }
+
+    @Override
+    public Page<Employee> findByName(String name, Pageable pageable) {
+        return iEmployeeRepository.findByName(name,pageable);
     }
 
 

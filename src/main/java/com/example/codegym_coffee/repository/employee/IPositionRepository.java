@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface IPositionRepository extends JpaRepository<Position,Integer> {
     @Query(value = "select * from position",nativeQuery = true)
-    List showPositionList();
+    List<Position> showPositionList();
 }

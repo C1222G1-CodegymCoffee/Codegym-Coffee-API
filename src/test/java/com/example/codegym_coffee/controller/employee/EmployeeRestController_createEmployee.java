@@ -875,7 +875,7 @@ public class EmployeeRestController_createEmployee {
         employeeDTO.setNameEmployee("Thang");
         employeeDTO.setDateOfBirth(LocalDate.parse("1995-06-11"));
         employeeDTO.setSalary(1000000);
-        employeeDTO.setImage("HoangAnhThangHoangAnhThangHoangAnhThang");
+        employeeDTO.setImage("HoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThangHoangAnhThang");
         employeeDTO.setAddress("Số 123, Đường Lê Lợi, Phường Hòa Cường, Quận Hải Châu, Thành phố Đà Nẵng");
         employeeDTO.setPhoneNumber("0915195883");
         employeeDTO.setEmail("h@e.com");
@@ -924,5 +924,4 @@ public class EmployeeRestController_createEmployee {
 
 
     }
-
 }

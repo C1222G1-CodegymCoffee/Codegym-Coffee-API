@@ -8,7 +8,7 @@ public class AccountDTO {
     private String nameAccount;
     private Integer idPosition;
     @NotBlank(message = "Không được bỏ trống")
-    @Length(min = 5, max = 20, message = "Mật khẩu ít nhất 5 ký tự và nhiều nhất 20 ký tự")
+    @Length(min = 5, max = 20, message = "Mật khẩu ít nhất 6 ký tự và nhiều nhất 20 ký tự")
     private String password;
 
 
