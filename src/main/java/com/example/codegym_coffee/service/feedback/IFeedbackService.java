@@ -6,12 +6,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public interface IFeedbackService {
-    Page<Feedback> findAllFeedback( Pageable pageable);
-    Page<Feedback> findFeedbackByDay(LocalDate dayOfFeedback, Pageable pageable);
+//    Page<Feedback> findAllFeedback( List<Feedback> pageable);
+
+    Page<Feedback> findAllFeedback(Pageable pageable);
     Feedback getFeedbackById(Integer id);
     Page<Feedback> findFeedbackByCreatorOrContent(String searchTerm, Pageable pageable);
+
+    Page<Feedback> searchByCreatorOrContentAndDayOfFeedback(String searchTerm, LocalDate dayOfFeedback, Pageable pageable);
 
 }

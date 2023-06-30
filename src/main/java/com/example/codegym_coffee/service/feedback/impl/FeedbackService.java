@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.Normalizer;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.regex.Pattern;
 
 @Service
@@ -17,14 +18,15 @@ public class FeedbackService implements IFeedbackService {
     @Autowired
     private IFeedbackRepository feedbackRepository;
 
+
     @Override
     public Page<Feedback> findAllFeedback(Pageable pageable) {
         return feedbackRepository.findAllFeedback(pageable);
     }
 
     @Override
-    public Page<Feedback> findFeedbackByDay(LocalDate dayOfFeedback, Pageable pageable) {
-        return feedbackRepository.findByDayOfFeedback(dayOfFeedback, pageable);
+    public Page<Feedback> searchByCreatorOrContentAndDayOfFeedback(String searchTerm, LocalDate dayOfFeedback, Pageable pageable) {
+        return feedbackRepository.findByCreatorOrContentAndDayOfFeedback(searchTerm, dayOfFeedback, pageable);
     }
 
     @Override

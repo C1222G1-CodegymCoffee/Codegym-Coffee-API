@@ -25,7 +25,7 @@ public class FeedbackController_getFeedbackByDay {
     public void getFeedbackByDay_dayOfFeedback_7() throws Exception {
         this.mockMvc.perform(
                 MockMvcRequestBuilders.get(
-                        "/api/admin/feedback/search/null"))
+                        "/api/admin/feedback/search/"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
@@ -63,9 +63,10 @@ public class FeedbackController_getFeedbackByDay {
      */
     @Test
     public void getFeedbackByDay_dayOfFeedback_11() throws Exception {
+
         this.mockMvc.perform(
                         MockMvcRequestBuilders.get(
-                                "/api/admin/feedback/search/2023-06-09"))
+                                "/api/feedback/search?dayOfFeedback=2023-06-09&page=0&size=10"))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("totalPages").value(1))
