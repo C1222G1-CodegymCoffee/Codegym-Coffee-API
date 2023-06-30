@@ -55,16 +55,7 @@ public class FeedbackController {
      * @Date_create: 27/06/2023
      * @Usage_method The method used to search feedback by dayOfFeedback
      */
-//    @GetMapping("/search/{dayOfFeedback}")
-//    public ResponseEntity<Page<Feedback>> getFeedbackByDay(@RequestParam("dayOfFeedback")
-//                                                           @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-//                                                           LocalDate dayOfFeedback, Pageable pageable) {
-//        Page<Feedback> listFeedbackDay = feedbackService.findFeedbackByDay(dayOfFeedback, pageable);
-//        if (listFeedbackDay.isEmpty()) {
-//            return new ResponseEntity<>(listFeedbackDay, HttpStatus.BAD_REQUEST);
-//        }
-//        return new ResponseEntity<>(listFeedbackDay, HttpStatus.OK);
-//    }
+
 
     @GetMapping("/search")
     public ResponseEntity<Page<Feedback>> searchFeedback(
@@ -109,17 +100,6 @@ public class FeedbackController {
      * @Date_create: 27/06/2023
      * @Usage_method The method used to search feedback by searchTerm
      */
-//    @GetMapping("/searchTerm/{searchTerm}")
-//    public ResponseEntity<Page<Feedback>> searchFeedbackByCreatorOrContent(
-//            @RequestParam("searchTerm") String searchTerm,
-//            @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-//            Model model) {
-//        Pageable pageable = PageRequest.of(page, 10, Sort.by("dayOfFeedback").descending());
-//        Page<Feedback> feedbackPage = feedbackService.findFeedbackByCreatorOrContent(searchTerm, pageable);
-//        if (feedbackPage.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//        return new ResponseEntity<>(feedbackPage, HttpStatus.OK);
-//    }
+
 }
 
