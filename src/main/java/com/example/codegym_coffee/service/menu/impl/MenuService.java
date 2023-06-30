@@ -28,4 +28,10 @@ public class MenuService implements IMenuService {
         return typeMenuRepository.findAll();
     }
 
+    @Override
+    public List<Product> getProductByTypeProduct(String typeProduct) {
+        return menuRepository.getProductByType(typeProduct);
+    }
+
+
 }
