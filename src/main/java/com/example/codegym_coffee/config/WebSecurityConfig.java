@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.http.HttpServletResponse;
@@ -36,23 +37,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
+
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
         http.authorizeRequests().antMatchers("/", "/api/login", "/logout").permitAll();
         http.authorizeRequests().antMatchers("/").access("hasAnyRole('ROLE_STAFF', 'ROLE_ADMIN')");
 
-        http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/admin/news").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/staff/**").access("hasAnyRole('ROLE_STAFF', 'ROLE_ADMIN')");
-
-
-        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
-
-        http.authorizeRequests().and().formLogin()
-                .loginProcessingUrl("/j_spring_security_check")
-                .loginPage("/api/login")
-                .defaultSuccessUrl("/")
-                .failureUrl("/api/login?error=true")
-                .usernameParameter("nameAccount")
-                .passwordParameter("password")
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
 
         http.exceptionHandling()
                 .authenticationEntryPoint(

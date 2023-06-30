@@ -1,11 +1,10 @@
 package com.example.codegym_coffee.utils;
 
-import com.example.codegym_coffee.model.Account;
+import com.example.codegym_coffee.service.login.impl.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -20,6 +19,9 @@ import java.io.IOException;
 public class JwtTokenFilter extends OncePerRequestFilter {
     @Autowired
     private JwtTokenUtil jwtUtil;
+
+    @Autowired
+    private UserDetailServiceImpl userDetailService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -61,21 +63,16 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         UserDetails userDetails = getUserDetails(token);
 
         UsernamePasswordAuthenticationToken
-                authentication = new UsernamePasswordAuthenticationToken(userDetails, null, null);
-
-        authentication.setDetails(
-                new WebAuthenticationDetailsSource().buildDetails(request));
+                authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),
+                userDetails.getAuthorities());
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
     private UserDetails getUserDetails(String token) {
-        Account userDetails = new Account();
+
         String[] jwtSubject = jwtUtil.getSubject(token).split(",");
 
-        userDetails.setIdAccount(Integer.parseInt(jwtSubject[0]));
-        userDetails.setNameAccount(jwtSubject[1]);
-
-        return userDetails;
+        return userDetailService.loadUserByUsername(jwtSubject[1]);
     }
 }

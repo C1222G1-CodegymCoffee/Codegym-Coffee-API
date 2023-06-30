@@ -1,5 +1,6 @@
 package com.example.codegym_coffee.service.login.impl;
 
+import com.example.codegym_coffee.config.MyUserPrincipal;
 import com.example.codegym_coffee.model.Account;
 import com.example.codegym_coffee.model.AccountRole;
 import com.example.codegym_coffee.repository.login.IAccountRepository;
@@ -7,7 +8,6 @@ import com.example.codegym_coffee.repository.login.IAccountRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,7 +26,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private IAccountRepository accountRepository;
 
     @Override
-    public Account loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = this.accountRepository.findByNameAccount(username);
         if (account == null) {
             System.out.println("User not found! " + username);
@@ -44,9 +44,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
             }
         }
 
-        Account account1 = new Account(account.getUsername(),
-                account.getPassword(), grantList);
-
-        return account1;
+        return new MyUserPrincipal(account.getNameAccount(), account.getPassword(), grantList);
     }
 }

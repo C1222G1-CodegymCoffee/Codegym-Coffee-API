@@ -1,9 +1,7 @@
 package com.example.codegym_coffee.controller.login;
 
-import com.example.codegym_coffee.dto.accountDTO.AuthRequest;
-import com.example.codegym_coffee.dto.accountDTO.AuthResponse;
-import com.example.codegym_coffee.dto.accountDTO.GenericRequest;
-import com.example.codegym_coffee.dto.accountDTO.Utility;
+import com.example.codegym_coffee.config.MyUserPrincipal;
+import com.example.codegym_coffee.dto.accountDTO.*;
 import com.example.codegym_coffee.model.Account;
 import com.example.codegym_coffee.service.login.IAccountService;
 import com.example.codegym_coffee.utils.JwtTokenUtil;
@@ -27,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 
+@CrossOrigin
 @RestController
 public class LoginController {
 
@@ -47,21 +46,15 @@ public class LoginController {
                             request.getNameAccount(), request.getPassword())
             );
 
-            Account account = (Account) authentication.getPrincipal();
+            MyUserPrincipal account = (MyUserPrincipal) authentication.getPrincipal();
             String accessToken = jwtUtil.generateAccessToken(account);
-            AuthResponse response = new AuthResponse(account.getNameAccount(), accessToken);
+            AuthResponse response = new AuthResponse(account.getUsername(), accessToken);
 
             return ResponseEntity.ok().body(response);
 
         } catch (BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-    }
-
-    @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
-    public String logoutSuccessfulPage(Model model) {
-        model.addAttribute("title", "Logout");
-        return "logout";
     }
 
     @Autowired
@@ -120,8 +113,6 @@ public class LoginController {
 
     @PostMapping("/reset_password")
     public ResponseEntity<?> resetPassword(@RequestBody @Valid GenericRequest genericRequest) {
-//        String token = request.getParameter("token");
-//        String password = request.getParameter("password");
 
         Account account = accountService.getByResetPasswordToken(genericRequest.getToken());
 

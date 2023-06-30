@@ -1,13 +1,11 @@
 package com.example.codegym_coffee.utils;
 
-import com.example.codegym_coffee.model.Account;
+import com.example.codegym_coffee.config.MyUserPrincipal;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.util.Date;
 
@@ -18,9 +16,9 @@ public class JwtTokenUtil {
 
     private static final String SECRET_KEY = "hoangdeptraivodoi";
 
-    public String generateAccessToken(Account account) {
+    public String generateAccessToken(MyUserPrincipal account) {
         return Jwts.builder()
-                .setSubject(String.format("%s,%s", account.getIdAccount(), account.getUsername()))
+                .setSubject(String.format("%s,%s", account.getPassword(), account.getUsername()))
                 .setIssuer("CodeJava")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE_DURATION))

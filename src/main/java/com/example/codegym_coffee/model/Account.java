@@ -1,5 +1,6 @@
 package com.example.codegym_coffee.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "account")
-public class Account implements UserDetails {
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -41,13 +42,6 @@ public class Account implements UserDetails {
         this.employee = employee;
     }
 
-    public Account(String nameAccount, String password, List<GrantedAuthority> grantList) {
-        this.nameAccount = nameAccount;
-        this.password = password;
-
-    }
-
-
     public Integer getIdAccount() {
         return idAccount;
     }
@@ -64,16 +58,12 @@ public class Account implements UserDetails {
         this.nameAccount = nameAccount;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
     }
 
     public String getResetPasswordToken() {
@@ -84,38 +74,11 @@ public class Account implements UserDetails {
         this.resetPasswordToken = resetPasswordToken;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.nameAccount;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }
