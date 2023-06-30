@@ -17,9 +17,6 @@ public class TableCoffee {
     @Column(name = "status")
     private int status;
 
-    @OneToOne(mappedBy = "tableCoffee")
-    private Bill bill;
-
     public TableCoffee() {
     }
 
@@ -28,7 +25,6 @@ public class TableCoffee {
         this.idTable = idTable;
         this.nameTable = nameTable;
         this.status = status;
-        this.bill = bill;
     }
 
     public Integer getIdTable() {
@@ -53,13 +49,5 @@ public class TableCoffee {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public Bill getBill() {
-        return bill;
-    }
-
-    public void setBill(Bill bill) {
-        this.bill = bill;
     }
 }
