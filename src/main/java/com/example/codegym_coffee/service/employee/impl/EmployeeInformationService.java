@@ -30,13 +30,10 @@ public class EmployeeInformationService implements IEmployeeInformationService {
      * Author:QuynhHTN
      * Date create: 27/06/2023
      * Function: use the update method to update personal information
-     * @param employeeUpdateDTO
+     * @param employee
      */
     @Override
-    public void updateEmployee(EmployeeUpdateDTO employeeUpdateDTO) {
-        Employee employee = findByNameAccount(employeeUpdateDTO.getNameAccount());
-        BeanUtils.copyProperties(employeeUpdateDTO,employee);
-        employee.setPosition(new Position(employeeUpdateDTO.getPositionDTO().getIdPosition()));
+    public void updateEmployee(Employee employee) {
         iEmployeeInformationRepository.updateEmployee(
                 employee.getNameEmployee(),
                 employee.getGender(),
@@ -47,5 +44,10 @@ public class EmployeeInformationService implements IEmployeeInformationService {
                 employee.getAddress(),
                 employee.getImage(),
                 employee.getIdEmployee());
+    }
+
+    @Override
+    public Boolean existsByEmail(String email) {
+        return iEmployeeInformationRepository.existsByEmail(email);
     }
 }

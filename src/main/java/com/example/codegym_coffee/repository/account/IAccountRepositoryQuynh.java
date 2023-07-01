@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
 
-public interface IAccountRepository extends JpaRepository<Account,Integer> {
+public interface IAccountRepositoryQuynh extends JpaRepository<Account,Integer> {
     /**
      * Author:QuynhHTN
      * Date create: 27/06/2023

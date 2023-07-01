@@ -1,6 +1,5 @@
 package com.example.codegym_coffee.dto.employee;
 
-import com.example.codegym_coffee.dto.account.PositionDTO;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -10,7 +9,6 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class EmployeeUpdateDTO implements Validator {
-    private String nameAccount;
     @NotNull(message = "Vui lòng chọn giới tính")
     private Boolean gender;
     @NotNull(message = "Không được bỏ trống")
@@ -30,6 +28,9 @@ public class EmployeeUpdateDTO implements Validator {
     @NotBlank(message = "Không được bỏ trống")
     @Pattern(regexp = "^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$",message = "Nhập đúng định dạng SĐT. VD: 0905.223.XXX (X là chữ số)")
     private String phoneNumber;
+    @NotBlank(message = "Không được bỏ trống")
+    @Email(message = "Email phải đúng định dạng")
+    private String email;
     @NotNull(message = "Vui lòng chọn vị trí")
     private PositionDTO positionDTO;
 
@@ -56,14 +57,6 @@ public class EmployeeUpdateDTO implements Validator {
             return Period.between(birthDate, currentDate).getYears();
         }
         return 0;
-    }
-
-    public String getNameAccount() {
-        return nameAccount;
-    }
-
-    public void setNameAccount(String nameAccount) {
-        this.nameAccount = nameAccount;
     }
 
     public Boolean getGender() {
@@ -133,6 +126,14 @@ public class EmployeeUpdateDTO implements Validator {
     @Override
     public boolean supports(Class<?> clazz) {
         return false;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

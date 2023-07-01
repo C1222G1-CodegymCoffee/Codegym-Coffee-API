@@ -1,4 +1,4 @@
-package com.example.codegym_coffee.dto.account;
+package com.example.codegym_coffee.dto.employee;
 
 public class PositionDTO {
     private Integer idPosition;

@@ -17,7 +17,9 @@ public interface IEmployeeInformationService {
      * Author:QuynhHTN
      * Date create: 27/06/2023
      * Function: use the update method to update personal information
-     * @param employeeUpdateDTO
+     * @param employee
      */
-    void updateEmployee(EmployeeUpdateDTO employeeUpdateDTO);
+    void updateEmployee(Employee employee);
+
+    Boolean existsByEmail(String email);
 }

@@ -1,6 +1,6 @@
 package com.example.api.controller;
 
-import com.example.codegym_coffee.dto.account.PositionDTO;
+import com.example.codegym_coffee.dto.employee.PositionDTO;
 import com.example.codegym_coffee.dto.employee.EmployeeUpdateDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

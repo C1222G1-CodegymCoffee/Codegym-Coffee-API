@@ -1,5 +1,7 @@
 package com.example.codegym_coffee.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,7 @@ public class AccountRole {
     private Integer idAccountRole;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 

@@ -2,7 +2,7 @@ package com.example.codegym_coffee.service.account;
 
 import com.example.codegym_coffee.model.Account;
 
-public interface IAccountService {
+public interface IAccountServiceQuynh {
     /**
      * Author:QuynhHTN
      * Date create: 27/06/2023

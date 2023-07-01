@@ -50,4 +50,5 @@ public interface IEmployeeInformationRepository extends JpaRepository<Employee, 
 //    @Transactional
 //    @Query(value = "UPDATE account SET password = :newPassword WHERE id_account = :id",nativeQuery = true)
 //    void updatePassword(@Param("newPassword")String newPassword,@Param("id")Integer id);
+        Boolean existsByEmail(String email);
 }

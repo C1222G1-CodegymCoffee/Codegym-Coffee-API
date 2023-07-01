@@ -1,22 +1,23 @@
 package com.example.codegym_coffee.service.account.impl;
 
 import com.example.codegym_coffee.model.Account;
-import com.example.codegym_coffee.repository.account.IAccountRepository;
-import com.example.codegym_coffee.service.account.IAccountService;
+import com.example.codegym_coffee.repository.account.IAccountRepositoryQuynh;
+import com.example.codegym_coffee.service.account.IAccountServiceQuynh;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AccountService implements IAccountService {
+public class AccountServiceQuynh implements IAccountServiceQuynh {
     @Autowired
-    private IAccountRepository iAccountRepository;
+    private IAccountRepositoryQuynh iAccountRepository;
 
     /**
      /**
      * Author:QuynhHTN
      * Date create: 27/06/2023
      * Function: use findByNameAccount method to find account
-     * @param nameAccount
+     * @param nameAccount   
      * @return
      */
     @Override
@@ -33,7 +34,9 @@ public class AccountService implements IAccountService {
      */
     @Override
     public void changePassword(Account account, String newPassword) {
-        account.setPassword(newPassword);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        account.setPassword(encodedPassword);
         iAccountRepository.updatePassword(account.getPassword(),account.getIdAccount());
     }
 
@@ -47,7 +50,8 @@ public class AccountService implements IAccountService {
      */
     @Override
     public Boolean checkIfValidOldPassword(Account account, String oldPassword) {
-        return account.getPassword().equals(oldPassword);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.matches(oldPassword,account.getPassword());
     }
 
 }
