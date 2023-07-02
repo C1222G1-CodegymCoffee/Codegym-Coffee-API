@@ -1,6 +1,7 @@
 package com.example.codegym_coffee.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -9,6 +10,7 @@ public class TableCoffee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_table")
+    @NotNull
     private Integer idTable;
 
     @Column(name = "name_table",columnDefinition = "Varchar(40)")

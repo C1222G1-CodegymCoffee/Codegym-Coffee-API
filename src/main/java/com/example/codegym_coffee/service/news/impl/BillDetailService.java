@@ -18,4 +18,9 @@ public class BillDetailService implements IBillDetailService {
     public List<BillDetailDTO> getBillDetailsAndTotalAmountByTableId(int tableId) {
         return billDetailRepository.getBillDetailsAndTotalAmountByTableId(tableId);
     }
+
+    @Override
+    public List<BillDetailDTO> resetTable(int tableId) {
+        return billDetailRepository.resetTable(tableId);
+    }
 }

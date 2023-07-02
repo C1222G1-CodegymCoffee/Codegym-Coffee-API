@@ -1,8 +1,10 @@
 package com.example.codegym_coffee.controller.sale;
 
 import com.example.codegym_coffee.dto.news.BillDetailDTO;
+import com.example.codegym_coffee.model.Bill;
 import com.example.codegym_coffee.model.TableCoffee;
 import com.example.codegym_coffee.service.news.IBillDetailService;
+import com.example.codegym_coffee.service.news.IBillService;
 import com.example.codegym_coffee.service.news.ISaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,12 +13,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/sale")
 public class SaleController {
     @Autowired
     private ISaleService saleService;
     @Autowired
     private IBillDetailService billDetailService;
+
+    @Autowired
+    private IBillService billService;
 
     /**
      * @author KhaiNLV
@@ -56,24 +62,21 @@ public class SaleController {
     /**
      * @author KhaiNLV
      * @body resetTableStatus
-     * @param id The ID of the TableCoffee to reset.
+     * @param tableId The ID of the TableCoffee to reset.
      * @return ResponseEntity<Void> An HTTP response indicating the success or failure of the reset operation.
      * This method is used to reset the status of a TableCoffee identified by the given ID. It calls the saleService's findById() method to retrieve the TableCoffee.
      * If the TableCoffee is not found, an HTTP response with HttpStatus.NOT_FOUND is returned.
      * If the TableCoffee's status is either 1 or 2, the saleService's saveWithStatusReset() method is called to reset the status.
      * The reset operation is considered successful if the TableCoffee's status is reset or if it is not necessary to reset (status is not 1 or 2).
-     * An HTTP response with HttpStatus.OK is returned to indicate the success of the reset operation.
+     * An HTTP response with ok is returned to indicate the success of the reset operation.
      */
-    @PostMapping("/reset/{id}")
-    public ResponseEntity<Void> resetTableStatus(@PathVariable("id") int id) {
-        TableCoffee tableCoffee = saleService.findById(id);
-        if (tableCoffee == null) {
-            return ResponseEntity.notFound().build();
+    @GetMapping("/reset/{tableId}")
+    public ResponseEntity<List<BillDetailDTO>> resetTableStatus(@PathVariable("tableId") int tableId) {
+        List<BillDetailDTO> billDetails = billDetailService.resetTable(tableId);
+        if (billDetails.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        if (tableCoffee.getStatus() == 1 || tableCoffee.getStatus() == 2) {
-            saleService.saveWithStatusReset(id);
-        }
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(billDetails);
     }
 
     /**
@@ -93,5 +96,29 @@ public class SaleController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.ok(billDetails);
+    }
+
+
+    /**
+     * @author KhaiNLV
+     * @body updatePaymentStatusToZero
+     * @param billId The ID of the table for which to retrieve bill details.
+     * @return ResponseEntity<List<BillDetailDTO>> An HTTP response containing the list of BillDetailDTO objects and the total amount if found, or HttpStatus.NO_CONTENT if not found.
+     * This method is used to retrieve the bill details and total amount for a specific table identified by the given table ID.
+     * It calls the billDetailService's getBillDetailsAndTotalAmountByTableId() method to retrieve the list of BillDetailDTO objects and the total amount.
+     * If the bill details are not found, an HTTP response with HttpStatus.NO_CONTENT is returned.
+     * If the bill details are found, they are returned in an HTTP response with HttpStatus.OK.
+     */
+    @PatchMapping("/update/{billId}")
+    public ResponseEntity<String> updatePaymentStatusToZero(@PathVariable Integer billId) {
+        Bill bill = billService.findByIdBill(billId); // Retrieve the Bill object from the data source
+        if (bill == null) {
+            return new ResponseEntity<>("Invalid billId", HttpStatus.BAD_REQUEST);
+        }
+        if (bill.getPaymentStatus() == 0) {
+            return new ResponseEntity<>("Invalid payment status", HttpStatus.BAD_REQUEST);
+        }
+        saleService.updatePaymentStatusToZero(billId);
+        return new ResponseEntity<>("Payment status updated successfully", HttpStatus.OK);
     }
 }

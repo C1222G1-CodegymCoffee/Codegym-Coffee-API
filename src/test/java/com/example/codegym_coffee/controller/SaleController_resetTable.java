@@ -13,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class SaleController_getBillDetailsAndTotalAmountByTableId {
+public class SaleController_resetTable {
 
     @Autowired
     private MockMvc mockMvc;
@@ -27,7 +27,7 @@ public class SaleController_getBillDetailsAndTotalAmountByTableId {
     public void getBillDetailsAndTotalAmountByTableId_7() throws Exception {
         this.mockMvc.perform(
                         MockMvcRequestBuilders
-                                .get("/api/sale/bill-details/null"))
+                                .get("/api/sale/reset/null"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
@@ -41,7 +41,7 @@ public class SaleController_getBillDetailsAndTotalAmountByTableId {
     public void getBillDetailsAndTotalAmountByTableId_8() throws Exception {
         this.mockMvc.perform(
                         MockMvcRequestBuilders
-                                .get("/api/sale/bill-details/''"))
+                                .get("/api/sale/reset/''"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
@@ -55,7 +55,7 @@ public class SaleController_getBillDetailsAndTotalAmountByTableId {
     public void getBillDetailsAndTotalAmountByTableId_9() throws Exception {
         this.mockMvc.perform(
                         MockMvcRequestBuilders
-                                .get("/api/sale/bill-details/123"))
+                                .get("/api/sale/reset/123"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
@@ -69,7 +69,7 @@ public class SaleController_getBillDetailsAndTotalAmountByTableId {
     public void getBillDetailsAndTotalAmountByTableId_10() throws Exception {
         this.mockMvc.perform(
                         MockMvcRequestBuilders
-                                .get("/api/sale/bill-details/1"))
+                                .get("/api/sale/reset/1"))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
@@ -84,7 +84,7 @@ public class SaleController_getBillDetailsAndTotalAmountByTableId {
 
         this.mockMvc.perform(
                         MockMvcRequestBuilders
-                                .get("/api/sale/bill-details/1"))
+                                .get("/api/sale/reset/1"))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("[0].quantityOfProduct").value(2))

@@ -27,4 +27,9 @@ public class SaleService implements ISaleService {
     public void saveWithStatusReset(int id) {
         saleRepository.saveWithStatusReset(id);
     }
+
+    @Override
+    public void updatePaymentStatusToZero(int billId) {
+        saleRepository.updatePaymentStatusToZero(billId);
+    }
 }

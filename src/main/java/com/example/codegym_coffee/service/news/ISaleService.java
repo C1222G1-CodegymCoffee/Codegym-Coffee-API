@@ -11,4 +11,5 @@ public interface ISaleService {
     TableCoffee findById(int id);
     void saveWithStatusReset(int id);
 
+    void updatePaymentStatusToZero(int billId);
 }
