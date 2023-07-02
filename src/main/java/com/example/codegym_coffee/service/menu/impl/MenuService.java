@@ -1,7 +1,9 @@
 package com.example.codegym_coffee.service.menu.impl;
 
+import com.example.codegym_coffee.model.BillDetail;
 import com.example.codegym_coffee.model.Product;
 import com.example.codegym_coffee.model.ProductType;
+import com.example.codegym_coffee.repository.menu.IMenuBD;
 import com.example.codegym_coffee.repository.menu.IMenuRepository;
 import com.example.codegym_coffee.repository.menu.ITypeMenuRepository;
 import com.example.codegym_coffee.service.menu.IMenuService;
@@ -17,6 +19,8 @@ public class MenuService implements IMenuService {
 
     @Autowired
     private ITypeMenuRepository typeMenuRepository ;
+    @Autowired
+    private IMenuBD menuBD;
 
     @Override
     public List<Product> getAllProduct() {
@@ -31,6 +35,11 @@ public class MenuService implements IMenuService {
     @Override
     public List<Product> getProductByTypeProduct(String type) {
         return menuRepository.getProductByType(type);
+    }
+
+    @Override
+    public void addBillDetail(BillDetail billDetail) {
+        menuBD.save(billDetail);
     }
 
 }

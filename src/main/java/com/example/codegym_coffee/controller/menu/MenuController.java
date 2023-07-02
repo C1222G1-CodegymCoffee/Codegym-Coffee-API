@@ -1,6 +1,7 @@
 package com.example.codegym_coffee.controller.menu;
 
 
+import com.example.codegym_coffee.model.Bill;
 import com.example.codegym_coffee.model.BillDetail;
 import com.example.codegym_coffee.model.Product;
 import com.example.codegym_coffee.model.ProductType;
@@ -28,7 +29,7 @@ public class MenuController {
     public ResponseEntity<List<Product>> displayMenu (){
         List<Product> products = menuService.getAllProduct();
         if(products.isEmpty()){
-            return new ResponseEntity<>(products , HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(products , HttpStatus.BAD_REQUEST);
         }
         return new  ResponseEntity<>(products , HttpStatus.OK);
     }
@@ -36,7 +37,7 @@ public class MenuController {
     public ResponseEntity<List<ProductType>> displayTypeMenu () {
         List<ProductType> productsType = menuService.getAllTypeProduct();
         if(productsType.isEmpty()){
-            return new ResponseEntity<>(productsType , HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(productsType , HttpStatus.BAD_REQUEST);
         }
         return new  ResponseEntity<>(productsType , HttpStatus.OK);
     }
@@ -49,8 +50,12 @@ public class MenuController {
         return new  ResponseEntity<>(products , HttpStatus.OK);
     }
     @PostMapping("/add-to-bill")
-    public ResponseEntity<BillDetail> addToBill(@RequestBody Arrays products){
-        System.out.println(products);
+    public ResponseEntity<BillDetail> addToBill(@RequestBody List<Product> products){
+        Bill bill = new Bill(1);
+        for (int i = 0; i < products.size(); i++) {
+            Product product = products.get(i);
+            menuService.addBillDetail(new BillDetail(12,product.getPrice(),bill,product));
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

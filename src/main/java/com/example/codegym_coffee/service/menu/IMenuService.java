@@ -1,5 +1,6 @@
 package com.example.codegym_coffee.service.menu;
 
+import com.example.codegym_coffee.model.BillDetail;
 import com.example.codegym_coffee.model.Product;
 import com.example.codegym_coffee.model.ProductType;
 import org.springframework.stereotype.Service;
@@ -11,4 +12,6 @@ public interface IMenuService {
     List<Product> getAllProduct();
     List<ProductType> getAllTypeProduct();
     List<Product> getProductByTypeProduct(String type);
+
+    void addBillDetail(BillDetail billDetail);
 }

@@ -39,6 +39,10 @@ public class Bill {
         this.feedback = feedback;
     }
 
+    public Bill(Integer idBill) {
+        this.idBill = idBill;
+    }
+
     public Integer getIdBill() {
         return idBill;
     }
