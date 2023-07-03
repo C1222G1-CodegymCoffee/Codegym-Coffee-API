@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -19,7 +21,7 @@ public class ProductController {
     private IProductService productService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createProduct(@Valid @RequestBody ProductDTO productDTO, BindingResult bindingResult) {
+    public ResponseEntity<List<ObjectError>> createProduct(@Valid @RequestBody ProductDTO productDTO, BindingResult bindingResult) {
         new ProductDTO().validate(productDTO, bindingResult);
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
@@ -55,13 +57,14 @@ public class ProductController {
      * @return
      */
     @ResponseStatus(HttpStatus.OK)
-    @PatchMapping("/update/{id}")
-    public ResponseEntity<?> updateProduct(@Valid @RequestBody ProductDTO productDTO,BindingResult bindingResult) {
+    @PatchMapping("/update/{idProduct}")
+    public ResponseEntity<List<ObjectError>> updateProduct(@PathVariable Integer idProduct, @Valid @RequestBody ProductDTO productDTO, BindingResult bindingResult) {
         new ProductDTO().validate(productDTO, bindingResult);
-        if(bindingResult.hasErrors()){
-            return new ResponseEntity<>(bindingResult.getAllErrors(),HttpStatus.BAD_REQUEST);
+        productDTO.setIdProduct(idProduct);
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
-        productService.updateProduct(productDTO.getCodeProduct(), productDTO.getNameProduct(), productDTO.getIngredient(),
+        productService.updateProduct(productDTO.getNameProduct(), productDTO.getIngredient(),
                 productDTO.getPrice(), productDTO.getImage(), productDTO.getProductTypeDTO().getIdType(), productDTO.getIdProduct());
         return new ResponseEntity<>(HttpStatus.OK);
     }

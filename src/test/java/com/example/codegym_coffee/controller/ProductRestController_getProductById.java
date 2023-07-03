@@ -64,7 +64,7 @@ public class ProductRestController_getProductById {
     @Test
     public void getProductById_4() throws Exception {
         this.mockMvc.perform(
-                        MockMvcRequestBuilders.get("/api/product/1"))
+                        MockMvcRequestBuilders.get("/api/product/10"))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful());
     }

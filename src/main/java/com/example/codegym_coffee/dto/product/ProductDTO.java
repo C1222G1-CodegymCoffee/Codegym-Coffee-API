@@ -1,12 +1,9 @@
 package com.example.codegym_coffee.dto.product;
 
-import com.example.codegym_coffee.model.ProductType;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -14,38 +11,32 @@ import javax.validation.constraints.Pattern;
 
 public class ProductDTO implements Validator {
     private Integer idProduct;
-    @NotBlank(message = "Mã số không được để trống")
-    @Pattern(regexp = "^A.*\\d$",message = "Mã số phải bắt đầu bằng chữ cái A và kết thúc là số ")
-    @Length(max = 6, message = "Mã số không dài quá 6 ký tự")
-    @Length(min = 1,message = "Mã số phải nhiều hơn 1 ký tự")
-    private String codeProduct;
-    @NotBlank(message = "Tên món không được để trống")
-    @Length(max = 20, message = "Tên món không dài quá 20 từ")
-    @Length(min = 5,message = "Tên món phải nhiều hơn 5 từ")
-    @Pattern(regexp = "^[^0-9]*$",message = "Tên món không được chứa số ")
+//    @NotBlank(message = "Tên món không được để trống")
+//    @Length(max = 20, message = "Tên món không dài quá 20 từ")
+//    @Length(min = 5,message = "Tên món phải nhiều hơn 5 từ")
+//    @Pattern(regexp = "^[^0-9]*$",message = "Tên món không được chứa số ")
     private String nameProduct;
-    @NotBlank(message = "Thành phần không được để trống")
-    @Length(max = 30, message = "Thành phần không dài quá 30 từ")
-    @Length(min = 5,message = "Thành phần phải nhiều hơn 5 từ")
-    @Pattern(regexp = "^[^0-9]*$",message = "Thành phần không được chứa số ")
+//    @NotBlank(message = "Thành phần không được để trống")
+//    @Length(max = 30, message = "Thành phần không dài quá 30 từ")
+//    @Length(min = 5,message = "Thành phần phải nhiều hơn 5 từ")
+//    @Pattern(regexp = "^[^0-9]*$",message = "Thành phần không được chứa số ")
     private String ingredient;
     private Double price;
-    @NotBlank(message = "Hình ảnh không được để trống")
+//    @NotBlank(message = "Hình ảnh không được để trống")
     private String image;
-    @NotNull
+//    @NotNull
     private ProductTypeDTO productTypeDTO;
 
-    public ProductDTO(Integer idProduct, String codeProduct, String nameProduct, String ingredient, Double price, String image, ProductTypeDTO productTypeDTO) {
+    public ProductDTO() {
+    }
+
+    public ProductDTO(Integer idProduct, String nameProduct, String ingredient, Double price, String image, ProductTypeDTO productTypeDTO) {
         this.idProduct = idProduct;
-        this.codeProduct = codeProduct;
         this.nameProduct = nameProduct;
         this.ingredient = ingredient;
         this.price = price;
         this.image = image;
         this.productTypeDTO = productTypeDTO;
-    }
-
-    public ProductDTO() {
     }
 
     public Integer getIdProduct() {
@@ -54,14 +45,6 @@ public class ProductDTO implements Validator {
 
     public void setIdProduct(Integer idProduct) {
         this.idProduct = idProduct;
-    }
-
-    public String getCodeProduct() {
-        return codeProduct;
-    }
-
-    public void setCodeProduct(String codeProduct) {
-        this.codeProduct = codeProduct;
     }
 
     public String getNameProduct() {
