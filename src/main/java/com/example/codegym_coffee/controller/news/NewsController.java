@@ -7,8 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 
 @RestController
 @Controller
@@ -27,7 +31,7 @@ public class NewsController {
      */
 
     @PostMapping("/createNews")
-    public ResponseEntity<?> createNews(@Validated @RequestBody NewsDTO newsDTO, BindingResult bindingResult) {
+    public ResponseEntity<List<ObjectError>> createNews(@Validated @RequestBody NewsDTO newsDTO, BindingResult bindingResult) {
         newsDTO.validate(newsDTO, bindingResult);
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);

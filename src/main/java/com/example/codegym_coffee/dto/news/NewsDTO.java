@@ -12,23 +12,22 @@ import java.util.Date;
 public class NewsDTO implements Validator {
     private Integer id;
     @NotBlank(message = "không được để trống")
-    @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "không được chứa ký tự đặc biệt")
+//    @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "không được chứa ký tự đặc biệt")
     private String title;
     @NotBlank(message = "không được để trống")
     private String content;
     private LocalDate dayPost;
     @NotBlank(message = "không được để trống")
-
     private String image;
 
     public NewsDTO() {
     }
 
-    public NewsDTO(Integer id, String title, String content, LocalDate day_post, String image) {
+    public NewsDTO(Integer id, String title, String content, LocalDate dayPost, String image) {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.dayPost = day_post;
+        this.dayPost = dayPost;
         this.image = image;
     }
 
@@ -79,6 +78,7 @@ public class NewsDTO implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-
     }
+
+
 }
