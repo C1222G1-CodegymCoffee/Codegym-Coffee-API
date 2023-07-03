@@ -22,13 +22,9 @@ import java.time.LocalDate;
 public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
 
 
-
-
-
 //    @Query(value = "select id_employee,name_employee,gender,date_of_birth,salary,image,address,phone_number,email,id_position from employee where phone_number = :phoneNumber", nativeQuery = true)
 //    Employee findByPhone(
-//            String phone
-//    );
+//            String phone);
 
 //    @Modifying
 //    @Transactional
@@ -48,7 +44,6 @@ public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
 //            Account account);
 
 
-
     @Query(value = "select * from employee", nativeQuery = true)
     Page<Employee> showListEmployee(Pageable pageable);
 
@@ -58,16 +53,13 @@ public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
             @Param("name_account") String nameAccount,
             @Param("phone_number") String phoneNumber,
             Pageable pageable);
+
     @Query(value = "select * from employee where name_employee like %:name_account% ", nativeQuery = true)
     Page<Employee> findByName(
             @Param("name_account") String name,
             Pageable pageable);
 
 
-//    @Query(value = "select * from employee as e join account as a on e.id_account = a.id_account where a.name_account like %:name_account%", nativeQuery = true)
-//    Page<Employee> findByAccount(
-//            @Param("name_account") String nameAccount,
-//            Pageable pageable);
 }
 
 

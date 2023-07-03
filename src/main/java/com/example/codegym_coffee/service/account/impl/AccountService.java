@@ -23,8 +23,7 @@ public class AccountService implements IAccountService {
 
     @Override
     public void addNewAccount(String nameAccount, String password) {
-        password = "12345678";
-        iAccountRepository.addNewAccount(nameAccount,password);
+        iAccountRepository.addNewAccount(nameAccount,"12345678");
     }
 
     @Override

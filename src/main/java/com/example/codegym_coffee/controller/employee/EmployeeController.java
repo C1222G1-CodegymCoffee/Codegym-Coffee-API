@@ -1,23 +1,16 @@
 package com.example.codegym_coffee.controller.employee;
 
 
-import com.example.codegym_coffee.dto.employee.EmployeeDTO;
-import com.example.codegym_coffee.model.Account;
 import com.example.codegym_coffee.model.Employee;
-import com.example.codegym_coffee.service.account.impl.AccountService;
 import com.example.codegym_coffee.service.employee.impl.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
+
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+
 
 @RestController
 @RequestMapping("home/admin/employee")
@@ -51,7 +44,7 @@ public class EmployeeController {
         }
         return new ResponseEntity<>(listEmployee, HttpStatus.OK);
     }
-    @GetMapping("/search/{employee}")
+    @GetMapping("/search/searchEmployee")
     public ResponseEntity<Page<Employee>> findByEmployee(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String nameEmployee, @PathVariable String nameAccount, @PathVariable String phoneNumber, @PathVariable String employee) {
         Pageable pageable = PageRequest.of(page, 10);
         Page<Employee> listEmployee = employeeService.findByEmployee(nameEmployee,nameAccount,phoneNumber,pageable);
@@ -67,10 +60,7 @@ public class EmployeeController {
 //    public Page<Employee> findAllEmployee(
 //            @PageableDefault(size = 2,sort = "id", direction = Sort.Direction.DESC)Pageable pageable,
 //            @RequestParam(required = false, defaultValue = "") String name,Account account ,String phoneNumber) {
-//        Page<Employee> employee = employeeService.findAllEmployee(name,account,phoneNumber, (java.awt.print.Pageable) pageable);
-//        List<Employee> employees = employee.toList();
-//        return new PageImpl<>(employees, pageable,employee.getTotalElements());
-//    }
+
 
 //    @PostMapping("")
 //    public ResponseEntity<?> saveEmployee(@Validated @RequestBody EmployeeDTO employeeDTO, BindingResult bindingResult) {
