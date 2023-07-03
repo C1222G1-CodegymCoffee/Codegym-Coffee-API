@@ -11,12 +11,14 @@ import java.time.LocalDate;
 public interface IEmployeeService {
     Page<Employee> showList(org.springframework.data.domain.Pageable pageable);
 
-//    Page<Employee> findByEmployee(String name,Account account,String phoneNumber);
+    Page<Employee> findByEmployee(String name,String account,String phoneNumber,Pageable pageable);
 
 
-    void addEmployee(String nameEmployee, Boolean gender, LocalDate dateOfBirth, double salary,
-                     String image, String address,
-                     String phoneNumber, String email, Position position, Account account);
+//    void addEmployee(String nameEmployee, Boolean gender, LocalDate dateOfBirth, double salary,
+//                     String image, String address,
+//                     String phoneNumber, String email, Position position);
 
     Page<Employee> findByName(String name, Pageable pageable);
+
+//    Employee findByPhone(String phone);
 }

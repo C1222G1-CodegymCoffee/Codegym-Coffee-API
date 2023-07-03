@@ -22,19 +22,19 @@ public class Employee {
     @Column(name = "salary", columnDefinition = "DOUBLE PRECISION")
     private double salary;
 
-    @Column(name = "image",columnDefinition = "MEDIUMTEXT")
+    @Column(name = "image", columnDefinition = "MEDIUMTEXT")
     private String image;
 
-    @Column(name = "name_employee",columnDefinition = "Varchar(40)")
+    @Column(name = "name_employee", columnDefinition = "Varchar(40)")
     private String nameEmployee;
 
-    @Column(name = "address",columnDefinition = "Varchar(40)")
+    @Column(name = "address", columnDefinition = "Varchar(40)")
     private String address;
 
-    @Column(name = "phone_number",columnDefinition = "Varchar(15)")
+    @Column(name = "phone_number", columnDefinition = "Varchar(15)", unique = true)
     private String phoneNumber;
 
-    @Column(name = "email",columnDefinition = "Varchar(40)")
+    @Column(name = "email", columnDefinition = "Varchar(40)")
     private String email;
 
     @ManyToOne
@@ -47,6 +47,19 @@ public class Employee {
     private Account account;
 
     public Employee() {
+    }
+
+    public Employee(Integer idEmployee, Boolean gender, LocalDate dateOfBirth, double salary, String image, String nameEmployee, String address, String phoneNumber, String email, Position position) {
+        this.idEmployee = idEmployee;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+        this.salary = salary;
+        this.image = image;
+        this.nameEmployee = nameEmployee;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.position = position;
     }
 
     public Employee(Integer idEmployee, Boolean gender, LocalDate dateOfBirth, double salary,

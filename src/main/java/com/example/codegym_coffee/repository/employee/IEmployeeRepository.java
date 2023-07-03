@@ -21,30 +21,54 @@ import java.time.LocalDate;
 
 public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
 
-//    @Query(value = "select * from employee as e left join account as a on e.id_account = a.id_account where e.name_employee like %:namenameEmployee% and a.name_account like %:account.name% and e.phone_number like %:phoneNumber% ", nativeQuery = true)
-//    Page<Employee> showListByEmployee(String nameEmployee, Account account, String phoneNumber);
 
-    @Modifying
-    @Transactional
-    @Query(value = "INSERT INTO employee ( name_employee,gender,date_of_birth, salary, image, address, phone_number, email, id_position, id_account) "
-            + "VALUES (:name_employee, :gender, :date_of_birth, :salary, :image, :address, :phone_number, :email, :id_position, :id_account)",
-            nativeQuery = true)
-    void addEmployee(
-            @Param("name_employee") String nameEmployee,
-            @Param("gender") Boolean gender,
-            @Param("date_of_birth") LocalDate dateOfBirth,
-            @Param("salary") double salary,
-            @Param("image") String image,
-            @Param("address") String address,
-            @Param("phone_number") String phoneNumber,
-            @Param("email") String email,
-            @Param("id_position") Position positionDTO,
-            @Param("id_account") Account account
-    );
 
-    @Query(value = "select * from employee",nativeQuery = true)
+
+
+//    @Query(value = "select id_employee,name_employee,gender,date_of_birth,salary,image,address,phone_number,email,id_position from employee where phone_number = :phoneNumber", nativeQuery = true)
+//    Employee findByPhone(
+//            String phone
+//    );
+
+//    @Modifying
+//    @Transactional
+//    @Query(value = "INSERT INTO employee ( name_employee,gender,date_of_birth, salary, image, address, phone_number, email, id_position, id_account) "
+//            + "VALUES (:name_employee, :gender, :date_of_birth, :salary, :image, :address, :phone_number, :email, :id_position)",
+//            nativeQuery = true)
+//    void addEmployee(
+//            @Param("name_employee") String nameEmployee,
+//            @Param("gender") Boolean gender,
+//            @Param("date_of_birth") LocalDate dateOfBirth,
+//            @Param("salary") double salary,
+//            @Param("image") String image,
+//            @Param("address") String address,
+//            @Param("phone_number") String phoneNumber,
+//            @Param("email") String email,
+//            @Param("id_position") Position positionDTOPosition,
+//            Account account);
+
+
+
+    @Query(value = "select * from employee", nativeQuery = true)
     Page<Employee> showListEmployee(Pageable pageable);
 
-    @Query(value = "select * from employee where name_employee like %:name%",nativeQuery = true)
-    Page<Employee> findByName(String name, Pageable pageable);
+    @Query(value = "select * from employee as e join account as a on e.id_account = a.id_account where e.name_employee like %:name_employee% and a.name_account like %:name_account% and e.phone_number like %:phone_number%", nativeQuery = true)
+    Page<Employee> findByAll(
+            @Param("name_employee") String nameEmployee,
+            @Param("name_account") String nameAccount,
+            @Param("phone_number") String phoneNumber,
+            Pageable pageable);
+    @Query(value = "select * from employee where name_employee like %:name_account% ", nativeQuery = true)
+    Page<Employee> findByName(
+            @Param("name_account") String name,
+            Pageable pageable);
+
+
+//    @Query(value = "select * from employee as e join account as a on e.id_account = a.id_account where a.name_account like %:name_account%", nativeQuery = true)
+//    Page<Employee> findByAccount(
+//            @Param("name_account") String nameAccount,
+//            Pageable pageable);
 }
+
+
+
