@@ -34,7 +34,7 @@ public class Feedback {
     }
 
     public Feedback(Integer idFeedback, String codeFeedback, LocalDate dayOfFeedback,
-                    String email, String image, String creator, String content, Bill bill) {
+                    String email, String image, String creator, String content) {
         this.idFeedback = idFeedback;
         this.codeFeedback = codeFeedback;
         this.dayOfFeedback = dayOfFeedback;
@@ -99,5 +99,4 @@ public class Feedback {
     public void setContent(String content) {
         this.content = content;
     }
-
 }

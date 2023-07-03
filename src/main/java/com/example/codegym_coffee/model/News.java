@@ -11,7 +11,7 @@ public class News {
     @Column(name = "id_news")
     private Integer idNews;
 
-    @Column(name = "title",columnDefinition = "Varchar(30)")
+    @Column(name = "title",columnDefinition = "MEDIUMTEXT")
     private String title;
 
     @Column(name = "content",columnDefinition = "MEDIUMTEXT")

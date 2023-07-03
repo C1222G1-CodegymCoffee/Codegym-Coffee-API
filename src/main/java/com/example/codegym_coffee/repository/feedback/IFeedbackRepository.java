@@ -13,6 +13,11 @@ import java.time.LocalDate;
 @Repository
 public interface IFeedbackRepository extends JpaRepository<Feedback, Integer> {
 
+    /**
+     * @author TruongNN
+     * Funcition: thêm mới feedback vào database
+     * Date created: 28/06/2023
+     */
     @Modifying
     @Transactional
     @Query(value = "insert into feedback(code_feedback , content, creator , email , image , day_of_feedback)" +

@@ -16,7 +16,7 @@ public class BillDetail {
     private double priceOfProduct;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bill_id")
+    @JoinColumn(name = "id_bill")
     private Bill bill;
 
     @ManyToOne
@@ -26,10 +26,12 @@ public class BillDetail {
     public BillDetail() {
     }
 
-    public BillDetail(Integer idBillDetail, int quantityOfProduct, double priceOfProduct, Product product) {
+    public BillDetail(Integer idBillDetail, int quantityOfProduct, double priceOfProduct,
+                      Bill bill, Product product) {
         this.idBillDetail = idBillDetail;
         this.quantityOfProduct = quantityOfProduct;
         this.priceOfProduct = priceOfProduct;
+        this.bill = bill;
         this.product = product;
     }
 
@@ -55,6 +57,14 @@ public class BillDetail {
 
     public void setPriceOfProduct(double priceOfProduct) {
         this.priceOfProduct = priceOfProduct;
+    }
+
+    public Bill getBill() {
+        return bill;
+    }
+
+    public void setBill(Bill bill) {
+        this.bill = bill;
     }
 
     public Product getProduct() {

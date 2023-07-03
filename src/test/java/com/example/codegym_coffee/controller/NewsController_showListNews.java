@@ -44,16 +44,18 @@ public class NewsController_showListNews {
                                 .get("/api/list-news"))
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("content[0].idNews").value(14))
-                .andExpect(jsonPath("content[0].title").value("Ưu đãi khai trương"))
-                .andExpect(jsonPath("content[0].content").value("Giảm 10% cho tất cả hóa đơn"))
-                .andExpect(jsonPath("content[0].dayPost").value("2023-06-28"))
-                .andExpect(jsonPath("content[0].image").value("abc"))
+                .andExpect(jsonPath("content[0].idNews").value(2))
+                .andExpect(jsonPath("content[0].title").value("Tuyển nhân viên"))
+                .andExpect(jsonPath("content[0].content").value("Tuyển nhân viên pha chế ca tối"))
+                .andExpect(jsonPath("content[0].dayPost").value("2023-06-29"))
+                .andExpect(jsonPath("content[0].image").value("ccc"))
+                .andExpect(jsonPath("content[0].employee.idEmployee").value(1))
 
-                .andExpect(jsonPath("content[3].idNews").value(17))
-                .andExpect(jsonPath("content[3].title").value("Ưu đãi khai trương"))
-                .andExpect(jsonPath("content[3].content").value("Giảm 50% cho hóa đơn từ 1tr"))
-                .andExpect(jsonPath("content[3].dayPost").value("2023-06-28"))
-                .andExpect(jsonPath("content[3].image").value("ccc"));
+                .andExpect(jsonPath("content[1].idNews").value(4))
+                .andExpect(jsonPath("content[1].title").value("Ưu đãi free ship"))
+                .andExpect(jsonPath("content[1].content").value("miễn phí giao hàng trong bán kính 2km"))
+                .andExpect(jsonPath("content[1].dayPost").value("2023-06-29"))
+                .andExpect(jsonPath("content[1].image").value("aaa"))
+                .andExpect(jsonPath("content[1].employee.idEmployee").value(1));
     }
 }

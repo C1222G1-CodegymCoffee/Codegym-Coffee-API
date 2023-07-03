@@ -7,5 +7,21 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface INewsService{
+
+    /**
+     * @author: TruongNN
+     * Date created: 28/06/2023
+     * function: find all news
+     * @param pageable
+     */
+
     Page<News> findAllNews(Pageable pageable);
+
+    /**
+     * @author: TruongNN
+     * Date created: 28/06/2023
+     * function: find by id of News
+     * @param id
+     */
+    News findByIdNews(int id);
 }

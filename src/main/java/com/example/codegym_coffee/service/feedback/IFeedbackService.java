@@ -7,6 +7,14 @@ import java.util.List;
 
 public interface IFeedbackService {
 
+
+    /**
+     * @author: TruongNN
+     * Date created: 28/06/2023
+     * function: Create feedback
+     *
+     * @param feedbackDTO
+     */
     void createFeedback (FeedbackDTO feedbackDTO);
 
     List<Feedback> findAllFeedback();

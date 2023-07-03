@@ -31,20 +31,18 @@ public class Bill {
     @JoinColumn(name = "id_feedback")
     private Feedback feedback;
 
-    @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
-    private List<BillDetail> billDetails;
-
 
     public Bill() {
     }
 
-    public Bill(Integer idBill, String codeBill, LocalDate dayOfBill, Employee employee, Feedback feedback, List<BillDetail> billDetails) {
+    public Bill(Integer idBill, String codeBill, LocalDate dayOfBill, Employee employee,
+                TableCoffee tableCoffee, Feedback feedback) {
         this.idBill = idBill;
         this.codeBill = codeBill;
         this.dayOfBill = dayOfBill;
         this.employee = employee;
+        this.tableCoffee = tableCoffee;
         this.feedback = feedback;
-        this.billDetails = billDetails;
     }
 
     public Integer getIdBill() {
@@ -79,19 +77,19 @@ public class Bill {
         this.employee = employee;
     }
 
+    public TableCoffee getTableCoffee() {
+        return tableCoffee;
+    }
+
+    public void setTableCoffee(TableCoffee tableCoffee) {
+        this.tableCoffee = tableCoffee;
+    }
+
     public Feedback getFeedback() {
         return feedback;
     }
 
     public void setFeedback(Feedback feedback) {
         this.feedback = feedback;
-    }
-
-    public List<BillDetail> getBillDetails() {
-        return billDetails;
-    }
-
-    public void setBillDetails(List<BillDetail> billDetails) {
-        this.billDetails = billDetails;
     }
 }

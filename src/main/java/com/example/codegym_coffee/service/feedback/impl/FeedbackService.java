@@ -16,6 +16,13 @@ public class FeedbackService implements IFeedbackService {
     @Autowired
     private IFeedbackRepository ifeedbackRepository;
 
+
+    /**
+     * @author: TruongNN
+     * Date created: 28/06/2023
+     * function: Create feedback
+     *
+     */
     @Override
     public void createFeedback(FeedbackDTO feedbackDTO) {
         Feedback feedback = new Feedback();

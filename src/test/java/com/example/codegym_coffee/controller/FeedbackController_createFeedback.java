@@ -11,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.time.LocalDate;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -430,16 +432,19 @@ public class FeedbackController_createFeedback {
     @Test
     public void createFeedback_18() throws Exception {
         FeedbackDTO feedbackDTO = new FeedbackDTO();
+        feedbackDTO.setIdFeedback(10);
+        feedbackDTO.setCodeFeedback("F012");
         feedbackDTO.setCreator("Ngo Ngoc Truong");
         feedbackDTO.setEmail("ngongoctruong@gmail.com");
-        feedbackDTO.setContent("Đồ uống của quán quá là ngon, tuyệt vời");
-        feedbackDTO.setImage("hinh.png");
+        feedbackDTO.setContent("abccccccc");
+        feedbackDTO.setImage("hinh.jpg");
+        feedbackDTO.setDayOfFeedback(LocalDate.parse("2023-06-29"));
         this.mockMvc
                 .perform(MockMvcRequestBuilders
                         .post("/api/public/create-feedback")
                         .content(this.objectMapper.writeValueAsString(feedbackDTO))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
-                .andExpect(status().is4xxClientError());
+                .andExpect(status().is2xxSuccessful());
     }
 }

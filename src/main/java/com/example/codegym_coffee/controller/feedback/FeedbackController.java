@@ -28,6 +28,12 @@ public class FeedbackController {
         return new ResponseEntity<>(feedbackList, HttpStatus.OK);
     }
 
+    /**
+     * Created by: TruongNN
+     * Date created: 28/06/2023
+     * Function: add data feedback  into Database
+     * @param feedbackDTO
+     */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/public/create-feedback")
     public ResponseEntity<?> createFeedback(@Valid @RequestBody FeedbackDTO feedbackDTO,

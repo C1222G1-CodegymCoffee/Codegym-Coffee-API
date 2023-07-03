@@ -10,10 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +22,12 @@ public class NewsController {
     @Autowired
     private INewsService iNewsService;
 
+    /**
+     * @author: TruongNN
+     * Date created: 28/06/2023
+     * @param pageable
+     * return : list News, status Ok
+     */
 
     @GetMapping("/list-news")
     public ResponseEntity<Page<News>> showListNews(@PageableDefault(size = 5)Pageable pageable,
@@ -35,5 +38,22 @@ public class NewsController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(newsPage, HttpStatus.OK);
+    }
+
+    /**
+     * @author: TruongNN
+     * Date created: 28/06/2023
+     * @param id
+     * return : idNews
+     */
+    @GetMapping("/detail-news/{id}")
+    public ResponseEntity<News> getInfoNews (@PathVariable Integer id) {
+
+        News news = this.iNewsService.findByIdNews(id);
+
+        if (news == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(news, HttpStatus.OK);
     }
 }
