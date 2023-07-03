@@ -36,10 +36,10 @@ public class FeedbackController {
      */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/public/create-feedback")
-    public ResponseEntity<?> createFeedback(@Valid @RequestBody FeedbackDTO feedbackDTO,
+    public ResponseEntity<FeedbackDTO> createFeedback(@Valid @RequestBody FeedbackDTO feedbackDTO,
                                             BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
-            return new ResponseEntity<>(bindingResult.getFieldError(), HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>( HttpStatus.NOT_ACCEPTABLE);
         }
         iFeedbackService.createFeedback(feedbackDTO);
         return new ResponseEntity<>(HttpStatus.OK);

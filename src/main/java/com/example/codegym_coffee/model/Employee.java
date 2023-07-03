@@ -20,19 +20,19 @@ public class Employee {
     @Column(name = "salary", columnDefinition = "DOUBLE PRECISION")
     private Double salary;
 
-    @Column(name = "image",columnDefinition = "MEDIUMTEXT")
+    @Column(name = "image", columnDefinition = "MEDIUMTEXT")
     private String image;
 
-    @Column(name = "name_employee",columnDefinition = "Varchar(40)")
+    @Column(name = "name_employee", columnDefinition = "Varchar(40)")
     private String nameEmployee;
 
-    @Column(name = "address",columnDefinition = "Varchar(40)")
+    @Column(name = "address", columnDefinition = "Varchar(40)")
     private String address;
 
-    @Column(name = "phone_number",columnDefinition = "Varchar(15)")
+    @Column(name = "phone_number", columnDefinition = "Varchar(15)")
     private String phoneNumber;
 
-    @Column(name = "email",columnDefinition = "Varchar(40)")
+    @Column(name = "email", columnDefinition = "Varchar(40)")
     private String email;
 
     @ManyToOne
