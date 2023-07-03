@@ -16,12 +16,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 
@@ -61,19 +58,18 @@ public class LoginController {
     private JavaMailSender mailSender;
 
     @PostMapping("/forgot_password")
-    public ResponseEntity<?> forgotPassword(@RequestParam String email,HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+    public ResponseEntity<EmailConfirm> forgotPassword(@RequestBody EmailConfirm emailConfirm) throws MessagingException, UnsupportedEncodingException {
 
         String token = RandomString.make(30);
-
         try {
-            accountService.updateResetPasswordToken(token, email);
-            String resetPasswordLink = Utility.getSiteURL(request) + "/reset_password?token=" + token;
-            sendEmail(email, resetPasswordLink);
-            return new ResponseEntity<>(HttpStatus.OK);
+            accountService.updateResetPasswordToken(token, emailConfirm.getEmailConfirm());
+            String resetPasswordLink = emailConfirm.getLocation() + "/reset_password";
+            sendEmail(emailConfirm.getEmailConfirm(), resetPasswordLink);
+            return new ResponseEntity<>(new EmailConfirm(emailConfirm.getEmailConfirm(), token), HttpStatus.OK);
         } catch (MessagingException | UnsupportedEncodingException e){
              e.getStackTrace();
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok().body(emailConfirm);
     }
 
     public void sendEmail(String recipientEmail, String link) throws MessagingException, UnsupportedEncodingException {
@@ -99,20 +95,8 @@ public class LoginController {
         mailSender.send(message);
     }
 
-
-    @GetMapping("/reset_password")
-    public ResponseEntity<?> showResetPasswordForm(@Param(value = "token") String token, Model model) {
-        Account account = accountService.getByResetPasswordToken(token);
-
-        if (account == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
     @PostMapping("/reset_password")
-    public ResponseEntity<?> resetPassword(@RequestBody @Valid GenericRequest genericRequest) {
+    public ResponseEntity<GenericRequest> resetPassword(@RequestBody @Valid GenericRequest genericRequest) {
 
         Account account = accountService.getByResetPasswordToken(genericRequest.getToken());
 

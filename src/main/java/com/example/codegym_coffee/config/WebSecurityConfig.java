@@ -25,8 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailServiceImpl userDetailServiceImpl;
 
-    @Autowired
-    private DataSource dataSource;
+//    @Autowired
+//    private DataSource dataSource;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -40,10 +40,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.authorizeRequests().antMatchers("/", "/api/login", "/logout").permitAll();
+        http.authorizeRequests().antMatchers("/", "/api/login", "/logout", "/reset_password").permitAll();
         http.authorizeRequests().antMatchers("/").access("hasAnyRole('ROLE_STAFF', 'ROLE_ADMIN')");
 
-        http.authorizeRequests().antMatchers("/admin/news").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().antMatchers("/staff/**").access("hasAnyRole('ROLE_STAFF', 'ROLE_ADMIN')");
 
         http.exceptionHandling()
