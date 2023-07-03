@@ -2,6 +2,7 @@ package com.example.codegym_coffee.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "bill")
@@ -11,11 +12,10 @@ public class Bill {
     @Column(name = "id_bill")
     private Integer idBill;
 
-    @Column(name = "code_bill", columnDefinition = "Varchar(40)")
-    private String codeBill;
-
     @Column(name = "day_of_bill",columnDefinition = "date")
     private LocalDate dayOfBill;
+    @Column(name = "status")
+    private Boolean status;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
@@ -33,11 +33,18 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(Integer idBill, String codeBill, LocalDate dayOfBill,
-                Employee employee, TableCoffee tableCoffee, Feedback feedback) {
+    public Bill(Integer idBill, LocalDate dayOfBill, Boolean status, Employee employee, TableCoffee tableCoffee, Feedback feedback) {
         this.idBill = idBill;
-        this.codeBill = codeBill;
         this.dayOfBill = dayOfBill;
+        this.status = status;
+        this.employee = employee;
+        this.tableCoffee = tableCoffee;
+        this.feedback = feedback;
+    }
+
+    public Bill(LocalDate dayOfBill, Boolean status, Employee employee,  Feedback feedback,TableCoffee tableCoffee) {
+        this.dayOfBill = dayOfBill;
+        this.status = status;
         this.employee = employee;
         this.tableCoffee = tableCoffee;
         this.feedback = feedback;
@@ -51,20 +58,20 @@ public class Bill {
         this.idBill = idBill;
     }
 
-    public String getCodeBill() {
-        return codeBill;
-    }
-
-    public void setCodeBill(String codeBill) {
-        this.codeBill = codeBill;
-    }
-
     public LocalDate getDayOfBill() {
         return dayOfBill;
     }
 
     public void setDayOfBill(LocalDate dayOfBill) {
         this.dayOfBill = dayOfBill;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public Employee getEmployee() {

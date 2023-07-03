@@ -21,11 +21,7 @@ public class Account {
     public Account() {
     }
 
-    public Account(Integer idAccount, String nameAccount, String password, Employee employee) {
-        this.idAccount = idAccount;
-        this.nameAccount = nameAccount;
-        this.password = password;
-    }
+
 
     public Integer getIdAccount() {
         return idAccount;

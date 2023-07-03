@@ -32,17 +32,6 @@ public class Feedback {
     public Feedback() {
     }
 
-    public Feedback(Integer idFeedback, String codeFeedback, LocalDate dayOfFeedback,
-                    String email, String image, String creator, String content, Bill bill) {
-        this.idFeedback = idFeedback;
-        this.codeFeedback = codeFeedback;
-        this.dayOfFeedback = dayOfFeedback;
-        this.email = email;
-        this.image = image;
-        this.creator = creator;
-        this.content = content;
-    }
-
     public Integer getIdFeedback() {
         return idFeedback;
     }

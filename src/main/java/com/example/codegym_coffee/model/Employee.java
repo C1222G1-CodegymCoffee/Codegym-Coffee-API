@@ -46,22 +46,6 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Integer idEmployee, Boolean gender, LocalDate dateOfBirth, double salary,
-                    String image, String nameEmployee, String address,
-                    String phoneNumber, String email, Position position, Account account) {
-        this.idEmployee = idEmployee;
-        this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
-        this.salary = salary;
-        this.image = image;
-        this.nameEmployee = nameEmployee;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.position = position;
-        this.account = account;
-    }
-
     public Integer getIdEmployee() {
         return idEmployee;
     }
