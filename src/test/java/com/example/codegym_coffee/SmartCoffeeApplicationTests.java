@@ -1,13 +1,13 @@
-//package com.example.api;
-//
-//import org.junit.jupiter.api.Test;
-//import org.springframework.boot.test.context.SpringBootTest;
-//
-//@SpringBootTest
-//class SmartCoffeeApplicationTests {
-//
-//    @Test
-//    void contextLoads() {
-//    }
-//
-//}
+
+package com.example.codegym_coffee;
+
+import org.junit.jupiter.api.Test;
+
+class SmartCoffeeApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}
+

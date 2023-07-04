@@ -1,12 +1,7 @@
 package com.example.codegym_coffee.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "account")
@@ -29,17 +24,14 @@ public class Account {
     @OneToOne(mappedBy = "account")
     private Employee employee;
 
-
     public Account() {
     }
-
     
 
     public Account(Integer idAccount, String nameAccount, String password, Employee employee) {
         this.idAccount = idAccount;
         this.nameAccount = nameAccount;
         this.password = password;
-        this.employee = employee;
     }
 
     public Integer getIdAccount() {
