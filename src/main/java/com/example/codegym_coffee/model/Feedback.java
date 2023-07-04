@@ -11,9 +11,6 @@ public class Feedback {
     @Column(name = "id_feedback")
     private Integer idFeedback;
 
-    @Column(name = "code_feedback",columnDefinition = "Varchar(40)")
-    private String codeFeedback;
-
     @Column(name = "day_of_feedback")
     private LocalDate dayOfFeedback;
 
@@ -32,20 +29,21 @@ public class Feedback {
     public Feedback() {
     }
 
+    public Feedback(Integer idFeedback, LocalDate dayOfFeedback, String email, String image, String creator, String content) {
+        this.idFeedback = idFeedback;
+        this.dayOfFeedback = dayOfFeedback;
+        this.email = email;
+        this.image = image;
+        this.creator = creator;
+        this.content = content;
+    }
+
     public Integer getIdFeedback() {
         return idFeedback;
     }
 
     public void setIdFeedback(Integer idFeedback) {
         this.idFeedback = idFeedback;
-    }
-
-    public String getCodeFeedback() {
-        return codeFeedback;
-    }
-
-    public void setCodeFeedback(String codeFeedback) {
-        this.codeFeedback = codeFeedback;
     }
 
     public LocalDate getDayOfFeedback() {
@@ -87,5 +85,4 @@ public class Feedback {
     public void setContent(String content) {
         this.content = content;
     }
-
 }

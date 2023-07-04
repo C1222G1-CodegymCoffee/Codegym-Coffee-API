@@ -39,7 +39,7 @@ public class BillDetail {
     public BillDetail(int quantityOfProduct, double priceOfProduct, Bill bill, Product product) {
         this.quantityOfProduct = quantityOfProduct;
         this.priceOfProduct = priceOfProduct;
-        this.bill = bill;
+        this.bill = bill;;
         this.product = product;
     }
 

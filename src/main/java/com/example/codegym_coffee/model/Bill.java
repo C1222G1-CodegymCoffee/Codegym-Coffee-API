@@ -15,7 +15,7 @@ public class Bill {
     @Column(name = "day_of_bill",columnDefinition = "date")
     private LocalDate dayOfBill;
     @Column(name = "status")
-    private Boolean status;
+    private int status;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
@@ -33,7 +33,7 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(Integer idBill, LocalDate dayOfBill, Boolean status, Employee employee, TableCoffee tableCoffee, Feedback feedback) {
+    public Bill(Integer idBill, LocalDate dayOfBill, int status, Employee employee, TableCoffee tableCoffee, Feedback feedback) {
         this.idBill = idBill;
         this.dayOfBill = dayOfBill;
         this.status = status;
@@ -42,7 +42,7 @@ public class Bill {
         this.feedback = feedback;
     }
 
-    public Bill(LocalDate dayOfBill, Boolean status, Employee employee,  Feedback feedback,TableCoffee tableCoffee) {
+    public Bill(LocalDate dayOfBill, int status, Employee employee,  Feedback feedback,TableCoffee tableCoffee) {
         this.dayOfBill = dayOfBill;
         this.status = status;
         this.employee = employee;
@@ -66,11 +66,11 @@ public class Bill {
         this.dayOfBill = dayOfBill;
     }
 
-    public Boolean getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

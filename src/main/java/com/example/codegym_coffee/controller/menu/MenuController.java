@@ -58,7 +58,7 @@ public class MenuController {
     public ResponseEntity<ProductMenuDto> addToBill(@RequestBody List<ProductMenuDto> listProductMenuDto) {
         TableCoffee tableCoffee = menuService.getTableCoffee(listProductMenuDto.get(0).getTableOfBill());
         LocalDate localDate = LocalDate.now();
-        Bill bill = new Bill(localDate, false, null, null, tableCoffee);
+        Bill bill = new Bill(localDate, 1, null, null, tableCoffee);
         menuService.createBill(bill);
         Bill billToAddBD = menuService.getBillByTable(tableCoffee.getIdTable());
 

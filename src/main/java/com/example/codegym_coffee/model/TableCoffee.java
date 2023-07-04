@@ -15,12 +15,13 @@ public class TableCoffee {
     private String nameTable;
 
     @Column(name = "status")
-    private Boolean status;
+    private int status;
+
 
     public TableCoffee() {
     }
 
-    public TableCoffee(Integer idTable, String nameTable, Boolean status) {
+    public TableCoffee(Integer idTable, String nameTable, int status) {
         this.idTable = idTable;
         this.nameTable = nameTable;
         this.status = status;
@@ -42,11 +43,11 @@ public class TableCoffee {
         this.nameTable = nameTable;
     }
 
-    public Boolean getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }
