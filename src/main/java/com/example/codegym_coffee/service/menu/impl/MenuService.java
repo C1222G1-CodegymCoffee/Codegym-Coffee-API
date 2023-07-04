@@ -1,11 +1,7 @@
 package com.example.codegym_coffee.service.menu.impl;
 
-import com.example.codegym_coffee.model.BillDetail;
-import com.example.codegym_coffee.model.Product;
-import com.example.codegym_coffee.model.ProductType;
-import com.example.codegym_coffee.repository.menu.IMenuBD;
-import com.example.codegym_coffee.repository.menu.IMenuRepository;
-import com.example.codegym_coffee.repository.menu.ITypeMenuRepository;
+import com.example.codegym_coffee.model.*;
+import com.example.codegym_coffee.repository.menu.*;
 import com.example.codegym_coffee.service.menu.IMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +10,10 @@ import java.util.List;
 
 @Service
 public class MenuService implements IMenuService {
+    @Autowired
+    private IMenuBillRepository menuBillRepository;
+    @Autowired
+    private ITableCoffeeRepository tableCoffeeRepository;
     @Autowired
     private IMenuRepository menuRepository;
 
@@ -41,5 +41,21 @@ public class MenuService implements IMenuService {
     public void addBillDetail(BillDetail billDetail) {
         menuBD.save(billDetail);
     }
+
+    @Override
+    public TableCoffee getTableCoffee(int tableOfBill) {
+        return tableCoffeeRepository.findByNameTable(tableOfBill);
+    }
+
+    @Override
+    public void createBill(Bill bill) {
+        menuBillRepository.save(bill);
+    }
+
+    @Override
+    public Bill getBillByTable(Integer idTable) {
+        return menuBillRepository.getBillByTable(idTable);
+    }
+
 
 }

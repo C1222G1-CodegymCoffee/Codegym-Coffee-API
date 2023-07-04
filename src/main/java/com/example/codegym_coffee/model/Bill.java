@@ -2,6 +2,7 @@ package com.example.codegym_coffee.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "bill")
@@ -13,6 +14,8 @@ public class Bill {
 
     @Column(name = "day_of_bill",columnDefinition = "date")
     private LocalDate dayOfBill;
+    @Column(name = "status")
+    private int status;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
@@ -30,17 +33,21 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(Integer idBill, LocalDate dayOfBill,
-                Employee employee, TableCoffee tableCoffee, Feedback feedback) {
+    public Bill(Integer idBill, LocalDate dayOfBill, int status, Employee employee, TableCoffee tableCoffee, Feedback feedback) {
         this.idBill = idBill;
         this.dayOfBill = dayOfBill;
+        this.status = status;
         this.employee = employee;
         this.tableCoffee = tableCoffee;
         this.feedback = feedback;
     }
 
-    public Bill(Integer idBill) {
-        this.idBill = idBill;
+    public Bill(LocalDate dayOfBill, int status, Employee employee,  Feedback feedback,TableCoffee tableCoffee) {
+        this.dayOfBill = dayOfBill;
+        this.status = status;
+        this.employee = employee;
+        this.tableCoffee = tableCoffee;
+        this.feedback = feedback;
     }
 
     public Integer getIdBill() {
@@ -51,13 +58,20 @@ public class Bill {
         this.idBill = idBill;
     }
 
-
     public LocalDate getDayOfBill() {
         return dayOfBill;
     }
 
     public void setDayOfBill(LocalDate dayOfBill) {
         this.dayOfBill = dayOfBill;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public Employee getEmployee() {

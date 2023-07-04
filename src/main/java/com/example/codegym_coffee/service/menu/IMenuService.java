@@ -1,8 +1,6 @@
 package com.example.codegym_coffee.service.menu;
 
-import com.example.codegym_coffee.model.BillDetail;
-import com.example.codegym_coffee.model.Product;
-import com.example.codegym_coffee.model.ProductType;
+import com.example.codegym_coffee.model.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,4 +12,11 @@ public interface IMenuService {
     List<Product> getProductByTypeProduct(String type);
 
     void addBillDetail(BillDetail billDetail);
+
+
+    TableCoffee getTableCoffee(int tableOfBill);
+
+    void createBill(Bill bill);
+
+    Bill getBillByTable(Integer idTable);
 }

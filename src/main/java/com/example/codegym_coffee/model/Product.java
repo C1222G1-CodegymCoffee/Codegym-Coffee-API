@@ -11,6 +11,7 @@ public class Product {
     @Column(name = "id_product")
     private Integer idProduct;
 
+
     @Column(name = "name_product",columnDefinition = "Varchar(40)")
     private String nameProduct;
 
@@ -30,7 +31,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(Integer idProduct, String nameProduct,
+    public Product(Integer idProduct,  String nameProduct,
                    String ingredient, double price, String image, ProductType productType) {
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;
@@ -47,6 +48,8 @@ public class Product {
     public void setIdProduct(Integer idProduct) {
         this.idProduct = idProduct;
     }
+
+
 
     public String getNameProduct() {
         return nameProduct;

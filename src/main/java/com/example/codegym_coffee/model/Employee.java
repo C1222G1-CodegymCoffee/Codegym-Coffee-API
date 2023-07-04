@@ -46,9 +46,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Integer idEmployee, Boolean gender, LocalDate dateOfBirth, double salary,
-                    String image, String nameEmployee, String address,
-                    String phoneNumber, String email, Position position, Account account) {
+    public Employee(Integer idEmployee, Boolean gender, LocalDate dateOfBirth, double salary, String image, String nameEmployee, String address, String phoneNumber, String email, Position position, Account account) {
         this.idEmployee = idEmployee;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
