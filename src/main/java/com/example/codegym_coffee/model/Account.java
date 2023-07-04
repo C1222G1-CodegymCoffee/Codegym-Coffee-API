@@ -1,6 +1,15 @@
 package com.example.codegym_coffee.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "account")
@@ -17,6 +26,15 @@ public class Account {
     @Column(name = "password", columnDefinition = "text")
     private String password;
 
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
+
+    @OneToOne(mappedBy = "account")
+    @JsonBackReference
+    private Employee employee;
+
+    @OneToMany(mappedBy = "account")
+    private Set<AccountRole> accountRoles = new HashSet<>();
 
     public Account() {
     }
@@ -51,4 +69,27 @@ public class Account {
         this.password = password;
     }
 
+    public String getResetPasswordToken() {
+        return resetPasswordToken;
+    }
+
+    public void setResetPasswordToken(String resetPasswordToken) {
+        this.resetPasswordToken = resetPasswordToken;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Set<AccountRole> getAccountRoles() {
+        return accountRoles;
+    }
+
+    public void setAccountRoles(Set<AccountRole> accountRoles) {
+        this.accountRoles = accountRoles;
+    }
 }

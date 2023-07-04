@@ -1,37 +1,88 @@
 package com.example.codegym_coffee.controller.account;
 
+import com.example.codegym_coffee.dto.account.ChangePasswordForm;
 import com.example.codegym_coffee.model.Account;
-import com.example.codegym_coffee.service.account.IAccountService;
+import com.example.codegym_coffee.model.AccountRole;
+import com.example.codegym_coffee.model.Employee;
+import com.example.codegym_coffee.service.account.IAccountServiceQuynh;
+import com.example.codegym_coffee.service.employee.IEmployeeInformationService;
+import com.example.codegym_coffee.utils.JwtTokenFilter;
+import com.example.codegym_coffee.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("home/admin/employee/account")
-@CrossOrigin
+@CrossOrigin("*")
+@RequestMapping("/account")
 public class AccountController {
+    @Autowired
+    private IAccountServiceQuynh iAccountServiceQuynh;
 
     @Autowired
-    private IAccountService iAccountService;
+    private JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    private JwtTokenFilter jwtTokenFilter;
+    @Autowired
+    private IEmployeeInformationService iEmployeeInformationService;
+    /**
+     * Author:QuynhHTN
+     * Date create: 27/06/2023
+     * Function: use the changePassword method to change password.If not unsuccessful return HttpStatus.BAD_REQUEST.
+     If successful return message and return HttpStatus.OK
 
-    @GetMapping("")
-    public List<Account> showList() {
-        return iAccountService.showList();
-    }
-
-    @GetMapping("/{nameAccount}")
-    public ResponseEntity<?> findByNameAccount(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String nameAccount) {
-        Pageable pageable = PageRequest.of(page, 10);
-        Page<Account> listAccount = iAccountService.findAccountUserByNameAccount(nameAccount,pageable);
-        if (listAccount.isEmpty()) {
-            return new ResponseEntity<>(listAccount, HttpStatus.NOT_FOUND);
+     * @param changePasswordForm
+     * @param bindingResult
+     * @return
+     */
+    @PutMapping("/change-password")
+    public ResponseEntity<?> changePassword(HttpServletRequest request, @Validated @RequestBody ChangePasswordForm changePasswordForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> map = new LinkedHashMap<>();
+            List<FieldError> err = bindingResult.getFieldErrors();
+            for (FieldError error : err) {
+                if (!map.containsKey(error.getField())) {
+                    map.put(error.getField(), error.getDefaultMessage());
+                }
+            }
+            return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(listAccount, HttpStatus.OK);
+        String token = null;
+        String nameAccount=null;
+        if(jwtTokenFilter.hasAuthorizationBearer(request)){
+            token = jwtTokenFilter.getAccessToken(request);
+        }
+        if(token != null && jwtTokenUtil.validateAccessToken(token)){
+            nameAccount = jwtTokenUtil.getSubject(token);
+        }
+        Employee employee = iEmployeeInformationService.findByNameAccount(nameAccount);
+        if (employee == null) {
+            return new ResponseEntity<>("Người dùng không tồn tai",HttpStatus.BAD_REQUEST);
+        }
+        Account account = iAccountServiceQuynh.findByNameAccount(employee.getAccount().getNameAccount());
+        if(account==null){
+            return new ResponseEntity<>("Tài khoản không tồn tại", HttpStatus.BAD_REQUEST);
+        }
+        if (Boolean.FALSE.equals(iAccountServiceQuynh.checkIfValidOldPassword(account, changePasswordForm.getOldPassword()))) {
+            return new ResponseEntity<>("Mật khẩu hiện tại không đúng", HttpStatus.BAD_REQUEST);
+        }
+        if (changePasswordForm.getNewPassword().equals(changePasswordForm.getOldPassword())) {
+            return new ResponseEntity<>("Mật khẩu mới không được trùng với mật khẩu cũ", HttpStatus.BAD_REQUEST);
+
+        }
+        if (!changePasswordForm.getNewPassword().equals(changePasswordForm.getConfirmPassword())) {
+            return new ResponseEntity<>("Mật khẩu xác nhận không trùng khớp", HttpStatus.BAD_REQUEST);
+        }
+        iAccountServiceQuynh.changePassword(account, changePasswordForm.getNewPassword());
+        return ResponseEntity.ok("Đổi mật khẩu thành công!");
     }
 }

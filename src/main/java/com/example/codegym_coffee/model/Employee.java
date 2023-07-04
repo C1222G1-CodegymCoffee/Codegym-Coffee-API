@@ -1,5 +1,7 @@
 package com.example.codegym_coffee.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -18,7 +20,7 @@ public class Employee {
     private LocalDate dateOfBirth;
 
     @Column(name = "salary", columnDefinition = "DOUBLE PRECISION")
-    private double salary;
+    private Double salary;
 
     @Column(name = "image",columnDefinition = "MEDIUMTEXT")
     private String image;
@@ -46,7 +48,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Integer idEmployee, Boolean gender, LocalDate dateOfBirth, double salary,
+    public Employee(Integer idEmployee, Boolean gender, LocalDate dateOfBirth, Double salary,
                     String image, String nameEmployee, String address,
                     String phoneNumber, String email, Position position, Account account) {
         this.idEmployee = idEmployee;
@@ -86,11 +88,11 @@ public class Employee {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public double getSalary() {
+    public Double getSalary() {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(Double salary) {
         this.salary = salary;
     }
 
