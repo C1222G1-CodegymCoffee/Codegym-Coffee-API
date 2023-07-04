@@ -1,5 +1,6 @@
 package com.example.codegym_coffee.model;
 
+
 import javax.persistence.*;
 
 @Entity
@@ -14,11 +15,18 @@ public class Account {
     @Column(name = "name_account",columnDefinition = "Varchar(40)")
     private String nameAccount;
 
-    @Column(name = "password", columnDefinition = "Varchar(50)")
+    @Column(name = "password", columnDefinition = "Varchar(255)")
     private String password;
+
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
+
+    @OneToOne(mappedBy = "account")
+    private Employee employee;
 
     public Account() {
     }
+    
 
     public Account(Integer idAccount, String nameAccount, String password, Employee employee) {
         this.idAccount = idAccount;
@@ -50,4 +58,19 @@ public class Account {
         this.password = password;
     }
 
+    public String getResetPasswordToken() {
+        return resetPasswordToken;
+    }
+
+    public void setResetPasswordToken(String resetPasswordToken) {
+        this.resetPasswordToken = resetPasswordToken;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 }
