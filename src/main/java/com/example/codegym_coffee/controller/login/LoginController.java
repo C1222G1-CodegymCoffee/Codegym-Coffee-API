@@ -1,13 +1,15 @@
 package com.example.codegym_coffee.controller.login;
 
 import com.example.codegym_coffee.config.MyUserPrincipal;
-import com.example.codegym_coffee.dto.accountDTO.*;
+import com.example.codegym_coffee.dto.accountDTO.AuthRequest;
+import com.example.codegym_coffee.dto.accountDTO.AuthResponse;
+import com.example.codegym_coffee.dto.accountDTO.EmailConfirm;
+import com.example.codegym_coffee.dto.accountDTO.GenericRequest;
 import com.example.codegym_coffee.model.Account;
-import com.example.codegym_coffee.service.login.IAccountService;
+import com.example.codegym_coffee.service.account.IAccountService;
 import com.example.codegym_coffee.utils.JwtTokenUtil;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,6 +19,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.validation.Valid;

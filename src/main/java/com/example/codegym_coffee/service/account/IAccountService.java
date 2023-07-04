@@ -39,4 +39,11 @@ public interface IAccountService {
      */
     Boolean checkIfValidOldPassword(Account account, String oldPassword);
 
+
+    void updateResetPasswordToken(String token, String email);
+    Account getByResetPasswordToken(String token);
+
+    void updatePassword(Account account, String newPassword);
+
+    Account findByEmail(String userEmail);
 }

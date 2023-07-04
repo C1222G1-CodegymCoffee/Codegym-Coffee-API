@@ -50,4 +50,11 @@ public interface IAccountRepositoryQuynh extends JpaRepository<Account,Integer> 
 
     @Query(value = "select * from account where name_account like %:name_account%", nativeQuery = true)
     Page<Account> findAccountUserByNameAccount(@Param("name_account") String nameAccount, Pageable pageable);
+
+    @Query(value = "select * from account where reset_password_token = ?1", nativeQuery = true)
+    Account findByResetPasswordToken(String token);
+
+
+    @Query(value = "SELECT * FROM account a join employee e on a.id_account = e.id_account WHERE e.email = ?1", nativeQuery = true)
+    Account findByEmail(String email);
 }

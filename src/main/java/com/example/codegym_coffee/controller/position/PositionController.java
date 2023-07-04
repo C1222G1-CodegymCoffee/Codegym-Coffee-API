@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("home/admin/employee/position")
+@RequestMapping("/api/admin/position")
 @CrossOrigin
 public class PositionController {
 

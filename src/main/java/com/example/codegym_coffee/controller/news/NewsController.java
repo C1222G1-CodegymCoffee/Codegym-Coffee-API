@@ -23,10 +23,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/news")
+@RequestMapping("/api")
 public class NewsController {
     @Autowired
     private INewsService iNewsService;
@@ -53,9 +52,6 @@ public class NewsController {
                                                    @RequestParam(value = "page", defaultValue = "0") int page) {
         pageable = PageRequest.of(page,5);
         Page<News> newsPage = iNewsService.findAllNews(pageable);
-        if (newsPage.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
         return new ResponseEntity<>(newsPage, HttpStatus.OK);
     }
 }

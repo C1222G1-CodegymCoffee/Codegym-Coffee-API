@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/v2/employee")
 @CrossOrigin("*")
 public class EmployeeInformationController {
     @Autowired

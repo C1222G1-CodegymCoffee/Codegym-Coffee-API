@@ -33,11 +33,6 @@ public class FeedbackController {
                                                        @RequestParam(value = "page", defaultValue = "0") int page) {
         pageable = PageRequest.of(page, 10);
         Page<Feedback> pageFeedback = feedbackService.findAllFeedback(pageable);
-
-        if (pageFeedback.isEmpty()) {
-            return new ResponseEntity<>(pageFeedback, HttpStatus.NOT_FOUND);
-        }
-
         return new ResponseEntity<>(pageFeedback, HttpStatus.OK);
     }
 

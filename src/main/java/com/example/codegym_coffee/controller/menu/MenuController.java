@@ -30,27 +30,18 @@ public class MenuController {
     @GetMapping("")
     public ResponseEntity<List<Product>> displayMenu() {
         List<Product> products = menuService.getAllProduct();
-        if (products.isEmpty()) {
-            return new ResponseEntity<>(products, HttpStatus.NOT_FOUND);
-        }
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @GetMapping("/type-product")
     public ResponseEntity<List<ProductType>> displayTypeMenu() {
         List<ProductType> productsType = menuService.getAllTypeProduct();
-        if (productsType.isEmpty()) {
-            return new ResponseEntity<>(productsType, HttpStatus.NOT_FOUND);
-        }
         return new ResponseEntity<>(productsType, HttpStatus.OK);
     }
 
     @GetMapping("/product-by-type")
     public ResponseEntity<List<Product>> displayProductByType(@RequestParam(name = "type") String type) {
         List<Product> products = menuService.getProductByTypeProduct(type);
-        if (products.isEmpty()) {
-            return new ResponseEntity<>(products, HttpStatus.NOT_FOUND);
-        }
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 

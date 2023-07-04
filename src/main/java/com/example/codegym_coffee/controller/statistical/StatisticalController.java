@@ -2,7 +2,7 @@ package com.example.codegym_coffee.controller.statistical;
 
 
 import com.example.codegym_coffee.dto.satistic.StaticDTO;
-import com.example.codegym_coffee.service.listNews.staitistical.IStatisticalService;
+import com.example.codegym_coffee.service.staitistical.IStatisticalService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;

@@ -3,7 +3,7 @@ package com.example.codegym_coffee.service.login.impl;
 import com.example.codegym_coffee.config.MyUserPrincipal;
 import com.example.codegym_coffee.model.Account;
 import com.example.codegym_coffee.model.AccountRole;
-import com.example.codegym_coffee.repository.login.IAccountRepository;
+import com.example.codegym_coffee.repository.account.IAccountRepositoryQuynh;
 import com.example.codegym_coffee.repository.login.IAccountRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,7 +23,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private IAccountRoleRepository accountRoleRepository;
 
     @Autowired
-    private IAccountRepository accountRepository;
+    private IAccountRepositoryQuynh accountRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

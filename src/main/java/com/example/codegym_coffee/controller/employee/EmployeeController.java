@@ -3,13 +3,13 @@ package com.example.codegym_coffee.controller.employee;
 
 import com.example.codegym_coffee.dto.employee.EmployeeDTO;
 import com.example.codegym_coffee.model.Employee;
-import com.example.codegym_coffee.service.account.impl.AccountService;
 import com.example.codegym_coffee.service.employee.impl.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,13 +17,13 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("home/admin/employee")
+@RequestMapping("/api/admin/employee")
 @CrossOrigin("*")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
-    @Autowired
-    private AccountService accountService;
+//    @Autowired
+//    private AccountService accountService;
 
 
 
@@ -36,9 +36,6 @@ public class EmployeeController {
     public ResponseEntity<Page<Employee>> listEmployee(@RequestParam(value = "page", defaultValue = "0") int page) {
         Pageable pageable = PageRequest.of(page, 10);
         Page<Employee> listFeedback = employeeService.showList(pageable);
-        if (listFeedback.isEmpty()) {
-            return new ResponseEntity<>(listFeedback, HttpStatus.NOT_FOUND);
-        }
         return new ResponseEntity<>(listFeedback, HttpStatus.OK);
     }
     @GetMapping("/{name}")
