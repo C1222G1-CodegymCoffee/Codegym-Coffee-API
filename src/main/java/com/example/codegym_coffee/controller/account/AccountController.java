@@ -45,7 +45,7 @@ public class AccountController {
      * @return
      */
     @PutMapping("/change-password")
-    public ResponseEntity<Map<String,String>> changePassword(HttpServletRequest request, @Validated @RequestBody ChangePasswordForm changePasswordForm, BindingResult bindingResult) {
+    public ResponseEntity<?> changePassword(HttpServletRequest request, @Validated @RequestBody ChangePasswordForm changePasswordForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, String> map = new LinkedHashMap<>();
             List<FieldError> err = bindingResult.getFieldErrors();
@@ -66,28 +66,23 @@ public class AccountController {
         }
         Employee employee = iEmployeeInformationService.findByNameAccount(nameAccount);
         if (employee == null) {
-//            return new ResponseEntity<>("Người dùng không tồn tai",HttpStatus.BAD_REQUEST);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Người dùng không tồn tai",HttpStatus.BAD_REQUEST);
         }
         Account account = iAccountServiceQuynh.findByNameAccount(employee.getAccount().getNameAccount());
         if(account==null){
-//            return new ResponseEntity<>("Tài khoản không tồn tại", HttpStatus.BAD_REQUEST);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Tài khoản không tồn tại", HttpStatus.BAD_REQUEST);
         }
         if (Boolean.FALSE.equals(iAccountServiceQuynh.checkIfValidOldPassword(account, changePasswordForm.getOldPassword()))) {
-//            return new ResponseEntity<>("Mật khẩu hiện tại không đúng", HttpStatus.BAD_REQUEST);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Mật khẩu hiện tại không đúng", HttpStatus.BAD_REQUEST);
         }
         if (changePasswordForm.getNewPassword().equals(changePasswordForm.getOldPassword())) {
-//            return new ResponseEntity<>("Mật khẩu mới không được trùng với mật khẩu cũ", HttpStatus.BAD_REQUEST);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Mật khẩu mới không được trùng với mật khẩu cũ", HttpStatus.BAD_REQUEST);
+
         }
         if (!changePasswordForm.getNewPassword().equals(changePasswordForm.getConfirmPassword())) {
-//            return new ResponseEntity<>("Mật khẩu xác nhận không trùng khớp", HttpStatus.BAD_REQUEST);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Mật khẩu xác nhận không trùng khớp", HttpStatus.BAD_REQUEST);
         }
         iAccountServiceQuynh.changePassword(account, changePasswordForm.getNewPassword());
-//        return ResponseEntity.ok("Đổi mật khẩu thành công!");
-        return (ResponseEntity<Map<String, String>>) ResponseEntity.ok();
+        return ResponseEntity.ok("Đổi mật khẩu thành công!");
     }
 }

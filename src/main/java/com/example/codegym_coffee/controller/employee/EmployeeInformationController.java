@@ -40,7 +40,7 @@ public class EmployeeInformationController {
      * @return
      */
     @GetMapping("/detail")
-    public ResponseEntity<Employee> findByNameAccount(HttpServletRequest request) {
+    public ResponseEntity<?> findByNameAccount(HttpServletRequest request) {
         String token = null;
         String nameAccount=null;
         if(jwtTokenFilter.hasAuthorizationBearer(request)){
@@ -51,8 +51,7 @@ public class EmployeeInformationController {
         }
         Employee employee = iEmployeeInformationService.findByNameAccount(nameAccount);
         if (employee == null) {
-//            return new ResponseEntity<>("Người dùng không tồn tai",HttpStatus.BAD_REQUEST);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Người dùng không tồn tai",HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
@@ -67,7 +66,7 @@ public class EmployeeInformationController {
      * @return
      */
     @PatchMapping("/update")
-    public ResponseEntity<Map<String,String>> updateEmployee(HttpServletRequest request, @Validated @RequestBody EmployeeUpdateDTO employeeUpdateDTO, BindingResult bindingResult) {
+    public ResponseEntity<?> updateEmployee(HttpServletRequest request, @Validated @RequestBody EmployeeUpdateDTO employeeUpdateDTO, BindingResult bindingResult) {
         String token = null;
         String nameAccount=null;
         if(jwtTokenFilter.hasAuthorizationBearer(request)){
@@ -78,8 +77,7 @@ public class EmployeeInformationController {
         }
         Employee employee = iEmployeeInformationService.findByNameAccount(nameAccount);
         if (employee == null) {
-//            return new ResponseEntity<>("Người dùng không tồn tai",HttpStatus.BAD_REQUEST);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Người dùng không tồn tai",HttpStatus.BAD_REQUEST);
         }
         if (bindingResult.hasErrors()) {
             Map<String, String> map = new LinkedHashMap<>();
@@ -93,17 +91,14 @@ public class EmployeeInformationController {
         }
         int age = employeeUpdateDTO.getAge();
         if (age < 15) {
-//            return new ResponseEntity<>("Người dùng phải từ 15 tuổi trở lên",HttpStatus.BAD_REQUEST);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Người dùng phải từ 15 tuổi trở lên",HttpStatus.BAD_REQUEST);
         }
         if ( !employee.getEmail().equals(employeeUpdateDTO.getEmail()) && Boolean.TRUE.equals(iEmployeeInformationService.existsByEmail(employeeUpdateDTO.getEmail()))) {
-//            return new ResponseEntity<>("Email đã tồn tại", HttpStatus.BAD_REQUEST);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Email đã tồn tại", HttpStatus.BAD_REQUEST);
         }
         BeanUtils.copyProperties(employeeUpdateDTO,employee);
         employee.setPosition(new Position(employeeUpdateDTO.getPositionDTO().getIdPosition()));
         iEmployeeInformationService.updateEmployee(employee);
-//        return new ResponseEntity<>("Chỉnh sửa thành công",HttpStatus.OK);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("Chỉnh sửa thành công",HttpStatus.OK);
     }
 }

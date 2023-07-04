@@ -21,7 +21,7 @@ public class Account {
     @Column(name = "name_account",columnDefinition = "Varchar(40)")
     private String nameAccount;
 
-    @Column(name = "password", columnDefinition = "Varchar(255)")
+    @Column(name = "password", columnDefinition = "text")
     private String password;
 
     @Column(name = "reset_password_token")
