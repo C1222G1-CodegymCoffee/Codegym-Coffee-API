@@ -1,6 +1,10 @@
 package com.example.codegym_coffee.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "role")
@@ -13,7 +17,9 @@ public class Role {
 
     @Column(name = "name_role",columnDefinition = "Varchar(40)")
     private String nameRole;
-
+    @OneToMany(mappedBy = "role")
+    @JsonBackReference
+    private Set<AccountRole> accountRoles = new HashSet<>();
     public Role() {
     }
 
@@ -36,5 +42,13 @@ public class Role {
 
     public void setNameRole(String nameRole) {
         this.nameRole = nameRole;
+    }
+
+    public Set<AccountRole> getAccountRoles() {
+        return accountRoles;
+    }
+
+    public void setAccountRoles(Set<AccountRole> accountRoles) {
+        this.accountRoles = accountRoles;
     }
 }

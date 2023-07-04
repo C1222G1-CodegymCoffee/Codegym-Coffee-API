@@ -7,7 +7,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "account")
@@ -31,11 +33,11 @@ public class Account {
     @JsonBackReference
     private Employee employee;
 
+    @OneToMany(mappedBy = "account")
+    private Set<AccountRole> accountRoles = new HashSet<>();
 
     public Account() {
     }
-
-
 
     public Account(Integer idAccount, String nameAccount, String password, Employee employee) {
         this.idAccount = idAccount;
@@ -82,5 +84,13 @@ public class Account {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public Set<AccountRole> getAccountRoles() {
+        return accountRoles;
+    }
+
+    public void setAccountRoles(Set<AccountRole> accountRoles) {
+        this.accountRoles = accountRoles;
     }
 }
