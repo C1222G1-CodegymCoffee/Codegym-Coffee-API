@@ -1,10 +1,10 @@
 package com.example.codegym_coffee.controller.sale;
 
-import com.example.codegym_coffee.dto.news.BillDetailDTO;
+import com.example.codegym_coffee.dto.sale.BillDetailDTO;
 import com.example.codegym_coffee.model.Bill;
 import com.example.codegym_coffee.model.TableCoffee;
 import com.example.codegym_coffee.service.news.IBillDetailService;
-import com.example.codegym_coffee.service.news.IBillService;
+import com.example.codegym_coffee.service.news.IBillDTOService;
 import com.example.codegym_coffee.service.news.ISaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ public class SaleController {
     private IBillDetailService billDetailService;
 
     @Autowired
-    private IBillService billService;
+    private IBillDTOService billService;
 
     /**
      * @author KhaiNLV
@@ -115,7 +115,7 @@ public class SaleController {
         if (bill == null) {
             return new ResponseEntity<>("Invalid billId", HttpStatus.BAD_REQUEST);
         }
-        if (bill.getPaymentStatus() == 0) {
+        if (bill.getPaymentStatus() == 2) {
             return new ResponseEntity<>("Invalid payment status", HttpStatus.BAD_REQUEST);
         }
         saleService.updatePaymentStatusToZero(billId);

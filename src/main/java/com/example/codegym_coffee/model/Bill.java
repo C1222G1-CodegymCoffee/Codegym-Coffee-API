@@ -28,7 +28,7 @@ public class Bill {
     private Employee employee;
 
     @OneToOne(optional = true)
-    @JoinColumn(name = "id_feedback", referencedColumnName = "id_feedback")
+    @JoinColumn(name = "id_feedback")
     private Feedback feedback;
 
 

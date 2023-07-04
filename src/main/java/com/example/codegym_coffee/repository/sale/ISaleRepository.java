@@ -1,6 +1,5 @@
 package com.example.codegym_coffee.repository.sale;
 
-import com.example.codegym_coffee.model.Bill;
 import com.example.codegym_coffee.model.TableCoffee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -19,12 +18,15 @@ public interface ISaleRepository extends JpaRepository<TableCoffee,Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE table_coffee SET status = 0 WHERE status IN (1, 2) AND id_table = :id", nativeQuery = true)
+    @Query(value = "UPDATE table_coffee SET status = 2 WHERE status IN (1, 0) AND id_table = :id", nativeQuery = true)
     void saveWithStatusReset(@Param("id") int id);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Bill b SET b.payment_status = 0 WHERE id_table = :billId",nativeQuery = true)
+    @Query(value = "UPDATE bill AS b\n" +
+            "JOIN `table_coffee` AS t ON b.id_table = t.id_table\n" +
+            "SET b.payment_status = 0, t.status = 2\n" +
+            "WHERE b.id_table = :billId",nativeQuery = true)
     void updatePaymentStatusToZero(int billId);
 
 

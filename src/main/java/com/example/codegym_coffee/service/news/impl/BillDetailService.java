@@ -1,6 +1,6 @@
 package com.example.codegym_coffee.service.news.impl;
 
-import com.example.codegym_coffee.dto.news.BillDetailDTO;
+import com.example.codegym_coffee.dto.sale.BillDetailDTO;
 import com.example.codegym_coffee.repository.sale.IBillDetailRepository;
 import com.example.codegym_coffee.service.news.IBillDetailService;
 import org.springframework.beans.factory.annotation.Autowired;

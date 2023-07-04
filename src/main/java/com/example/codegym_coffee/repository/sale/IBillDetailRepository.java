@@ -1,11 +1,9 @@
 package com.example.codegym_coffee.repository.sale;
 
-import com.example.codegym_coffee.dto.news.BillDetailDTO;
-import com.example.codegym_coffee.model.Bill;
+import com.example.codegym_coffee.dto.sale.BillDetailDTO;
 import com.example.codegym_coffee.model.BillDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 

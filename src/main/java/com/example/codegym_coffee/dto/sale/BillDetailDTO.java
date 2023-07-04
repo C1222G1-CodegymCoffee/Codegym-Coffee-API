@@ -1,4 +1,4 @@
-package com.example.codegym_coffee.dto.news;
+package com.example.codegym_coffee.dto.sale;
 
 public interface BillDetailDTO {
     Integer getIdBillDetail();

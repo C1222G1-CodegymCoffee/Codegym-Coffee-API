@@ -11,10 +11,10 @@ public class Account {
     @Column(name = "id_account")
     private Integer idAccount;
 
-    @Column(name = "name_account",columnDefinition = "Varchar(40)")
+    @Column(name = "name_account",columnDefinition = "Varchar(40)",unique = true)
     private String nameAccount;
 
-    @Column(name = "password", columnDefinition = "Varchar(50)")
+    @Column(name = "password", columnDefinition = "text")
     private String password;
 
     @OneToOne(mappedBy = "account")
