@@ -25,6 +25,12 @@ public class AccountRole {
     public AccountRole() {
     }
 
+    public AccountRole(Integer idAccountRole, Account account, Role role) {
+        this.idAccountRole = idAccountRole;
+        this.account = account;
+        this.role = role;
+    }
+
     public Integer getIdAccountRole() {
         return idAccountRole;
     }

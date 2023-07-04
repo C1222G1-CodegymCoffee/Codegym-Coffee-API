@@ -52,14 +52,6 @@ public class Feedback {
         this.idFeedback = idFeedback;
     }
 
-    public String getCodeFeedback() {
-        return codeFeedback;
-    }
-
-    public void setCodeFeedback(String codeFeedback) {
-        this.codeFeedback = codeFeedback;
-    }
-
     public LocalDate getDayOfFeedback() {
         return dayOfFeedback;
     }

@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Date;
 
 @Entity
 @Table(name = "bill")
@@ -13,11 +14,14 @@ public class Bill {
     @Column(name = "id_bill",nullable = false)
     @NotNull
     private Integer idBill;
+
     @Column(name = "code_bill", columnDefinition = "Varchar(40)")
     private String codeBill;
 
     @Column(name = "day_of_bill",columnDefinition = "date")
     private LocalDate dayOfBill;
+    @Column(name = "status")
+    private int status;
 
     @Column(name = "payment_status")
     private Integer paymentStatus;
@@ -43,7 +47,14 @@ public class Bill {
 
     public Bill(Integer idBill, String codeBill, LocalDate dayOfBill, Integer paymentStatus, Employee employee, Feedback feedback, List<BillDetail> billDetails, TableCoffee tableCoffee) {
         this.idBill = idBill;
-        this.codeBill = codeBill;
+        this.dayOfBill = dayOfBill;
+        this.status = status;
+        this.employee = employee;
+        this.tableCoffee = tableCoffee;
+        this.feedback = feedback;
+    }
+
+    public Bill(LocalDate dayOfBill, int status, Employee employee,  Feedback feedback,TableCoffee tableCoffee) {
         this.dayOfBill = dayOfBill;
         this.paymentStatus = paymentStatus;
         this.employee = employee;
@@ -58,14 +69,6 @@ public class Bill {
 
     public void setIdBill(Integer idBill) {
         this.idBill = idBill;
-    }
-
-    public String getCodeBill() {
-        return codeBill;
-    }
-
-    public void setCodeBill(String codeBill) {
-        this.codeBill = codeBill;
     }
 
     public LocalDate getDayOfBill() {

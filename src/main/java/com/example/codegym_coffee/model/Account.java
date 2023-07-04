@@ -39,7 +39,7 @@ public class Account {
     public Account() {
     }
 
-    public Account(Integer idAccount, String nameAccount, String password, Employee employee) {
+    public Account(Integer idAccount, String nameAccount, String password) {
         this.idAccount = idAccount;
         this.nameAccount = nameAccount;
         this.password = password;
