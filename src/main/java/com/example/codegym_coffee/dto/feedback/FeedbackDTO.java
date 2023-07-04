@@ -2,6 +2,7 @@ package com.example.codegym_coffee.dto.feedback;
 
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 public class FeedbackDTO {
 
     private Integer idFeedback;
+    @NotBlank(message = "Khong duoc bo trong")
     private String codeFeedback;
 
     @NotBlank(message = "Khong duoc bo trong")
@@ -25,9 +27,9 @@ public class FeedbackDTO {
     @Size(min = 5, max = 200, message = "noi dung phai tu 5 ky tu va khong dai qua 200 ky tu")
     private String content;
 
-    @NotBlank(message = "Khong duoc bo trong")
     private String image;
 
+    @NotNull(message = "Khong duoc bo trong")
     private LocalDate dayOfFeedback;
 
     public FeedbackDTO() {
