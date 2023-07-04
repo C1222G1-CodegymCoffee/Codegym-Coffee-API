@@ -36,14 +36,21 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
+    public void deleteByIdEmployee(Integer idEmployee) {
+        iEmployeeRepository.deleteEmployeeById(idEmployee);
+    }
+
+    @Override
     public Page<Employee> findByName(String name, Pageable pageable) {
         return iEmployeeRepository.findByName(name, pageable);
     }
 
     @Override
     public Page<Employee> findByPhone(String phone, Pageable pageable) {
-        return iEmployeeRepository.findByPhone(phone,pageable);
+        return iEmployeeRepository.findByPhone(phone, pageable);
     }
+
+
 
 
     @Override

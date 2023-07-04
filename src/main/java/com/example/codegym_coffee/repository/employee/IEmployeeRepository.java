@@ -47,6 +47,12 @@ public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
     @Query(value = "select * from employee", nativeQuery = true)
     Page<Employee> showListEmployee(Pageable pageable);
 
+    @Transactional
+    @Modifying
+    @Query(value = "delete from employee where id_employee = :idEmployee", nativeQuery = true)
+    void deleteEmployeeById(Integer idEmployee);
+
+
     @Query(value = "select * from employee as e join account as a on e.id_account = a.id_account where e.name_employee like %:name_employee% and a.name_account like %:name_account% and e.phone_number like %:phone_number%", nativeQuery = true)
     Page<Employee> findByAll(
             @Param("name_employee") String nameEmployee,
@@ -58,7 +64,6 @@ public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
     Page<Employee> findByName(
             @Param("name_employee") String name,
             Pageable pageable);
-
 
 
 }

@@ -12,12 +12,11 @@ public interface IEmployeeService {
 
     Page<Employee> findByEmployee(String name,String account,String phoneNumber,Pageable pageable);
 
-
-//    void addEmployee(String nameEmployee, Boolean gender, LocalDate dateOfBirth, double salary,
-//                     String image, String address,
+    void deleteByIdEmployee(Integer idEmployee);
 
     Page<Employee> findByName(String name, Pageable pageable);
     Page<Employee> findByPhone(String phone, Pageable pageable);
+
 
     void create(EmployeeDTO employeeDTO);
 }

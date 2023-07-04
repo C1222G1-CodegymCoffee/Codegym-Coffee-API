@@ -3,7 +3,6 @@ package com.example.codegym_coffee.controller.employee;
 
 import com.example.codegym_coffee.dto.employee.EmployeeDTO;
 import com.example.codegym_coffee.model.Employee;
-import com.example.codegym_coffee.service.account.impl.AccountService;
 import com.example.codegym_coffee.service.employee.impl.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -17,20 +16,16 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("home/admin/employee")
+@RequestMapping("api/admin/employee")
 @CrossOrigin("*")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
-    @Autowired
-    private AccountService accountService;
 
 
 
-//    @GetMapping("")
-//    public Page<Employee> showList(Pageable pageable) {
-//        return employeeService.showList( pageable);
-//    }
+
+
 
     @GetMapping("")
     public ResponseEntity<Page<Employee>> listEmployee(@RequestParam(value = "page", defaultValue = "0") int page) {
@@ -63,10 +58,14 @@ public class EmployeeController {
     public ResponseEntity<Page<Employee>> findByEmployee(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String nameAccount, @PathVariable String nameEmployee, @PathVariable String phoneNumber) {
         Pageable pageable = PageRequest.of(page, 10);
         Page<Employee> listEmployee = employeeService.findByEmployee(nameEmployee,nameAccount,phoneNumber,pageable);
-        if (listEmployee.isEmpty()) {
+        if (listEmployee.isEmpty    ()) {
             return new ResponseEntity<>(listEmployee, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(listEmployee, HttpStatus.OK);
+    }
+    @PostMapping("/{id}")
+    public void deleteEmployeeById(@PathVariable("id") Integer id) {
+        employeeService.deleteByIdEmployee(id);
     }
 
 

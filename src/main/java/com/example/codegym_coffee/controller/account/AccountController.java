@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("home/admin/employee/account")
+    @RequestMapping("api/admin/account")
 @CrossOrigin
 public class AccountController {
 
