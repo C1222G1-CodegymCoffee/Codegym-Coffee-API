@@ -7,20 +7,19 @@ import javax.persistence.*;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id_product")
     private Integer idProduct;
 
     @Column(name = "name_product",columnDefinition = "Varchar(40)")
     private String nameProduct;
 
-    @Column(name = "description", columnDefinition = "MEDIUMTEXT")
+    @Column(name = "ingredient", columnDefinition = "MEDIUMTEXT")
     private String ingredient;
 
-    @Column(name = "price",columnDefinition = "DOUBLE")
-    private double price;
+    @Column(name = "price", columnDefinition = "DOUBLE")
+    private Double price;
 
-    @Column(name = "image",columnDefinition = "MEDIUMTEXT")
+    @Column(name = "image", columnDefinition = "MEDIUMTEXT")
     private String image;
 
     @ManyToOne
@@ -30,8 +29,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(Integer idProduct, String nameProduct,
-                   String ingredient, double price, String image, ProductType productType) {
+    public Product(Integer idProduct, String nameProduct, String ingredient, Double price, String image, ProductType productType) {
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;
         this.ingredient = ingredient;
@@ -64,11 +62,11 @@ public class Product {
         this.ingredient = ingredient;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

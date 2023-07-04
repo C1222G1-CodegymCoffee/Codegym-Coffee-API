@@ -22,9 +22,8 @@ public class ProductDTO implements Validator {
     @Pattern(regexp = "^[^0-9]*$",message = "Thành phần không được chứa số ")
     private String ingredient;
     private Double price;
-    @NotBlank(message = "Hình ảnh không được để trống")
     private String image;
-    @NotNull
+
     private ProductTypeDTO productTypeDTO;
 
     public ProductDTO() {
