@@ -9,5 +9,20 @@ import org.springframework.data.domain.Pageable;
 
 public interface INewsService{
     void addNews (NewsDTO newsDTO);
+    /**
+     * @author: TruongNN
+     * Date created: 28/06/2023
+     * function: find all news
+     * @param pageable
+     */
+
     Page<News> findAllNews(Pageable pageable);
+
+    /**
+     * @author: TruongNN
+     * Date created: 28/06/2023
+     * function: find by id of News
+     * @param id
+     */
+    News findByIdNews(int id);
 }

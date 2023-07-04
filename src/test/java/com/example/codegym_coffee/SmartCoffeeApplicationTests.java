@@ -1,8 +1,9 @@
-
-package com.example.codegym_coffee;
+package com.example.api;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 class SmartCoffeeApplicationTests {
 
     @Test
@@ -10,4 +11,3 @@ class SmartCoffeeApplicationTests {
     }
 
 }
-

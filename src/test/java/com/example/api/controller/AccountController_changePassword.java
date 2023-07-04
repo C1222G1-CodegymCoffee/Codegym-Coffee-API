@@ -30,7 +30,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_oldPassWord_19() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("admin1");
+//        changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword(null);
         changePasswordForm.setNewPassword("abc123456");
         changePasswordForm.setConfirmPassword("abc123456");
@@ -52,7 +52,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_oldPassWord_20() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("admin1");
+//        changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword("");
         changePasswordForm.setNewPassword("abc123456");
         changePasswordForm.setConfirmPassword("abc123456");
@@ -74,7 +74,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_oldPassWord_22() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("admin1");
+//        changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword("a");
         changePasswordForm.setNewPassword("abc123456");
         changePasswordForm.setConfirmPassword("abc123456");
@@ -96,7 +96,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_oldPassWord_23() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("admin1");
+//        changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword("abcaabcabcabababbcabbabacbabacbacbabacbcababcabhgdsgdsgs");
         changePasswordForm.setNewPassword("abc123456");
         changePasswordForm.setConfirmPassword("abc123456");
@@ -118,7 +118,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_oldPassWord_99() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("admin1");
+//        changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword("abc11111");
         changePasswordForm.setNewPassword("abc123456");
         changePasswordForm.setConfirmPassword("abc123456");
@@ -140,7 +140,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_newPassWord_19() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("admin1");
+//        changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword("abc12345");
         changePasswordForm.setNewPassword(null);
         changePasswordForm.setConfirmPassword("abc123456");
@@ -162,7 +162,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_newPassWord_20() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("admin1");
+//        changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword("abc12345");
         changePasswordForm.setNewPassword("");
         changePasswordForm.setConfirmPassword("abc123456");
@@ -184,7 +184,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_newPassWord_22() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("admin1");
+//        changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword("abc12345");
         changePasswordForm.setNewPassword("a");
         changePasswordForm.setConfirmPassword("abc123456");
@@ -206,7 +206,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_newPassWord_23() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("admin1");
+//        changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword("abc12345");
         changePasswordForm.setNewPassword("abcaabcabcabababbcabbabacbabacbacbabacbcababcab");
         changePasswordForm.setConfirmPassword("abc123456");
@@ -228,7 +228,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_newPassWord_99() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("admin1");
+//        changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword("abc12345");
         changePasswordForm.setNewPassword("abc12345");
         changePasswordForm.setConfirmPassword("abc123456");
@@ -250,7 +250,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_confirmPassword_19() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("admin1");
+//        changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword("abc123");
         changePasswordForm.setNewPassword("abc12345");
         changePasswordForm.setConfirmPassword(null);
@@ -272,7 +272,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_confirmPassword_20() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("admin1");
+//        changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword("abc123");
         changePasswordForm.setNewPassword("abc12345");
         changePasswordForm.setConfirmPassword("");
@@ -294,7 +294,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_confirmPassword_22() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("admin1");
+//        changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword("abc12345");
         changePasswordForm.setNewPassword("abc123456");
         changePasswordForm.setConfirmPassword("a");
@@ -316,7 +316,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_confirmPassword_23() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("admin1");
+//        changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword("abc12345");
         changePasswordForm.setNewPassword("abc123456");
         changePasswordForm.setConfirmPassword("abcaabcabcabababbcabbabacbabacbacbabacbcababcab");
@@ -338,7 +338,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_confirmPassword_99() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("admin1");
+//        changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword("abc12345");
         changePasswordForm.setNewPassword("abc123456");
         changePasswordForm.setConfirmPassword("abc12345555");
@@ -360,7 +360,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_24() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("admin1");
+//        changePasswordForm.setNameAccount("admin1");
         changePasswordForm.setOldPassword("abc12345");
         changePasswordForm.setNewPassword("abc123456");
         changePasswordForm.setConfirmPassword("abc123456");
@@ -382,7 +382,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_nameAccount_19() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount(null);
+//        changePasswordForm.setNameAccount(null);
         changePasswordForm.setOldPassword("abc12345");
         changePasswordForm.setNewPassword("abc123456");
         changePasswordForm.setConfirmPassword("abc123456");
@@ -404,7 +404,7 @@ public class AccountController_changePassword {
     @Test
     public void changePassword_nameAccount_20() throws Exception {
         ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-        changePasswordForm.setNameAccount("");
+//        changePasswordForm.setNameAccount("");
         changePasswordForm.setOldPassword("abc12345");
         changePasswordForm.setNewPassword("abc123456");
         changePasswordForm.setConfirmPassword("abc123456");

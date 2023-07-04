@@ -2,9 +2,8 @@ package com.example.codegym_coffee.controller.account;
 
 import com.example.codegym_coffee.dto.account.ChangePasswordForm;
 import com.example.codegym_coffee.model.Account;
-import com.example.codegym_coffee.model.AccountRole;
 import com.example.codegym_coffee.model.Employee;
-import com.example.codegym_coffee.service.account.IAccountServiceQuynh;
+import com.example.codegym_coffee.service.account.IAccountService;
 import com.example.codegym_coffee.service.employee.IEmployeeInformationService;
 import com.example.codegym_coffee.utils.JwtTokenFilter;
 import com.example.codegym_coffee.utils.JwtTokenUtil;
@@ -26,7 +25,7 @@ import java.util.Map;
 @RequestMapping("/account")
 public class AccountController {
     @Autowired
-    private IAccountServiceQuynh iAccountServiceQuynh;
+    private IAccountService accountService;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -68,11 +67,11 @@ public class AccountController {
         if (employee == null) {
             return new ResponseEntity<>("Người dùng không tồn tai",HttpStatus.BAD_REQUEST);
         }
-        Account account = iAccountServiceQuynh.findByNameAccount(employee.getAccount().getNameAccount());
+        Account account = accountService.findByNameAccount(employee.getAccount().getNameAccount());
         if(account==null){
             return new ResponseEntity<>("Tài khoản không tồn tại", HttpStatus.BAD_REQUEST);
         }
-        if (Boolean.FALSE.equals(iAccountServiceQuynh.checkIfValidOldPassword(account, changePasswordForm.getOldPassword()))) {
+        if (Boolean.FALSE.equals(accountService.checkIfValidOldPassword(account, changePasswordForm.getOldPassword()))) {
             return new ResponseEntity<>("Mật khẩu hiện tại không đúng", HttpStatus.BAD_REQUEST);
         }
         if (changePasswordForm.getNewPassword().equals(changePasswordForm.getOldPassword())) {
@@ -82,7 +81,7 @@ public class AccountController {
         if (!changePasswordForm.getNewPassword().equals(changePasswordForm.getConfirmPassword())) {
             return new ResponseEntity<>("Mật khẩu xác nhận không trùng khớp", HttpStatus.BAD_REQUEST);
         }
-        iAccountServiceQuynh.changePassword(account, changePasswordForm.getNewPassword());
+        accountService.changePassword(account, changePasswordForm.getNewPassword());
         return ResponseEntity.ok("Đổi mật khẩu thành công!");
     }
 }

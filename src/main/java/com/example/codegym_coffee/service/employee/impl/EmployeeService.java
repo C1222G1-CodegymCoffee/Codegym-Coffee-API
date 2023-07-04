@@ -3,7 +3,7 @@ package com.example.codegym_coffee.service.employee.impl;
 import com.example.codegym_coffee.dto.employee.EmployeeDTO;
 import com.example.codegym_coffee.model.Account;
 import com.example.codegym_coffee.model.Employee;
-import com.example.codegym_coffee.repository.employee.IAccountRepository;
+import com.example.codegym_coffee.repository.account.IAccountRepositoryQuynh;
 import com.example.codegym_coffee.repository.employee.IEmployeeRepository;
 import com.example.codegym_coffee.service.employee.IEmployeeService;
 import org.springframework.beans.BeanUtils;
@@ -20,7 +20,7 @@ public class EmployeeService implements IEmployeeService {
     @Autowired
     private IEmployeeRepository iEmployeeRepository;
     @Autowired
-    private IAccountRepository iAccountRepository;
+    private IAccountRepositoryQuynh accountRepositoryQuynh;
     private PasswordEncoder passwordEncoder;
 
 
@@ -48,9 +48,9 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public void create(EmployeeDTO employeeDTO) {
-        iAccountRepository.createAccount(employeeDTO.getAccount().getNameAccount(),
+        accountRepositoryQuynh.createAccount(employeeDTO.getAccount().getNameAccount(),
                 passwordEncoder.encode("12345678"));
-        Account account = iAccountRepository
+        Account account = accountRepositoryQuynh
                 .findByName(employeeDTO.getAccount().getNameAccount());
         Employee employee = new Employee();
         employee.setAccount(account);
