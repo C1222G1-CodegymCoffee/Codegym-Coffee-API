@@ -1,5 +1,7 @@
 package com.example.codegym_coffee.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +20,7 @@ public class Account {
     private String password;
 
     @OneToOne(mappedBy = "account")
+    @JsonIgnore
     private Employee employee;
 
     public Account() {
