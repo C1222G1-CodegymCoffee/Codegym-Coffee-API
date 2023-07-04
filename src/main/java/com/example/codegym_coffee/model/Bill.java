@@ -13,7 +13,6 @@ public class Bill {
     @Column(name = "id_bill",nullable = false)
     @NotNull
     private Integer idBill;
-
     @Column(name = "code_bill", columnDefinition = "Varchar(40)")
     private String codeBill;
 

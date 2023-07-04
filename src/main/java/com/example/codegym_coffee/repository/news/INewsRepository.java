@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
+
 public interface INewsRepository extends JpaRepository<News,Integer> {
 
     /**

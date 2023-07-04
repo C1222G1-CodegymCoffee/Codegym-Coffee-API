@@ -1,7 +1,7 @@
 package com.example.codegym_coffee.controller.news;
 
 import com.example.codegym_coffee.dto.news.NewsDTO;
-import com.example.codegym_coffee.service.listNews.news.INewsService;
+import com.example.codegym_coffee.service.news.INewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
