@@ -23,6 +23,7 @@ dependencies {
     runtimeOnly 'com.mysql:mysql-connector-j'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.4.3'
 }
 
 tasks.named('test') {

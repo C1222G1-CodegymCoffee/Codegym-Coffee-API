@@ -1,15 +1,19 @@
 package com.example.codegym_coffee.controller.employee;
 
 
+import com.example.codegym_coffee.dto.employee.EmployeeDTO;
 import com.example.codegym_coffee.model.Employee;
+import com.example.codegym_coffee.service.account.impl.AccountService;
 import com.example.codegym_coffee.service.employee.impl.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 
 
 @RestController
@@ -18,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private AccountService accountService;
 
 
 
@@ -44,8 +50,17 @@ public class EmployeeController {
         }
         return new ResponseEntity<>(listEmployee, HttpStatus.OK);
     }
-    @GetMapping("/search/searchEmployee")
-    public ResponseEntity<Page<Employee>> findByEmployee(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String nameEmployee, @PathVariable String nameAccount, @PathVariable String phoneNumber, @PathVariable String employee) {
+    @GetMapping("/phone/{phoneNumber}")
+    public ResponseEntity<?> findByPhone(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String phoneNumber) {
+        Pageable pageable = PageRequest.of(page, 10);
+        Page<Employee> listEmployee = employeeService.findByPhone(phoneNumber,pageable);
+        if (listEmployee.isEmpty()) {
+            return new ResponseEntity<>(listEmployee, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(listEmployee, HttpStatus.OK);
+    }
+    @GetMapping("/search/{nameEmployee}&{nameAccount}&{phoneNumber}")
+    public ResponseEntity<Page<Employee>> findByEmployee(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String nameAccount, @PathVariable String nameEmployee, @PathVariable String phoneNumber) {
         Pageable pageable = PageRequest.of(page, 10);
         Page<Employee> listEmployee = employeeService.findByEmployee(nameEmployee,nameAccount,phoneNumber,pageable);
         if (listEmployee.isEmpty()) {
@@ -56,30 +71,16 @@ public class EmployeeController {
 
 
 
-//    @GetMapping("/list-employee")
-//    public Page<Employee> findAllEmployee(
-//            @PageableDefault(size = 2,sort = "id", direction = Sort.Direction.DESC)Pageable pageable,
-//            @RequestParam(required = false, defaultValue = "") String name,Account account ,String phoneNumber) {
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/create")
+    public ResponseEntity<?> createEmployeeWithAccount(@Valid @RequestBody EmployeeDTO employeeDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
+        }
+        employeeService.create(employeeDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
-//    @PostMapping("")
-//    public ResponseEntity<?> saveEmployee(@Validated @RequestBody EmployeeDTO employeeDTO, BindingResult bindingResult) {
-//        if (!bindingResult.hasErrors()) {
-//            employeeService.addEmployee(employeeDTO.getNameEmployee()
-//                    ,employeeDTO.getGender(),employeeDTO.getDateOfBirth(),employeeDTO.getSalary(),
-//                    employeeDTO.getImage(),employeeDTO.getAddress(),employeeDTO.getPhoneNumber(),employeeDTO.getEmail(),
-//                    employeeDTO.getPosition());
-//        } else {
-//            Map<String, String> map = new LinkedHashMap<>();
-//            List<FieldError> errors = bindingResult.getFieldErrors();
-//            for (FieldError error : errors) {
-//                if (!map.containsKey(error.getField())) {
-//                    map.put(error.getField(),error.getDefaultMessage());
-//                }
-//            }
-//            return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
-//        }
-//        return new ResponseEntity<>(HttpStatus.CREATED);
-//    }
 
 }

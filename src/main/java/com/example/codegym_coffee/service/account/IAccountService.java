@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IAccountService {
     List<Account> showList();
-    void addNewAccount(String nameAccount,String password);
-    Page<Account> findByNameAccount(String nameAccount, Pageable pageable);
+    Account saveAccountUser(Account accountUser);
+    Page<Account> findAccountUserByNameAccount(String name,Pageable pageable);
+
 }

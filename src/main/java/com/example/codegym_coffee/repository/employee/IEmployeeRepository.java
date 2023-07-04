@@ -22,26 +22,26 @@ import java.time.LocalDate;
 public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
 
 
-//    @Query(value = "select id_employee,name_employee,gender,date_of_birth,salary,image,address,phone_number,email,id_position from employee where phone_number = :phoneNumber", nativeQuery = true)
-//    Employee findByPhone(
-//            String phone);
+    @Query(value = "select * from employee where phone_number like %:phone_number%", nativeQuery = true)
+    Page<Employee> findByPhone(
+            @Param("phone_number") String phone,Pageable pageable);
 
-//    @Modifying
-//    @Transactional
-//    @Query(value = "INSERT INTO employee ( name_employee,gender,date_of_birth, salary, image, address, phone_number, email, id_position, id_account) "
-//            + "VALUES (:name_employee, :gender, :date_of_birth, :salary, :image, :address, :phone_number, :email, :id_position)",
-//            nativeQuery = true)
-//    void addEmployee(
-//            @Param("name_employee") String nameEmployee,
-//            @Param("gender") Boolean gender,
-//            @Param("date_of_birth") LocalDate dateOfBirth,
-//            @Param("salary") double salary,
-//            @Param("image") String image,
-//            @Param("address") String address,
-//            @Param("phone_number") String phoneNumber,
-//            @Param("email") String email,
-//            @Param("id_position") Position positionDTOPosition,
-//            Account account);
+    @Modifying
+    @Transactional
+    @Query(value = "INSERT INTO employee ( name_employee,gender,date_of_birth, salary, image, address, phone_number, email, id_position, id_account) "
+            + "VALUES (:name_employee, :gender, :date_of_birth, :salary, :image, :address, :phone_number, :email, :id_position,:id_account)",
+            nativeQuery = true)
+    void saveEmployee(
+            @Param("name_employee") String nameEmployee,
+            @Param("gender") Boolean gender,
+            @Param("date_of_birth") LocalDate dateOfBirth,
+            @Param("salary") double salary,
+            @Param("image") String image,
+            @Param("address") String address,
+            @Param("phone_number") String phoneNumber,
+            @Param("email") String email,
+            @Param("id_position") Position positionDTOPosition,
+            @Param("id_account") Integer idAccount);
 
 
     @Query(value = "select * from employee", nativeQuery = true)
@@ -54,10 +54,11 @@ public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
             @Param("phone_number") String phoneNumber,
             Pageable pageable);
 
-    @Query(value = "select * from employee where name_employee like %:name_account% ", nativeQuery = true)
+    @Query(value = "select * from employee where name_employee like %:name_employee% ", nativeQuery = true)
     Page<Employee> findByName(
-            @Param("name_account") String name,
+            @Param("name_employee") String name,
             Pageable pageable);
+
 
 
 }

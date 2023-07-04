@@ -24,17 +24,14 @@ public class AccountController {
     public List<Account> showList() {
         return iAccountService.showList();
     }
-    @PostMapping("")
-    public void addNew(@RequestBody Account account) {
-        iAccountService.addNewAccount(account.getNameAccount(),account.getPassword());
-    }
+
     @GetMapping("/{nameAccount}")
-    public ResponseEntity<Page<Account>> findByNameAccount(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String nameAccount) {
+    public ResponseEntity<?> findByNameAccount(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String nameAccount) {
         Pageable pageable = PageRequest.of(page, 10);
-        Page<Account> listEmployee = iAccountService.findByNameAccount(nameAccount,pageable);
-        if (listEmployee.isEmpty()) {
-            return new ResponseEntity<>(listEmployee, HttpStatus.NOT_FOUND);
+        Page<Account> listAccount = iAccountService.findAccountUserByNameAccount(nameAccount,pageable);
+        if (listAccount.isEmpty()) {
+            return new ResponseEntity<>(listAccount, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(listEmployee, HttpStatus.OK);
+        return new ResponseEntity<>(listAccount, HttpStatus.OK);
     }
 }

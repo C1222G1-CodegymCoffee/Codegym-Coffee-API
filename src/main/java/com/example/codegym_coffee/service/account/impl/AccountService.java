@@ -22,13 +22,14 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public void addNewAccount(String nameAccount, String password) {
-        iAccountRepository.addNewAccount(nameAccount,"12345678");
+    public Account saveAccountUser(Account accountUser) {
+        return iAccountRepository.save(accountUser);
     }
 
     @Override
-    public Page<Account> findByNameAccount(String nameAccount, Pageable pageable) {
-
-        return iAccountRepository.findByName(nameAccount,pageable);
+    public Page<Account> findAccountUserByNameAccount(String name,Pageable pageable) {
+        return iAccountRepository.findAccountUserByNameAccount(name,pageable);
     }
+
+
 }

@@ -15,20 +15,17 @@ public interface IAccountRepository extends JpaRepository<Account, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO account( name_account,password)"+ "Value(:name_account,:password)",
-            nativeQuery = true)
-    void addNewAccount(
-            @Param("name_account") String nameAccount,
-            @Param("password") String password
-    );
+    @Query(value = "insert into account(name_account , password) values (:name_account , :password)", nativeQuery = true)
+    void createAccount(@Param("name_account") String nameAccount
+            , @Param("password") String password);
 
     @Query(value = "select * from account", nativeQuery = true)
     List<Account> accountList();
 
 
     @Query(value = "select * from account where name_account = :nameAccount",nativeQuery = true)
-    Page<Account> findByName (String nameAccount, Pageable pageable);
+    Account findByName (String nameAccount);
 
 
-
-}
+    @Query(value = "select * from account where name_account like %:name_account%", nativeQuery = true)
+    Page<Account> findAccountUserByNameAccount(@Param("name_account") String nameAccount, Pageable pageable);}
