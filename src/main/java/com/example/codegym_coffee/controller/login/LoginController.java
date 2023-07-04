@@ -28,15 +28,19 @@ public class LoginController {
 
     @Autowired
     AuthenticationManager authenticationManager;
+
     @Autowired
     JwtTokenUtil jwtUtil;
 
     @Autowired
     private IAccountService accountService;
 
+    @Autowired
+    private JavaMailSender mailSender;
+
     @PostMapping(value = "/api/login")
     public ResponseEntity<?> login(@RequestBody @Valid AuthRequest request) {
-
+        String errorMessages = "Tài khoản hoặc mật khẩu của bạn không đúng";
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -50,16 +54,13 @@ public class LoginController {
             return ResponseEntity.ok().body(response);
 
         } catch (BadCredentialsException ex) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return new ResponseEntity<>(errorMessages, HttpStatus.BAD_REQUEST);
         }
     }
 
-    @Autowired
-    private JavaMailSender mailSender;
-
     @PostMapping("/forgot_password")
-    public ResponseEntity<EmailConfirm> forgotPassword(@RequestBody EmailConfirm emailConfirm) throws MessagingException, UnsupportedEncodingException {
-
+    public ResponseEntity<?> forgotPassword(@RequestBody EmailConfirm emailConfirm) throws MessagingException, UnsupportedEncodingException {
+        String message = "email bạn nhập không tồn tại";
         String token = RandomString.make(30);
         try {
             accountService.updateResetPasswordToken(token, emailConfirm.getEmailConfirm());
@@ -69,7 +70,7 @@ public class LoginController {
         } catch (MessagingException | UnsupportedEncodingException e){
              e.getStackTrace();
         }
-        return ResponseEntity.ok().body(emailConfirm);
+        return new ResponseEntity<>( message, HttpStatus.BAD_REQUEST);
     }
 
     public void sendEmail(String recipientEmail, String link) throws MessagingException, UnsupportedEncodingException {
@@ -107,5 +108,11 @@ public class LoginController {
             return new ResponseEntity<>(HttpStatus.OK);
 
         }
+    }
+
+    @GetMapping("/403")
+    public ResponseEntity<?> daniedPage() {
+        String message = "Bạn không có quyền truy cập trang này";
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }
