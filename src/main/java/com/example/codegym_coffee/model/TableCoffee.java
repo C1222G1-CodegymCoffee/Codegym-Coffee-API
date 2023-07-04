@@ -22,7 +22,7 @@ public class TableCoffee {
     }
 
 
-    public TableCoffee(Integer idTable, String nameTable, int status, Bill bill) {
+    public TableCoffee(Integer idTable, String nameTable, int status) {
         this.idTable = idTable;
         this.nameTable = nameTable;
         this.status = status;

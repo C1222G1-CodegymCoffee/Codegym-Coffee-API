@@ -13,8 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
+
 
 @RestController
 @RequestMapping("api/admin/bill")
@@ -62,7 +61,6 @@ public class BillController {
         return new ResponseEntity<>(listBillDay, HttpStatus.OK);
     }
 
-
     /**
      * @param codeBill
      * @return ResponseEntity<>(listBillCode,HttpStatus.OK)
@@ -91,7 +89,6 @@ public class BillController {
     public ResponseEntity<Bill> getBillById(@PathVariable("id") Integer id) {
         Bill bill = billService.getBillById(id);
         if (bill == null) {
-            System.out.println(bill);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(bill, HttpStatus.OK);

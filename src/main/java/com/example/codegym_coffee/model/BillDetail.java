@@ -1,9 +1,4 @@
 package com.example.codegym_coffee.model;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 
 @Entity
@@ -27,7 +22,7 @@ public class BillDetail {
     public BillDetail() {
     }
 
-    public BillDetail(Integer idBillDetail, int quantityOfProduct, double priceOfProduct, Bill bill, Product product) {
+    public BillDetail(Integer idBillDetail, int quantityOfProduct, double priceOfProduct, Product product) {
         this.idBillDetail = idBillDetail;
         this.quantityOfProduct = quantityOfProduct;
         this.priceOfProduct = priceOfProduct;

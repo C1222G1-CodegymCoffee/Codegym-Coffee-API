@@ -1,7 +1,5 @@
 package com.example.codegym_coffee.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
