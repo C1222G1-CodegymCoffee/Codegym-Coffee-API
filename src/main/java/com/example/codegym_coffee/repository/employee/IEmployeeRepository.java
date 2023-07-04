@@ -1,6 +1,5 @@
 package com.example.codegym_coffee.repository.employee;
 
-import com.example.codegym_coffee.model.Account;
 import com.example.codegym_coffee.model.Employee;
 import com.example.codegym_coffee.model.Position;
 import org.springframework.data.domain.Page;
@@ -59,7 +58,10 @@ public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
             @Param("name_employee") String name,
             Pageable pageable);
 
-
+    @Transactional
+    @Modifying
+    @Query(value = "delete from employee where id_employee = :idEmployee", nativeQuery = true)
+    void deleteEmployeeById(Integer idEmployee);
 
 }
 

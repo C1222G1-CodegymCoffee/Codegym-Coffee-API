@@ -1,5 +1,7 @@
 package com.example.codegym_coffee.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -20,27 +22,29 @@ public class Employee {
     @Column(name = "salary", columnDefinition = "DOUBLE PRECISION")
     private Double salary;
 
-    @Column(name = "image",columnDefinition = "MEDIUMTEXT")
+    @Column(name = "image", columnDefinition = "MEDIUMTEXT")
     private String image;
 
-    @Column(name = "name_employee",columnDefinition = "Varchar(40)")
+    @Column(name = "name_employee", columnDefinition = "Varchar(40)")
     private String nameEmployee;
 
-    @Column(name = "address",columnDefinition = "Varchar(40)")
+    @Column(name = "address", columnDefinition = "Varchar(40)")
     private String address;
 
     @Column(name = "phone_number",columnDefinition = "Varchar(15)",unique = true)
     private String phoneNumber;
 
-    @Column(name = "email",columnDefinition = "Varchar(40)")
+    @Column(name = "email", columnDefinition = "Varchar(40)")
     private String email;
+    private boolean isDelete = false;
 
     @ManyToOne
     @JoinColumn(name = "id_position", referencedColumnName = "id_position")
     private Position position;
 
-    @OneToOne
-    @JoinColumn(name = "id_account")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_account", referencedColumnName = "id_account")
+    @JsonManagedReference
     private Account account;
 
     public Employee() {
@@ -149,4 +153,6 @@ public class Employee {
     public void setAccount(Account account) {
         this.account = account;
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.codegym_coffee.model;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
@@ -11,7 +12,6 @@ import java.util.Set;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id_account")
     private Integer idAccount;
 

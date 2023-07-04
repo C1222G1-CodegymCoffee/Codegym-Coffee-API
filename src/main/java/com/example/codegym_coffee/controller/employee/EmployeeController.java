@@ -69,9 +69,6 @@ public class EmployeeController {
         return new ResponseEntity<>(listEmployee, HttpStatus.OK);
     }
 
-
-
-
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create")
     public ResponseEntity<?> createEmployeeWithAccount(@Valid @RequestBody EmployeeDTO employeeDTO, BindingResult bindingResult) {
@@ -82,5 +79,9 @@ public class EmployeeController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping("/{id}")
+    public void deleteEmployeeById(@PathVariable("id") Integer id) {
+        employeeService.deleteByIdEmployee(id);
+    }
 
 }

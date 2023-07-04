@@ -1,16 +1,13 @@
 package com.example.codegym_coffee.dto.employee;
 
-import com.example.codegym_coffee.dto.account.AccountDTO;
 import com.example.codegym_coffee.model.Account;
 import com.example.codegym_coffee.model.Position;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.format.annotation.NumberFormat;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
-import java.time.Period;
 
 public class EmployeeDTO implements Validator {
 
