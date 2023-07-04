@@ -29,7 +29,7 @@ public class Employee {
     @Column(name = "address",columnDefinition = "Varchar(40)")
     private String address;
 
-    @Column(name = "phone_number",columnDefinition = "Varchar(15)")
+    @Column(name = "phone_number",columnDefinition = "Varchar(15)",unique = true)
     private String phoneNumber;
 
     @Column(name = "email",columnDefinition = "Varchar(40)")

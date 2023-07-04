@@ -29,14 +29,12 @@ public class Feedback {
     @Column(name = "content", columnDefinition = "MEDIUMTEXT")
     private String content;
 
-    @OneToOne(mappedBy = "feedback")
-    private Bill bill;
 
     public Feedback() {
     }
 
     public Feedback(Integer idFeedback, String codeFeedback, LocalDate dayOfFeedback,
-                    String email, String image, String creator, String content, Bill bill) {
+                    String email, String image, String creator, String content) {
         this.idFeedback = idFeedback;
         this.codeFeedback = codeFeedback;
         this.dayOfFeedback = dayOfFeedback;
@@ -44,7 +42,6 @@ public class Feedback {
         this.image = image;
         this.creator = creator;
         this.content = content;
-        this.bill = bill;
     }
 
     public Integer getIdFeedback() {
@@ -103,11 +100,4 @@ public class Feedback {
         this.content = content;
     }
 
-    public Bill getBill() {
-        return bill;
-    }
-
-    public void setBill(Bill bill) {
-        this.bill = bill;
-    }
 }
