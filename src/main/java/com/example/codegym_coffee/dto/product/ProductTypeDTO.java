@@ -8,9 +8,8 @@ import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 
 public class ProductTypeDTO {
-//    @NotNull
     private int idType;
-//    @NotBlank(message = "Nhóm món không được để trống")
+    @NotBlank(message = "Nhóm món không được để trống")
     private String nameType;
 
     public ProductTypeDTO() {
