@@ -92,4 +92,11 @@ public class Feedback {
         this.content = content;
     }
 
+    public String getCodeFeedback() {
+        return codeFeedback;
+    }
+
+    public void setCodeFeedback(String codeFeedback) {
+        this.codeFeedback = codeFeedback;
+    }
 }

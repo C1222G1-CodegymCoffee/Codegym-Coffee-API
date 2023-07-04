@@ -26,8 +26,6 @@ public class FeedbackDTO {
     private String content;
 
     @NotBlank(message = "Khong duoc bo trong")
-//    @Pattern(regexp = "^.{0,}(.png|.jpg|.jpeg)[?](alt=media&token=).{0,}$"
-//            ,message = "Sai định dạng ảnh, phải có dạng đuôi .jpg, .jpeg, .png")
     private String image;
 
     private LocalDate dayOfFeedback;
@@ -101,5 +99,6 @@ public class FeedbackDTO {
     public void setDayOfFeedback(LocalDate dayOfFeedback) {
         this.dayOfFeedback = dayOfFeedback;
     }
+
 }
 
