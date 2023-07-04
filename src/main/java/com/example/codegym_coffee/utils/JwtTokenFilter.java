@@ -69,8 +69,10 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
-    public UserDetails getUserDetails(String token) {
+    private UserDetails getUserDetails(String token) {
+
         String[] jwtSubject = jwtUtil.getSubject(token).split(",");
-        return userDetailService.loadUserByUsername(jwtSubject[0]);
+
+        return userDetailService.loadUserByUsername(jwtSubject[1]);
     }
 }

@@ -41,8 +41,8 @@ public class Employee {
     @JoinColumn(name = "id_position", referencedColumnName = "id_position")
     private Position position;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_account", referencedColumnName = "id_account")
+    @OneToOne
+    @JoinColumn(name = "id_account")
     private Account account;
 
     public Employee() {

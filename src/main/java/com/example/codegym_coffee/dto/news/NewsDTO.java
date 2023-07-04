@@ -5,9 +5,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class NewsDTO implements Validator {
     private Integer id;

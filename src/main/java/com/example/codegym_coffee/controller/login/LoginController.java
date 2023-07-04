@@ -16,12 +16,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 
@@ -31,15 +28,19 @@ public class LoginController {
 
     @Autowired
     AuthenticationManager authenticationManager;
+
     @Autowired
     JwtTokenUtil jwtUtil;
 
     @Autowired
     private IAccountService accountService;
 
+    @Autowired
+    private JavaMailSender mailSender;
+
     @PostMapping(value = "/api/login")
     public ResponseEntity<?> login(@RequestBody @Valid AuthRequest request) {
-
+        String errorMessages = "Tài khoản hoặc mật khẩu của bạn không đúng";
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -48,32 +49,28 @@ public class LoginController {
 
             MyUserPrincipal account = (MyUserPrincipal) authentication.getPrincipal();
             String accessToken = jwtUtil.generateAccessToken(account);
-            AuthResponse response = new AuthResponse(account.getUsername(), accessToken);
+            AuthResponse response = new AuthResponse(account.getUsername(), account.getAuthorities(), accessToken);
 
             return ResponseEntity.ok().body(response);
 
         } catch (BadCredentialsException ex) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return new ResponseEntity<>(errorMessages, HttpStatus.BAD_REQUEST);
         }
     }
 
-    @Autowired
-    private JavaMailSender mailSender;
-
     @PostMapping("/forgot_password")
-    public ResponseEntity<?> forgotPassword(@RequestParam String email,HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
-
+    public ResponseEntity<?> forgotPassword(@RequestBody EmailConfirm emailConfirm) throws MessagingException, UnsupportedEncodingException {
+        String message = "email bạn nhập không tồn tại";
         String token = RandomString.make(30);
-
         try {
-            accountService.updateResetPasswordToken(token, email);
-            String resetPasswordLink = Utility.getSiteURL(request) + "/reset_password?token=" + token;
-            sendEmail(email, resetPasswordLink);
-            return new ResponseEntity<>(HttpStatus.OK);
+            accountService.updateResetPasswordToken(token, emailConfirm.getEmailConfirm());
+            String resetPasswordLink = emailConfirm.getLocation() + "/reset_password";
+            sendEmail(emailConfirm.getEmailConfirm(), resetPasswordLink);
+            return new ResponseEntity<>(new EmailConfirm(emailConfirm.getEmailConfirm(), token), HttpStatus.OK);
         } catch (MessagingException | UnsupportedEncodingException e){
             e.getStackTrace();
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>( message, HttpStatus.BAD_REQUEST);
     }
 
     public void sendEmail(String recipientEmail, String link) throws MessagingException, UnsupportedEncodingException {
@@ -99,20 +96,8 @@ public class LoginController {
         mailSender.send(message);
     }
 
-
-    @GetMapping("/reset_password")
-    public ResponseEntity<?> showResetPasswordForm(@Param(value = "token") String token, Model model) {
-        Account account = accountService.getByResetPasswordToken(token);
-
-        if (account == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
     @PostMapping("/reset_password")
-    public ResponseEntity<?> resetPassword(@RequestBody @Valid GenericRequest genericRequest) {
+    public ResponseEntity<GenericRequest> resetPassword(@RequestBody @Valid GenericRequest genericRequest) {
 
         Account account = accountService.getByResetPasswordToken(genericRequest.getToken());
 
@@ -123,5 +108,11 @@ public class LoginController {
             return new ResponseEntity<>(HttpStatus.OK);
 
         }
+    }
+
+    @GetMapping("/403")
+    public ResponseEntity<?> daniedPage() {
+        String message = "Bạn không có quyền truy cập trang này";
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

@@ -25,8 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailServiceImpl userDetailServiceImpl;
 
-    @Autowired
-    private DataSource dataSource;
+//    @Autowired
+//    private DataSource dataSource;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -38,9 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
 
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.authorizeRequests().antMatchers("/", "/api/login", "/logout").permitAll();
+        http.authorizeRequests().antMatchers("/", "/api/login", "/logout", "/reset_password").permitAll();
         http.authorizeRequests().antMatchers("/").access("hasAnyRole('ROLE_STAFF', 'ROLE_ADMIN')");
 
         http.authorizeRequests().antMatchers("/admin/news").access("hasRole('ROLE_ADMIN')");
@@ -54,7 +54,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                                     ex.getMessage()
                             );
                         }
-                );
+                )
+                .accessDeniedPage("/403");
 
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
