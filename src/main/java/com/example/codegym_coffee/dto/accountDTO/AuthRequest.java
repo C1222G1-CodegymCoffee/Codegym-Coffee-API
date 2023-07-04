@@ -1,9 +1,6 @@
 package com.example.codegym_coffee.dto.accountDTO;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 public class AuthRequest {
     @NotNull(message = "Trường này không được để trống")

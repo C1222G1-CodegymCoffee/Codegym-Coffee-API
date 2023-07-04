@@ -38,7 +38,6 @@ public class NewsController {
      * @param newsDTO
      * @return HttpStatus.BAD_REQUEST if the result is an error or HttpStatus.OK if the passed parameter is successfully saved to the database
      */
-
     @PostMapping("/createNews")
     public ResponseEntity<List<ObjectError>> createNews(@Validated @RequestBody NewsDTO newsDTO, BindingResult bindingResult) {
         newsDTO.validate(newsDTO, bindingResult);
@@ -48,7 +47,6 @@ public class NewsController {
         iNewsService.addNews(newsDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
     @GetMapping("/list-news")
     public ResponseEntity<Page<News>> showListNews(@PageableDefault(size = 5)Pageable pageable,

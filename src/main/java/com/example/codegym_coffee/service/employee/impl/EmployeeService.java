@@ -21,6 +21,7 @@ public class EmployeeService implements IEmployeeService {
     private IEmployeeRepository iEmployeeRepository;
     @Autowired
     private IAccountRepositoryQuynh accountRepositoryQuynh;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
 

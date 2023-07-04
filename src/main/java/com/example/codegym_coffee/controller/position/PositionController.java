@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("home/admin/employee/position")
 @CrossOrigin
-
 public class PositionController {
 
     @Autowired
