@@ -22,15 +22,6 @@ import javax.validation.Valid;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
-//    @Autowired
-//    private AccountService accountService;
-
-
-
-//    @GetMapping("")
-//    public Page<Employee> showList(Pageable pageable) {
-//        return employeeService.showList( pageable);
-//    }
 
     @GetMapping("")
     public ResponseEntity<Page<Employee>> listEmployee(@RequestParam(value = "page", defaultValue = "0") int page) {
