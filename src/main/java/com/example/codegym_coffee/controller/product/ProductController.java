@@ -15,12 +15,12 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/product")
+@RequestMapping("/api/admin")
 public class ProductController {
     @Autowired
     private IProductService productService;
 
-    @PostMapping("/create")
+    @PostMapping("/product-create")
     public ResponseEntity<List<ObjectError>> createProduct(@Valid @RequestBody ProductDTO productDTO, BindingResult bindingResult) {
         new ProductDTO().validate(productDTO, bindingResult);
         if (bindingResult.hasErrors()) {
@@ -39,7 +39,7 @@ public class ProductController {
      */
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/{id}")
+    @GetMapping("/product/{id}")
     public ResponseEntity<Product> findById(@PathVariable("id") Integer id) {
         Product product = productService.findById(id);
         if (product == null) {
@@ -57,7 +57,7 @@ public class ProductController {
      * @return
      */
     @ResponseStatus(HttpStatus.OK)
-    @PatchMapping("/update/{idProduct}")
+    @PatchMapping("/product-update/{idProduct}")
     public ResponseEntity<List<ObjectError>> updateProduct(@PathVariable Integer idProduct, @Valid @RequestBody ProductDTO productDTO, BindingResult bindingResult) {
         new ProductDTO().validate(productDTO, bindingResult);
         productDTO.setIdProduct(idProduct);

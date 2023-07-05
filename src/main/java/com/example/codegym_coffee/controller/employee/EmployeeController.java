@@ -22,21 +22,13 @@ import javax.validation.Valid;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
-//    @Autowired
-//    private AccountService accountService;
 
-
-
-//    @GetMapping("")
-//    public Page<Employee> showList(Pageable pageable) {
-//        return employeeService.showList( pageable);
-//    }
 
     @GetMapping("")
     public ResponseEntity<Page<Employee>> listEmployee(@RequestParam(value = "page", defaultValue = "0") int page) {
         Pageable pageable = PageRequest.of(page, 10);
-        Page<Employee> listFeedback = employeeService.showList(pageable);
-        return new ResponseEntity<>(listFeedback, HttpStatus.OK);
+        Page<Employee> listEmployee = employeeService.showList(pageable);
+        return new ResponseEntity<>(listEmployee, HttpStatus.OK);
     }
     @GetMapping("/{name}")
     public ResponseEntity<Page<Employee>> findByName(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String name) {
@@ -50,9 +42,9 @@ public class EmployeeController {
     @GetMapping("/phone/{phoneNumber}")
     public ResponseEntity<?> findByPhone(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String phoneNumber) {
         Pageable pageable = PageRequest.of(page, 10);
-        Page<Employee> listEmployee = employeeService.findByPhone(phoneNumber,pageable);
+        Page<Employee> listEmployee = employeeService.findByPhone(phoneNumber, pageable);
         if (listEmployee.isEmpty()) {
-            return new ResponseEntity<>(listEmployee, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>( HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(listEmployee, HttpStatus.OK);
     }
@@ -80,5 +72,4 @@ public class EmployeeController {
     public void deleteEmployeeById(@PathVariable("id") Integer id) {
         employeeService.deleteByIdEmployee(id);
     }
-
 }
