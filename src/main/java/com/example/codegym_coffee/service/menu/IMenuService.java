@@ -19,4 +19,6 @@ public interface IMenuService {
     void createBill(Bill bill);
 
     Bill getBillByTable(Integer idTable);
+
+    List<Product> getProductByNameProduct(String nameProduct);
 }
