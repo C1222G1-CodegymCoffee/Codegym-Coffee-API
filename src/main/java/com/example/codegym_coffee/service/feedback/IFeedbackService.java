@@ -1,5 +1,6 @@
 package com.example.codegym_coffee.service.feedback;
 
+import com.example.codegym_coffee.dto.feedback.FeedbackDTO;
 import com.example.codegym_coffee.model.Feedback;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,4 +19,5 @@ public interface IFeedbackService {
 
     Page<Feedback> searchByCreatorOrContentAndDayOfFeedback(String searchTerm, LocalDate dayOfFeedback, Pageable pageable);
 
+    void createFeedback(FeedbackDTO feedbackDTO);
 }
