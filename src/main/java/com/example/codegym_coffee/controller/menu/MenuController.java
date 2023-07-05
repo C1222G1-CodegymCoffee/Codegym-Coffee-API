@@ -6,21 +6,16 @@ import com.example.codegym_coffee.model.*;
 import com.example.codegym_coffee.service.menu.IMenuService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.time.LocalDate;
-
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/menu")
+@RequestMapping("/v2/menu")
 @CrossOrigin("*")
 public class MenuController {
 
@@ -42,6 +37,11 @@ public class MenuController {
     @GetMapping("/product-by-type")
     public ResponseEntity<List<Product>> displayProductByType(@RequestParam(name = "type") String type) {
         List<Product> products = menuService.getProductByTypeProduct(type);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+    @GetMapping("/product-by-name")
+    public ResponseEntity<List<Product>> displayProductByName(@RequestParam(name = "nameProduct") String nameProduct) {
+        List<Product> products = menuService.getProductByNameProduct(nameProduct);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
