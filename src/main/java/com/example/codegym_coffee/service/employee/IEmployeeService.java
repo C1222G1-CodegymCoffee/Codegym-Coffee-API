@@ -20,6 +20,7 @@ public interface IEmployeeService {
     Page<Employee> findByPhone(String phone, Pageable pageable);
 
     void create(EmployeeDTO employeeDTO);
+    Employee findEmployeeById(Integer id);
 
     void deleteByIdEmployee(Integer idEmployee);
 
