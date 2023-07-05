@@ -11,13 +11,18 @@ import java.util.List;
 
 @Service
 public interface IFeedbackService {
-//    Page<Feedback> findAllFeedback( List<Feedback> pageable);
 
     Page<Feedback> findAllFeedback(Pageable pageable);
     Feedback getFeedbackById(Integer id);
     Page<Feedback> findFeedbackByCreatorOrContent(String searchTerm, Pageable pageable);
 
     Page<Feedback> searchByCreatorOrContentAndDayOfFeedback(String searchTerm, LocalDate dayOfFeedback, Pageable pageable);
-
-    void createFeedback(FeedbackDTO feedbackDTO);
+    /**
+     * @author: TruongNN
+     * Date created: 28/06/2023
+     * function: Create feedback
+     *
+     * @param feedbackDTO
+     */
+    void createFeedback (FeedbackDTO feedbackDTO);
 }
