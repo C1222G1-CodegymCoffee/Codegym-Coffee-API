@@ -54,6 +54,13 @@ public class Bill {
         this.billDetails = billDetails;
     }
 
+    public Bill(LocalDate dayOfBill, Integer paymentStatus, Employee employee, TableCoffee tableCoffee, Feedback feedback) {
+        this.dayOfBill = dayOfBill;
+        this.paymentStatus = paymentStatus;
+        this.employee = employee;
+        this.tableCoffee = tableCoffee;
+        this.feedback = feedback;
+    }
     public Integer getIdBill() {
         return idBill;
     }
