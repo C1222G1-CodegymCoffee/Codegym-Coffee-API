@@ -1,7 +1,6 @@
 package com.example.codegym_coffee.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,8 +9,7 @@ import java.util.List;
 public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_bill",nullable = false)
-    @NotNull
+    @Column(name = "id_bill")
     private Integer idBill;
 
     @Column(name = "code_bill", columnDefinition = "Varchar(40)")
@@ -19,8 +17,6 @@ public class Bill {
 
     @Column(name = "day_of_bill",columnDefinition = "date")
     private LocalDate dayOfBill;
-    @Column(name = "status")
-    private int status;
 
     @Column(name = "payment_status")
     private Integer paymentStatus;
@@ -42,26 +38,26 @@ public class Bill {
     @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
     private List<BillDetail> billDetails;
 
-
     public Bill() {
     }
 
-    public Bill(Integer idBill, String codeBill, LocalDate dayOfBill, Integer paymentStatus, Employee employee, Feedback feedback, List<BillDetail> billDetails, TableCoffee tableCoffee) {
+    public Bill(Integer idBill,String codeBill, LocalDate dayOfBill, Integer paymentStatus, Employee employee, TableCoffee tableCoffee, Feedback feedback, List<BillDetail> billDetails) {
         this.idBill = idBill;
-        this.dayOfBill = dayOfBill;
-        this.status = status;
-        this.employee = employee;
-        this.tableCoffee = tableCoffee;
-        this.feedback = feedback;
-    }
-
-    public Bill(LocalDate dayOfBill, int status, Employee employee,  Feedback feedback,TableCoffee tableCoffee) {
+        this.codeBill = codeBill;
         this.dayOfBill = dayOfBill;
         this.paymentStatus = paymentStatus;
         this.employee = employee;
+        this.tableCoffee = tableCoffee;
         this.feedback = feedback;
         this.billDetails = billDetails;
+    }
+
+    public Bill(LocalDate dayOfBill, Integer paymentStatus, Employee employee, TableCoffee tableCoffee, Feedback feedback) {
+        this.dayOfBill = dayOfBill;
+        this.paymentStatus = paymentStatus;
+        this.employee = employee;
         this.tableCoffee = tableCoffee;
+        this.feedback = feedback;
     }
 
     public Integer getIdBill() {
@@ -74,6 +70,14 @@ public class Bill {
 
     public LocalDate getDayOfBill() {
         return dayOfBill;
+    }
+
+    public String getCodeBill() {
+        return codeBill;
+    }
+
+    public void setCodeBill(String codeBill) {
+        this.codeBill = codeBill;
     }
 
     public void setDayOfBill(LocalDate dayOfBill) {
@@ -96,6 +100,14 @@ public class Bill {
         this.employee = employee;
     }
 
+    public TableCoffee getTableCoffee() {
+        return tableCoffee;
+    }
+
+    public void setTableCoffee(TableCoffee tableCoffee) {
+        this.tableCoffee = tableCoffee;
+    }
+
     public Feedback getFeedback() {
         return feedback;
     }
@@ -110,13 +122,5 @@ public class Bill {
 
     public void setBillDetails(List<BillDetail> billDetails) {
         this.billDetails = billDetails;
-    }
-
-    public TableCoffee getTableCoffee() {
-        return tableCoffee;
-    }
-
-    public void setTableCoffee(TableCoffee tableCoffee) {
-        this.tableCoffee = tableCoffee;
     }
 }

@@ -20,7 +20,7 @@ public interface IBillRepository extends JpaRepository<Bill, Integer> {
      * @Date_create: 27/06/2023
      * @Usage_method findAllBill to show list bill
      */
-    @Query(value = "select  * from bill"
+    @Query(value = "select  * from bill ORDER BY day_of_bill DESC"
             , nativeQuery = true)
     Page<Bill> showListBill(Pageable pageable, @Param("search") String search);
 

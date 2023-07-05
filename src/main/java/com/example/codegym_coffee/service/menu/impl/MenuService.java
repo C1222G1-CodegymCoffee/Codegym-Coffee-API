@@ -57,5 +57,10 @@ public class MenuService implements IMenuService {
         return menuBillRepository.getBillByTable(idTable);
     }
 
+    @Override
+    public List<Product> getProductByNameProduct(String nameProduct) {
+        return menuRepository.getProductByName(nameProduct);
+    }
+
 
 }
