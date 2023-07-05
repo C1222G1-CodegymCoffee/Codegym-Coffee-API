@@ -31,9 +31,6 @@ public class FeedbackController {
      * @Date_create: 27/06/2023
      * @Usage_method The method used to show list feedback
      */
-
-
-
     @GetMapping("/admin/list-feedback")
     public ResponseEntity<Page<Feedback>> listFeedback(@PageableDefault(size = 10) Pageable pageable,
                                                        @RequestParam(value = "page", defaultValue = "0") int page) {
@@ -55,8 +52,6 @@ public class FeedbackController {
      * @Date_create: 27/06/2023
      * @Usage_method The method used to search feedback by dayOfFeedback
      */
-
-
     @GetMapping("/admin/list-feedback/search")
     public ResponseEntity<Page<Feedback>> searchFeedback(
             @RequestParam(name = "searchTerm", defaultValue = "") String searchTerm,
@@ -91,16 +86,6 @@ public class FeedbackController {
         }
         return new ResponseEntity<>(feedback, HttpStatus.OK);
     }
-
-
-    /**
-     * @param searchTerm
-     * @return ResponseEntity<>(feedbackPage, HttpStatus.OK)
-     * @Author TrinhCHT
-     * @Date_create: 27/06/2023
-     * @Usage_method The method used to search feedback by searchTerm
-     */
-
     /**
      * Created by: TruongNN
      * Date created: 28/06/2023

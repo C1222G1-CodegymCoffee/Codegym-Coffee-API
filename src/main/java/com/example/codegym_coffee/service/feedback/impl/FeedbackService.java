@@ -46,7 +46,6 @@ public class FeedbackService implements IFeedbackService {
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         return pattern.matcher(nfdNormalizedString).replaceAll("");
     }
-
     /**
      * @author: TruongNN
      * Date created: 28/06/2023
@@ -66,6 +65,4 @@ public class FeedbackService implements IFeedbackService {
                 feedback.getDayOfFeedback()
         );
     }
-
-
 }
