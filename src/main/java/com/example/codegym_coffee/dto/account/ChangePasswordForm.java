@@ -3,15 +3,19 @@ package com.example.codegym_coffee.dto.account;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 public class ChangePasswordForm {
-    @Length(min = 5, max = 20, message = "Mật khẩu ít nhất 5 ký tự và nhiều nhất 20 ký tự")
+        @Length(min = 5, max = 20, message = "Mật khẩu ít nhất 5 ký tự và nhiều nhất 20 ký tự")
+//    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,10}$", message = "mật khẩu từ 8 đến 10 ký tự")
     @NotBlank(message = "Không được bỏ trống")
     private String oldPassword;
     @NotBlank(message = "Không được bỏ trống")
+//    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,10}$", message = "mật khẩu từ 8 đến 10 ký tự")
     @Length(min = 5, max = 20, message = "Mật khẩu ít nhất 5 ký tự và nhiều nhất 20 ký tự")
     private String newPassword;
-    @Length(min = 5, max = 20, message = "Mật khẩu ít nhất 5 ký tự và nhiều nhất 20 ký tự")
+//    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,10}$", message = "mật khẩu từ 8 đến 10 ký tự")
+        @Length(min = 5, max = 20, message = "Mật khẩu ít nhất 5 ký tự và nhiều nhất 20 ký tự")
     @NotBlank(message = "Không được bỏ trống")
     private String confirmPassword;
 

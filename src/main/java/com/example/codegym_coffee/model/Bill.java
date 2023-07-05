@@ -38,8 +38,9 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(Integer idBill, LocalDate dayOfBill, Integer paymentStatus, Employee employee, TableCoffee tableCoffee, Feedback feedback, List<BillDetail> billDetails) {
+    public Bill(Integer idBill,String codeBill, LocalDate dayOfBill, Integer paymentStatus, Employee employee, TableCoffee tableCoffee, Feedback feedback, List<BillDetail> billDetails) {
         this.idBill = idBill;
+        this.codeBill = codeBill;
         this.dayOfBill = dayOfBill;
         this.paymentStatus = paymentStatus;
         this.employee = employee;
@@ -66,6 +67,14 @@ public class Bill {
 
     public LocalDate getDayOfBill() {
         return dayOfBill;
+    }
+
+    public String getCodeBill() {
+        return codeBill;
+    }
+
+    public void setCodeBill(String codeBill) {
+        this.codeBill = codeBill;
     }
 
     public void setDayOfBill(LocalDate dayOfBill) {
