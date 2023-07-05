@@ -9,7 +9,7 @@ import java.util.List;
 public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_bill")
+    @Column(name = "id_bill",nullable = false)
     private Integer idBill;
 
     @Column(name = "code_bill", columnDefinition = "Varchar(40)")
@@ -38,10 +38,12 @@ public class Bill {
     @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
     private List<BillDetail> billDetails;
 
+
     public Bill() {
     }
 
-    public Bill(Integer idBill,String codeBill, LocalDate dayOfBill, Integer paymentStatus, Employee employee, TableCoffee tableCoffee, Feedback feedback, List<BillDetail> billDetails) {
+    public Bill(Integer idBill, String codeBill, LocalDate dayOfBill, Integer paymentStatus, Employee employee,
+                TableCoffee tableCoffee, Feedback feedback, List<BillDetail> billDetails) {
         this.idBill = idBill;
         this.codeBill = codeBill;
         this.dayOfBill = dayOfBill;
@@ -59,7 +61,6 @@ public class Bill {
         this.tableCoffee = tableCoffee;
         this.feedback = feedback;
     }
-
     public Integer getIdBill() {
         return idBill;
     }
@@ -68,16 +69,16 @@ public class Bill {
         this.idBill = idBill;
     }
 
-    public LocalDate getDayOfBill() {
-        return dayOfBill;
-    }
-
     public String getCodeBill() {
         return codeBill;
     }
 
     public void setCodeBill(String codeBill) {
         this.codeBill = codeBill;
+    }
+
+    public LocalDate getDayOfBill() {
+        return dayOfBill;
     }
 
     public void setDayOfBill(LocalDate dayOfBill) {

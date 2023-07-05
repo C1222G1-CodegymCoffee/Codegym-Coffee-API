@@ -50,7 +50,7 @@ public class EmployeeService implements IEmployeeService {
     @Override
     public void create(EmployeeDTO employeeDTO) {
         accountRepositoryQuynh.createAccount(employeeDTO.getAccount().getNameAccount(),
-                passwordEncoder.encode("12345678"));
+                passwordEncoder.encode("Abc@123"));
         Account account = accountRepositoryQuynh
                 .findByName(employeeDTO.getAccount().getNameAccount());
         Employee employee = new Employee();
@@ -67,6 +67,11 @@ public class EmployeeService implements IEmployeeService {
                 employee.getEmail(),
                 employee.getPosition(),
                 account.getIdAccount());
+    }
+
+    @Override
+    public Employee findEmployeeById(Integer id) {
+        return iEmployeeRepository.findEmployeeById(id);
     }
 
     @Override

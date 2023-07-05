@@ -23,7 +23,10 @@ public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
 
     @Query(value = "select * from employee where phone_number like %:phone_number%", nativeQuery = true)
     Page<Employee> findByPhone(
-            @Param("phone_number") String phone,Pageable pageable);
+            @Param("phone_number") String phone, Pageable pageable);
+
+    @Query(value = "select * from employee where id_employee = :idEmployee", nativeQuery = true)
+    Employee findEmployeeById(Integer idEmployee);
 
     @Modifying
     @Transactional

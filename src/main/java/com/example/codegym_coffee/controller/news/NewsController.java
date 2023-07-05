@@ -37,7 +37,7 @@ public class NewsController {
      * @param newsDTO
      * @return HttpStatus.BAD_REQUEST if the result is an error or HttpStatus.OK if the passed parameter is successfully saved to the database
      */
-    @PostMapping("/admin/create-news")
+    @PostMapping("/v2/create-news")
     public ResponseEntity<List<ObjectError>> createNews(@Validated @RequestBody NewsDTO newsDTO, BindingResult bindingResult) {
         newsDTO.validate(newsDTO, bindingResult);
         if (bindingResult.hasErrors()) {
