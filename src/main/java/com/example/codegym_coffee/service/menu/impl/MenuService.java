@@ -62,5 +62,10 @@ public class MenuService implements IMenuService {
         return menuRepository.getProductByName(nameProduct);
     }
 
+    @Override
+    public void updateTable(TableCoffee tableCoffee) {
+        tableCoffeeRepository.save(tableCoffee);
+    }
+
 
 }

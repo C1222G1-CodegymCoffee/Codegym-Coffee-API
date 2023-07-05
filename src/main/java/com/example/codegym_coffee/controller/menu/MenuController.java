@@ -39,6 +39,7 @@ public class MenuController {
         List<Product> products = menuService.getProductByTypeProduct(type);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
+
     @GetMapping("/product-by-name")
     public ResponseEntity<List<Product>> displayProductByName(@RequestParam(name = "nameProduct") String nameProduct) {
         List<Product> products = menuService.getProductByNameProduct(nameProduct);
@@ -48,6 +49,8 @@ public class MenuController {
     @PostMapping("/add-to-bill")
     public ResponseEntity<ProductMenuDto> addToBill(@RequestBody List<ProductMenuDto> listProductMenuDto) {
         TableCoffee tableCoffee = menuService.getTableCoffee(listProductMenuDto.get(0).getTableOfBill());
+        tableCoffee.setStatus(1);
+        menuService.updateTable(tableCoffee);
         LocalDate localDate = LocalDate.now();
         Bill bill = new Bill(localDate, 1, null, tableCoffee, null);
         menuService.createBill(bill);
@@ -56,8 +59,8 @@ public class MenuController {
         for (int i = 0; i < listProductMenuDto.size(); i++) {
             ProductMenuDto productMenuDto = listProductMenuDto.get(i);
             Product product = new Product();
-            BeanUtils.copyProperties(productMenuDto,product);
-            menuService.addBillDetail(new BillDetail(productMenuDto.getQuantityOfProduct(),product.getPrice(),billToAddBD,product));
+            BeanUtils.copyProperties(productMenuDto, product);
+            menuService.addBillDetail(new BillDetail(productMenuDto.getQuantityOfProduct(), product.getPrice(), billToAddBD, product));
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }

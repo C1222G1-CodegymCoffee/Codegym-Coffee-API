@@ -21,4 +21,6 @@ public interface IMenuService {
     Bill getBillByTable(Integer idTable);
 
     List<Product> getProductByNameProduct(String nameProduct);
+
+    void updateTable(TableCoffee tableCoffee);
 }
