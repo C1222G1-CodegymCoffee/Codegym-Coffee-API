@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 public interface IFeedbackService {
-//    Page<Feedback> findAllFeedback( List<Feedback> pageable);
 
     Page<Feedback> findAllFeedback(Pageable pageable);
     Feedback getFeedbackById(Integer id);
