@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/statistic")
+@RequestMapping("/api")
 @CrossOrigin("*")
 public class StatisticalController {
 
@@ -33,7 +33,7 @@ public class StatisticalController {
     @Autowired
     private IStatisticalService iStatisticalService;
 
-    @GetMapping("")
+    @GetMapping("/admin/statistical")
     public ResponseEntity<List<StaticDTO>> getStatistic(@RequestParam String dateAfter, @RequestParam String dateBefore ){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -48,9 +48,6 @@ public class StatisticalController {
         }
 
         List<StaticDTO> entityStatisticDTOS  = iStatisticalService.getListStatistical(date,date1);
-        if (entityStatisticDTOS == null){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
         return new ResponseEntity<>(entityStatisticDTOS, HttpStatus.OK);
     }
 }

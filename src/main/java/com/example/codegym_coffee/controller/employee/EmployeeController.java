@@ -4,6 +4,7 @@ package com.example.codegym_coffee.controller.employee;
 import com.example.codegym_coffee.dto.employee.EmployeeDTO;
 import com.example.codegym_coffee.model.Employee;
 import com.example.codegym_coffee.service.employee.impl.EmployeeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,44 +23,39 @@ import javax.validation.Valid;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
-//    @Autowired
-//    private AccountService accountService;
 
-
-
-//    @GetMapping("")
-//    public Page<Employee> showList(Pageable pageable) {
-//        return employeeService.showList( pageable);
-//    }
 
     @GetMapping("")
     public ResponseEntity<Page<Employee>> listEmployee(@RequestParam(value = "page", defaultValue = "0") int page) {
         Pageable pageable = PageRequest.of(page, 10);
-        Page<Employee> listFeedback = employeeService.showList(pageable);
-        return new ResponseEntity<>(listFeedback, HttpStatus.OK);
+        Page<Employee> listEmployee = employeeService.showList(pageable);
+        return new ResponseEntity<>(listEmployee, HttpStatus.OK);
     }
+
     @GetMapping("/{name}")
     public ResponseEntity<Page<Employee>> findByName(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String name) {
         Pageable pageable = PageRequest.of(page, 10);
-        Page<Employee> listEmployee = employeeService.findByName(name,pageable);
+        Page<Employee> listEmployee = employeeService.findByName(name, pageable);
         if (listEmployee.isEmpty()) {
             return new ResponseEntity<>(listEmployee, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(listEmployee, HttpStatus.OK);
     }
+
     @GetMapping("/phone/{phoneNumber}")
     public ResponseEntity<?> findByPhone(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String phoneNumber) {
         Pageable pageable = PageRequest.of(page, 10);
-        Page<Employee> listEmployee = employeeService.findByPhone(phoneNumber,pageable);
+        Page<Employee> listEmployee = employeeService.findByPhone(phoneNumber, pageable);
         if (listEmployee.isEmpty()) {
-            return new ResponseEntity<>(listEmployee, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>( HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(listEmployee, HttpStatus.OK);
     }
+
     @GetMapping("/search/{nameEmployee}&{nameAccount}&{phoneNumber}")
     public ResponseEntity<Page<Employee>> findByEmployee(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String nameAccount, @PathVariable String nameEmployee, @PathVariable String phoneNumber) {
         Pageable pageable = PageRequest.of(page, 10);
-        Page<Employee> listEmployee = employeeService.findByEmployee(nameEmployee,nameAccount,phoneNumber,pageable);
+        Page<Employee> listEmployee = employeeService.findByEmployee(nameEmployee, nameAccount, phoneNumber, pageable);
         if (listEmployee.isEmpty()) {
             return new ResponseEntity<>(listEmployee, HttpStatus.NOT_FOUND);
         }
@@ -79,6 +75,11 @@ public class EmployeeController {
     @PostMapping("/{id}")
     public void deleteEmployeeById(@PathVariable("id") Integer id) {
         employeeService.deleteByIdEmployee(id);
+    }
+
+    @GetMapping("findById/{idEmployee}")
+    public Employee findEmployeeById(@PathVariable("idEmployee") Integer id) {
+        return employeeService.findEmployeeById(id);
     }
 
 }

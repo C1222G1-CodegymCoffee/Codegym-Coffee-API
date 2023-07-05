@@ -12,5 +12,8 @@ import java.util.List;
 public interface IMenuRepository extends JpaRepository<Product , Integer> {
     @Query(value = "select * from product join product_type pt on pt.id_type = product.id_type where name_type = ?1" , nativeQuery = true)
     List<Product> getProductByType(String type) ;
+
+    @Query(value = "select * from product join product_type pt on pt.id_type = product.id_type where name_product like CONCAT('%',?1, '%')" , nativeQuery = true)
+    List<Product> getProductByName(String nameProduct);
 }
 
