@@ -38,11 +38,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.authorizeRequests().antMatchers("/", "/api/login", "/logout", "/reset_password", "/api/*").permitAll();
+        http.authorizeRequests().antMatchers("/", "/auth/login", "/logout").permitAll();
         http.authorizeRequests().antMatchers("/").access("hasAnyRole('ROLE_STAFF', 'ROLE_ADMIN')");
 
-        http.authorizeRequests().antMatchers("/api/admin/*").access("hasRole('ROLE_ADMIN')");
-        http.authorizeRequests().antMatchers("/v2").access("hasAnyRole('ROLE_STAFF', 'ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/api/admin/**").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/v2/**").access("hasAnyRole('ROLE_STAFF', 'ROLE_ADMIN')");
 
         http.exceptionHandling()
                 .authenticationEntryPoint(

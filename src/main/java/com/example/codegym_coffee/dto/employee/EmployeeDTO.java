@@ -28,7 +28,7 @@ public class EmployeeDTO implements Validator {
     private String image;
 
     @NotBlank(message = "Không được bỏ trống")
-    @Pattern(regexp = "^([a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+)$", message = "Tên phải nhập đúng định dạng. VD: Nguyễn Văn A")
+//    @Pattern(regexp = "^([a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+)$", message = "Tên phải nhập đúng định dạng. VD: Nguyễn Văn A")
     @Length(min = 5, max = 30, message = "Trường này ít nhất 5 ký tự và nhiều nhất 30 ký tự")
     private String nameEmployee;
     @NotBlank(message = "Không được để trống")

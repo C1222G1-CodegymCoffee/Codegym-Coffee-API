@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/v2")
 @CrossOrigin("*")
 public class FeedbackController {
     @Autowired
@@ -31,7 +31,7 @@ public class FeedbackController {
      * @Date_create: 27/06/2023
      * @Usage_method The method used to show list feedback
      */
-    @GetMapping("/admin/list-feedback")
+    @GetMapping("/list-feedback")
     public ResponseEntity<Page<Feedback>> listFeedback(@PageableDefault(size = 10) Pageable pageable,
                                                        @RequestParam(value = "page", defaultValue = "0") int page) {
         pageable = PageRequest.of(page, 10);
@@ -52,7 +52,7 @@ public class FeedbackController {
      * @Date_create: 27/06/2023
      * @Usage_method The method used to search feedback by dayOfFeedback
      */
-    @GetMapping("/admin/list-feedback/search")
+    @GetMapping("/list-feedback/search")
     public ResponseEntity<Page<Feedback>> searchFeedback(
             @RequestParam(name = "searchTerm", defaultValue = "") String searchTerm,
             @RequestParam(name = "dayOfFeedback", required = false)
@@ -78,7 +78,7 @@ public class FeedbackController {
      * @Date_create: 27/06/2023
      * @Usage_method The method used to show detail feedback
      */
-    @GetMapping("admin/feedback/detail/{id}")
+    @GetMapping("/feedback/detail/{id}")
     public ResponseEntity<Feedback> getFeedbackById(@PathVariable("id") Integer id) {
         Feedback feedback = feedbackService.getFeedbackById(id);
         if (feedback == null) {

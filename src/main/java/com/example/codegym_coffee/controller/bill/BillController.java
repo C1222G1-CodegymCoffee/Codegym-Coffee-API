@@ -16,7 +16,7 @@ import java.time.LocalDate;
 
 
 @RestController
-@RequestMapping("api/admin/bill")
+@RequestMapping("/api/admin")
 @CrossOrigin("*")
 public class BillController {
     @Autowired
@@ -30,7 +30,7 @@ public class BillController {
      * @Date_create: 27/06/2023
      * @Usage_method The method used to show list bill
      */
-    @GetMapping("")
+    @GetMapping("/list-bill")
     public ResponseEntity<Page<Bill>> listBill(
             @PageableDefault(size = 10) Pageable pageable,
             @RequestParam(value = "page", defaultValue = "0") int page,
@@ -40,40 +40,7 @@ public class BillController {
         return new ResponseEntity<>(billPage, HttpStatus.OK);
     }
 
-    /**
-     * @param dayOfBill
-     * @return ResponseEntity<>(listBillDay,HttpStatus.OK)
-     * @Author ThanhNV
-     * @Date_create: 27/06/2023
-     * @Usage_method The method used to search bill by dayOfBill
-     */
-    @GetMapping("/day/{dayOfBill}")
-    public ResponseEntity<Page<Bill>> getBillByDay(@PathVariable("dayOfBill")
-                                                   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-                                                   LocalDate dayOfBill, Pageable pageable) {
-        Page<Bill> listBillDay = billService.findBillByDay(dayOfBill, pageable);
-        if (listBillDay.isEmpty()) {
-            return new ResponseEntity<>(listBillDay, HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(listBillDay, HttpStatus.OK);
-    }
 
-    /**
-     * @param codeBill
-     * @return ResponseEntity<>(listBillCode,HttpStatus.OK)
-     * @Author ThanhNV
-     * @Date_create: 27/06/2023
-     * @Usage_method The method used to search bill by codeBill
-     */
-    @GetMapping("/code/{codeBill}")
-    public ResponseEntity<Page<Bill>> getBillByCode(@PathVariable("codeBill")
-                                                    String codeBill, Pageable pageable) {
-        Page<Bill> listBillCode = billService.findBillByCode(codeBill, pageable);
-        if (listBillCode.isEmpty()) {
-            return new ResponseEntity<>(listBillCode, HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(listBillCode, HttpStatus.OK);
-    }
 
     /**
      * @param id
@@ -82,7 +49,7 @@ public class BillController {
      * @Date_create: 27/06/2023
      * @Usage_method The method used to show detail bill
      */
-    @GetMapping("/detail/{id}")
+    @GetMapping("/detail-bill/{id}")
     public ResponseEntity<Bill> getBillById(@PathVariable("id") Integer id) {
         Bill bill = billService.getBillById(id);
         if (bill == null) {
@@ -98,7 +65,7 @@ public class BillController {
      * @Date_create: 27/06/2023
      * @Usage_method The method used to search bill by dayOfBill
      */
-    @GetMapping("/search")
+    @GetMapping("/bill/search")
     public ResponseEntity<Page<Bill>> searchBill(
             @RequestParam(name = "searchTerm", defaultValue = "") String searchTerm,
             @RequestParam(name = "dayOfBill", required = false)

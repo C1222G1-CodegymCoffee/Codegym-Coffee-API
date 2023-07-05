@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v2/menu")
+@RequestMapping("/menu")
 @CrossOrigin("*")
 public class MenuController {
 

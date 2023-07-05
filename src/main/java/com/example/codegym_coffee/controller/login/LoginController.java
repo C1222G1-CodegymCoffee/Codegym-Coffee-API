@@ -41,7 +41,7 @@ public class LoginController {
     @Autowired
     private JavaMailSender mailSender;
 
-    @PostMapping(value = "/api/login")
+    @PostMapping(value = "/auth/login")
     public ResponseEntity<?> login(@RequestBody @Valid AuthRequest request) {
         String errorMessages = "Tài khoản hoặc mật khẩu của bạn không đúng";
         try {

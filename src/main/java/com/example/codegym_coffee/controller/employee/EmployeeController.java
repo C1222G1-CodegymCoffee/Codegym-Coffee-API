@@ -17,20 +17,20 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/api/admin/employee")
+@RequestMapping("/api/admin")
 @CrossOrigin("*")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
 
-    @GetMapping("")
+    @GetMapping("/employee-list")
     public ResponseEntity<Page<Employee>> listEmployee(@RequestParam(value = "page", defaultValue = "0") int page) {
         Pageable pageable = PageRequest.of(page, 10);
         Page<Employee> listEmployee = employeeService.showList(pageable);
         return new ResponseEntity<>(listEmployee, HttpStatus.OK);
     }
-    @GetMapping("/{name}")
+    @GetMapping("/employee/{name}")
     public ResponseEntity<Page<Employee>> findByName(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String name) {
         Pageable pageable = PageRequest.of(page, 10);
         Page<Employee> listEmployee = employeeService.findByName(name,pageable);
@@ -39,7 +39,7 @@ public class EmployeeController {
         }
         return new ResponseEntity<>(listEmployee, HttpStatus.OK);
     }
-    @GetMapping("/phone/{phoneNumber}")
+    @GetMapping("/employee/phone/{phoneNumber}")
     public ResponseEntity<?> findByPhone(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String phoneNumber) {
         Pageable pageable = PageRequest.of(page, 10);
         Page<Employee> listEmployee = employeeService.findByPhone(phoneNumber, pageable);
@@ -48,7 +48,7 @@ public class EmployeeController {
         }
         return new ResponseEntity<>(listEmployee, HttpStatus.OK);
     }
-    @GetMapping("/search/{nameEmployee}&{nameAccount}&{phoneNumber}")
+    @GetMapping("/employee/search/{nameEmployee}&{nameAccount}&{phoneNumber}")
     public ResponseEntity<Page<Employee>> findByEmployee(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String nameAccount, @PathVariable String nameEmployee, @PathVariable String phoneNumber) {
         Pageable pageable = PageRequest.of(page, 10);
         Page<Employee> listEmployee = employeeService.findByEmployee(nameEmployee,nameAccount,phoneNumber,pageable);
@@ -59,7 +59,7 @@ public class EmployeeController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/create")
+    @PostMapping("/employee-create")
     public ResponseEntity<?> createEmployeeWithAccount(@Valid @RequestBody EmployeeDTO employeeDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);

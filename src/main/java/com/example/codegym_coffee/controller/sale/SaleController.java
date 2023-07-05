@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/sale")
+@RequestMapping("/v2")
 public class SaleController {
     @Autowired
     private ISaleService saleService;
@@ -49,7 +49,7 @@ public class SaleController {
      * If the TableCoffee is found, it is returned in an HTTP response with HttpStatus.OK. If the TableCoffee is not found,
      * an HTTP response with HttpStatus.NO_CONTENT is returned.
      */
-    @GetMapping("search/{id}")
+    @GetMapping("/search/{id}")
     public ResponseEntity<TableCoffee> findTableCoffeeById(@PathVariable("id") int id) {
         TableCoffee tableCoffee = saleService.findById(id);
         if (tableCoffee == null) {

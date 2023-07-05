@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 @CrossOrigin("*")
 public class StatisticalController {
 
@@ -33,7 +33,7 @@ public class StatisticalController {
     @Autowired
     private IStatisticalService iStatisticalService;
 
-    @GetMapping("/admin/statistical")
+    @GetMapping("/statistical")
     public ResponseEntity<List<StaticDTO>> getStatistic(@RequestParam String dateAfter, @RequestParam String dateBefore ){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
