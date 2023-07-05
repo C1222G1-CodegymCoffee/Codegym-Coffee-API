@@ -18,7 +18,7 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/api/admin/employee")
+@RequestMapping("/employee")
 @CrossOrigin("*")
 public class EmployeeController {
     @Autowired

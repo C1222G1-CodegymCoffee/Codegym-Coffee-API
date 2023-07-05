@@ -13,17 +13,16 @@ public class ProductDTO implements Validator {
     private Integer idProduct;
     @NotBlank(message = "Tên món không được để trống")
     @Length(max = 20, message = "Tên món không dài quá 20 từ")
-    @Length(min = 5,message = "Tên món phải nhiều hơn 5 từ")
-    @Pattern(regexp = "^[^0-9]*$",message = "Tên món không được chứa số ")
+    @Length(min = 5, message = "Tên món phải nhiều hơn 5 từ")
+    @Pattern(regexp = "^[^0-9]*$", message = "Tên món không được chứa số ")
     private String nameProduct;
     @NotBlank(message = "Thành phần không được để trống")
     @Length(max = 30, message = "Thành phần không dài quá 30 từ")
-    @Length(min = 5,message = "Thành phần phải nhiều hơn 5 từ")
-    @Pattern(regexp = "^[^0-9]*$",message = "Thành phần không được chứa số ")
+    @Length(min = 5, message = "Thành phần phải nhiều hơn 5 từ")
+    @Pattern(regexp = "^[^0-9]*$", message = "Thành phần không được chứa số ")
     private String ingredient;
     private Double price;
     private String image;
-
     private ProductTypeDTO productTypeDTO;
 
     public ProductDTO() {
