@@ -6,17 +6,12 @@ import com.example.codegym_coffee.model.*;
 import com.example.codegym_coffee.service.menu.IMenuService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.time.LocalDate;
-
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -44,12 +39,17 @@ public class MenuController {
         List<Product> products = menuService.getProductByTypeProduct(type);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
+    @GetMapping("/product-by-name")
+    public ResponseEntity<List<Product>> displayProductByName(@RequestParam(name = "nameProduct") String nameProduct) {
+        List<Product> products = menuService.getProductByNameProduct(nameProduct);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
 
     @PostMapping("/add-to-bill")
     public ResponseEntity<ProductMenuDto> addToBill(@RequestBody List<ProductMenuDto> listProductMenuDto) {
         TableCoffee tableCoffee = menuService.getTableCoffee(listProductMenuDto.get(0).getTableOfBill());
         LocalDate localDate = LocalDate.now();
-        Bill bill = new Bill(localDate, 1, null, null, tableCoffee);
+        Bill bill = new Bill(localDate, 1, null, tableCoffee, null);
         menuService.createBill(bill);
         Bill billToAddBD = menuService.getBillByTable(tableCoffee.getIdTable());
 
