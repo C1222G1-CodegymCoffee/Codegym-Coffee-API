@@ -17,20 +17,20 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api/admin/employee")
 @CrossOrigin("*")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
 
-    @GetMapping("/employee-list")
+    @GetMapping()
     public ResponseEntity<Page<Employee>> listEmployee(@RequestParam(value = "page", defaultValue = "0") int page) {
         Pageable pageable = PageRequest.of(page, 10);
         Page<Employee> listEmployee = employeeService.showList(pageable);
         return new ResponseEntity<>(listEmployee, HttpStatus.OK);
     }
-    @GetMapping("/employee/{name}")
+    @GetMapping("/{name}")
     public ResponseEntity<Page<Employee>> findByName(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String name) {
         Pageable pageable = PageRequest.of(page, 10);
         Page<Employee> listEmployee = employeeService.findByName(name,pageable);
@@ -39,7 +39,7 @@ public class EmployeeController {
         }
         return new ResponseEntity<>(listEmployee, HttpStatus.OK);
     }
-    @GetMapping("/employee/phone/{phoneNumber}")
+    @GetMapping("/phone/{phoneNumber}")
     public ResponseEntity<?> findByPhone(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String phoneNumber) {
         Pageable pageable = PageRequest.of(page, 10);
         Page<Employee> listEmployee = employeeService.findByPhone(phoneNumber, pageable);
@@ -48,7 +48,7 @@ public class EmployeeController {
         }
         return new ResponseEntity<>(listEmployee, HttpStatus.OK);
     }
-    @GetMapping("/employee/search/{nameEmployee}&{nameAccount}&{phoneNumber}")
+    @GetMapping("/search/{nameEmployee}&{nameAccount}&{phoneNumber}")
     public ResponseEntity<Page<Employee>> findByEmployee(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String nameAccount, @PathVariable String nameEmployee, @PathVariable String phoneNumber) {
         Pageable pageable = PageRequest.of(page, 10);
         Page<Employee> listEmployee = employeeService.findByEmployee(nameEmployee,nameAccount,phoneNumber,pageable);
@@ -59,7 +59,7 @@ public class EmployeeController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/employee-create")
+    @PostMapping("/create")
     public ResponseEntity<?> createEmployeeWithAccount(@Valid @RequestBody EmployeeDTO employeeDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
@@ -68,7 +68,7 @@ public class EmployeeController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/{id}")
+    @DeleteMapping("/{id}")
     public void deleteEmployeeById(@PathVariable("id") Integer id) {
         employeeService.deleteByIdEmployee(id);
     }

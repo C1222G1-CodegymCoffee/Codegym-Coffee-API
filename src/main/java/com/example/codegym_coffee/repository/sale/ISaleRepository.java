@@ -25,9 +25,9 @@ public interface ISaleRepository extends JpaRepository<TableCoffee,Integer> {
     @Transactional
     @Query(value = "UPDATE bill AS b\n" +
             "JOIN `table_coffee` AS t ON b.id_table = t.id_table\n" +
-            "SET b.payment_status = 0, t.status = 2\n" +
-            "WHERE b.id_table = :billId",nativeQuery = true)
-    void updatePaymentStatusToZero(int billId);
+            "SET b.payment_status = 1, t.status = 0, b.employee_id = :employeeId " +
+            "WHERE b.id_bill = :billId",nativeQuery = true)
+    void updatePaymentStatusToZero(@Param("billId") int billId, @Param("employeeId") int employeeId);
 
 
 

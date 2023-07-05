@@ -29,7 +29,7 @@ public class SaleService implements ISaleService {
     }
 
     @Override
-    public void updatePaymentStatusToZero(int billId) {
-        saleRepository.updatePaymentStatusToZero(billId);
+    public void updatePaymentStatusToZero(int billId, int employeeId) {
+        saleRepository.updatePaymentStatusToZero(billId, employeeId);
     }
 }

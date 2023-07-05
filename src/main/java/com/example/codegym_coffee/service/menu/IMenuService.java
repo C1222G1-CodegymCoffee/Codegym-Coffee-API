@@ -16,6 +16,8 @@ public interface IMenuService {
 
     TableCoffee getTableCoffee(int tableOfBill);
 
+    TableCoffee getAvailableTableCoffee();
+
     void createBill(Bill bill);
 
     Bill getBillByTable(Integer idTable);

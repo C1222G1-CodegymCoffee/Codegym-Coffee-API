@@ -3,6 +3,7 @@ package com.example.codegym_coffee.service.bill;
 import com.example.codegym_coffee.model.Bill;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,5 +19,9 @@ public interface IBillService {
     Page<Bill> searchByCodeOrDayOfBill(String searchTerm, Pageable pageable);
 
     Page<Bill> searchByCodeOrDayAndBill(String searchTerm,LocalDate dayOfBill, Pageable pageable);
+
+    Bill getByTableIdAndNonPayment(Integer tableId);
+
+    Bill findBillByIdForPayment(Integer id);
 
 }

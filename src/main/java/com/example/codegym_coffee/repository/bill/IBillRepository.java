@@ -61,4 +61,9 @@ public interface IBillRepository extends JpaRepository<Bill, Integer> {
     Page<Bill> findBillByCodeAndDay(@Param("searchTerm") String searchTerm, LocalDate dayOfBill, Pageable pageable);
 
 
+    @Query(value = "SELECT * FROM bill WHERE id_table = :tableId AND payment_status = 0 LIMIT 1", nativeQuery = true)
+    Bill getByTableIdAndNonPayment(@Param("tableId") Integer tableId);
+
+    @Query(value = "SELECT * FROM bill WHERE id_bill = :id AND payment_status = 0 LIMIT 1", nativeQuery = true)
+    Bill findBillByIdForPayment(@Param("id") Integer id);
 }

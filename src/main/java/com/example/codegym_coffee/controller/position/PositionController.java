@@ -20,7 +20,6 @@ public class PositionController {
 
     @GetMapping("")
     public List<Position> showList() {
-
         return iPositionService.showList();
     }
 }

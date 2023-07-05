@@ -35,14 +35,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable().cors();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-                http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        http.authorizeRequests().antMatchers("/", "/auth/login", "/logout").permitAll();
-        http.authorizeRequests().antMatchers("/").access("hasAnyRole('ROLE_STAFF', 'ROLE_ADMIN')");
-
-        http.authorizeRequests().antMatchers("/api/admin/**").access("hasRole('ROLE_ADMIN')");
-        http.authorizeRequests().antMatchers("/v2/**").access("hasAnyRole('ROLE_STAFF', 'ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/auth/login",
+                        "/api/feedbacks/create-feedback",
+                        "/topProduct", "/newProduct", "/menu", "/menu/*", "/news/list").permitAll()
+                .and().authorizeRequests().antMatchers("/api/admin/*").hasAnyRole("ADMIN")
+                .and().authorizeRequests().antMatchers("/api/feedbacks/*").hasAnyRole("ADMIN")
+                .and().authorizeRequests()
+                .anyRequest().authenticated();
 
         http.exceptionHandling()
                 .authenticationEntryPoint(
@@ -57,6 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
+
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {

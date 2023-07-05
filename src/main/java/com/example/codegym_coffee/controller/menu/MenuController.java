@@ -48,11 +48,11 @@ public class MenuController {
 
     @PostMapping("/add-to-bill")
     public ResponseEntity<ProductMenuDto> addToBill(@RequestBody List<ProductMenuDto> listProductMenuDto) {
-        TableCoffee tableCoffee = menuService.getTableCoffee(listProductMenuDto.get(0).getTableOfBill());
+        TableCoffee tableCoffee = menuService.getAvailableTableCoffee();
         tableCoffee.setStatus(1);
         menuService.updateTable(tableCoffee);
         LocalDate localDate = LocalDate.now();
-        Bill bill = new Bill(localDate, 1, null, tableCoffee, null);
+        Bill bill = new Bill(localDate, 0, null, tableCoffee, null);
         menuService.createBill(bill);
         Bill billToAddBD = menuService.getBillByTable(tableCoffee.getIdTable());
 

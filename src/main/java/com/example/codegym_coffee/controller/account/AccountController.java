@@ -22,7 +22,7 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/v2/account")
+@RequestMapping("/account")
 public class AccountController {
     @Autowired
     private IAccountService accountService;

@@ -1,20 +1,24 @@
 package com.example.codegym_coffee.controller.sale;
 
+import com.example.codegym_coffee.config.MyUserPrincipal;
+import com.example.codegym_coffee.dto.sale.BillDTO;
 import com.example.codegym_coffee.dto.sale.BillDetailDTO;
 import com.example.codegym_coffee.model.Bill;
 import com.example.codegym_coffee.model.TableCoffee;
+import com.example.codegym_coffee.service.bill.IBillService;
 import com.example.codegym_coffee.service.news.IBillDetailService;
 import com.example.codegym_coffee.service.news.IBillDTOService;
 import com.example.codegym_coffee.service.news.ISaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/v2")
+@RequestMapping("/api/sale")
 public class SaleController {
     @Autowired
     private ISaleService saleService;
@@ -22,7 +26,7 @@ public class SaleController {
     private IBillDetailService billDetailService;
 
     @Autowired
-    private IBillDTOService billService;
+    private IBillService billService;
 
     /**
      * @author KhaiNLV
@@ -90,12 +94,12 @@ public class SaleController {
      * If the bill details are found, they are returned in an HTTP response with HttpStatus.OK.
      */
     @GetMapping("/bill-details/{tableId}")
-    public ResponseEntity<List<BillDetailDTO>> getBillDetailsAndTotalAmountByTableId(@PathVariable("tableId") int tableId) {
+    public ResponseEntity<BillDTO> getBillDetailsAndTotalAmountByTableId(@PathVariable("tableId") int tableId) {
         List<BillDetailDTO> billDetails = billDetailService.getBillDetailsAndTotalAmountByTableId(tableId);
         if (billDetails.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.ok(billDetails);
+        return ResponseEntity.ok(new BillDTO(billDetails, this.billService.getByTableIdAndNonPayment(tableId).getIdBill()));
     }
 
 
@@ -109,16 +113,17 @@ public class SaleController {
      * If the bill details are not found, an HTTP response with HttpStatus.NO_CONTENT is returned.
      * If the bill details are found, they are returned in an HTTP response with HttpStatus.OK.
      */
-    @PatchMapping("/update/{billId}")
+    @PutMapping("/update/{billId}")
     public ResponseEntity<String> updatePaymentStatusToZero(@PathVariable Integer billId) {
-        Bill bill = billService.findByIdBill(billId); // Retrieve the Bill object from the data source
+        Bill bill = billService.findBillByIdForPayment(billId); // Retrieve the Bill object from the data source
         if (bill == null) {
             return new ResponseEntity<>("Invalid billId", HttpStatus.BAD_REQUEST);
         }
         if (bill.getPaymentStatus() == 2) {
             return new ResponseEntity<>("Invalid payment status", HttpStatus.BAD_REQUEST);
         }
-        saleService.updatePaymentStatusToZero(billId);
+        saleService.updatePaymentStatusToZero(billId,
+                ((MyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
         return new ResponseEntity<>("Payment status updated successfully", HttpStatus.OK);
     }
 }

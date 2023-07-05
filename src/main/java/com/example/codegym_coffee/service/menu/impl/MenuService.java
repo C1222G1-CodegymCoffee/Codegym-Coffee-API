@@ -48,6 +48,11 @@ public class MenuService implements IMenuService {
     }
 
     @Override
+    public TableCoffee getAvailableTableCoffee() {
+        return tableCoffeeRepository.getAvailableTable();
+    }
+
+    @Override
     public void createBill(Bill bill) {
         menuBillRepository.save(bill);
     }

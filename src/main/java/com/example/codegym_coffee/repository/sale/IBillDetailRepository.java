@@ -16,7 +16,7 @@ public interface IBillDetailRepository extends JpaRepository<BillDetail,Integer>
             "    t.name_table AS nametable,\n" +
             "    bd.quantity_product * p.price AS totalprice,\n" +
             "    CASE\n" +
-            "        WHEN b.payment_status = 1 THEN\n" +
+            "        WHEN b.payment_status = 0 THEN\n" +
             "            (\n" +
             "                SELECT SUM(bd2.quantity_product * p2.price)\n" +
             "                FROM bill_detail bd2\n" +
@@ -35,7 +35,7 @@ public interface IBillDetailRepository extends JpaRepository<BillDetail,Integer>
             "    INNER JOIN table_coffee t ON b.id_table = t.id_table\n" +
             "WHERE\n" +
             "    t.id_table = :tableId\n" +
-            "    AND b.payment_status = 1",
+            "    AND b.payment_status = 0",
             countQuery = "SELECT\n" +
                     "  *\n" +
                     "FROM\n" +

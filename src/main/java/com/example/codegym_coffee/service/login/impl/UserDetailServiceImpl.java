@@ -13,8 +13,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
@@ -42,6 +44,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
             }
         }
 
-        return new MyUserPrincipal(account.getNameAccount(), account.getPassword(), grantList);
+        return new MyUserPrincipal(Optional.ofNullable(account.getEmployee().getIdEmployee()).orElse(null), account.getNameAccount(), account.getPassword(), grantList);
     }
 }

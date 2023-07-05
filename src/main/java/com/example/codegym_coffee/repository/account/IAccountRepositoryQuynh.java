@@ -35,7 +35,7 @@ public interface IAccountRepositoryQuynh extends JpaRepository<Account,Integer> 
     void updatePassword(@Param("newPassword")String newPassword, @Param("id")Integer id);
 
     @Modifying
-    @org.springframework.transaction.annotation.Transactional
+    @Transactional
     @Query(value = "insert into account(name_account , password) values (:name_account , :password)", nativeQuery = true)
     void createAccount(@Param("name_account") String nameAccount
             , @Param("password") String password);

@@ -9,6 +9,8 @@ public class MyUserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
+    private Integer id;
+
     private String username;
 
     private String password;
@@ -25,10 +27,15 @@ public class MyUserPrincipal implements UserDetails {
         this.password = password;
     }
 
-    public MyUserPrincipal(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public MyUserPrincipal(Integer id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+        this.id = id;
         this.authorities = authorities;
         this.username = username;
         this.password = password;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     @Override

@@ -24,6 +24,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/news")
 @CrossOrigin("*")
 public class NewsController {
     @Autowired
@@ -36,7 +37,7 @@ public class NewsController {
      * @param newsDTO
      * @return HttpStatus.BAD_REQUEST if the result is an error or HttpStatus.OK if the passed parameter is successfully saved to the database
      */
-    @PostMapping("/v2/create-news")
+    @PostMapping()
     public ResponseEntity<List<ObjectError>> createNews(@Validated @RequestBody NewsDTO newsDTO, BindingResult bindingResult) {
         newsDTO.validate(newsDTO, bindingResult);
         if (bindingResult.hasErrors()) {
@@ -46,7 +47,7 @@ public class NewsController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/list-news")
+    @GetMapping("/list")
     public ResponseEntity<Page<News>> showListNews(@PageableDefault(size = 5)Pageable pageable,
                                                    @RequestParam(value = "page", defaultValue = "0") int page) {
         pageable = PageRequest.of(page,5);

@@ -5,17 +5,25 @@ public class ProductMenuDto {
     private String nameProduct;
     private double price;
     private int quantityOfProduct;
-    private int tableOfBill;
+//    private int tableOfBill;
 
     public ProductMenuDto() {
     }
 
-    public ProductMenuDto(int idProduct, String nameProduct, double price, int quantityOfProduct, int tableOfBill) {
+//    public ProductMenuDto(int idProduct, String nameProduct, double price, int quantityOfProduct, int tableOfBill) {
+//        this.idProduct = idProduct;
+//        this.nameProduct = nameProduct;
+//        this.price = price;
+//        this.quantityOfProduct = quantityOfProduct;
+//        this.tableOfBill = tableOfBill;
+//    }
+
+
+    public ProductMenuDto(int idProduct, String nameProduct, double price, int quantityOfProduct) {
         this.idProduct = idProduct;
         this.nameProduct = nameProduct;
         this.price = price;
         this.quantityOfProduct = quantityOfProduct;
-        this.tableOfBill = tableOfBill;
     }
 
     public int getIdProduct() {
@@ -50,11 +58,11 @@ public class ProductMenuDto {
         this.quantityOfProduct = quantityOfProduct;
     }
 
-    public int getTableOfBill() {
-        return tableOfBill;
-    }
-
-    public void setTableOfBill(int tableOfBill) {
-        this.tableOfBill = tableOfBill;
-    }
+//    public int getTableOfBill() {
+//        return tableOfBill;
+//    }
+//
+//    public void setTableOfBill(int tableOfBill) {
+//        this.tableOfBill = tableOfBill;
+//    }
 }

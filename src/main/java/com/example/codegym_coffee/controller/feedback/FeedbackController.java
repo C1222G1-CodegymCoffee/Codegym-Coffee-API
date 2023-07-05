@@ -18,74 +18,12 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 
 @RestController
-@RequestMapping("/v2")
+@RequestMapping("/api/feedbacks")
 @CrossOrigin("*")
 public class FeedbackController {
     @Autowired
     private IFeedbackService feedbackService;
 
-    /**
-     * @param pageable (10)
-     * @return ResponseEntity<>(listFeedback,HttpStatus.OK)
-     * @Author TrinhCHT
-     * @Date_create: 27/06/2023
-     * @Usage_method The method used to show list feedback
-     */
-    @GetMapping("/list-feedback")
-    public ResponseEntity<Page<Feedback>> listFeedback(@PageableDefault(size = 10) Pageable pageable,
-                                                       @RequestParam(value = "page", defaultValue = "0") int page) {
-        pageable = PageRequest.of(page, 10);
-        Page<Feedback> pageFeedback = feedbackService.findAllFeedback(pageable);
-
-        if (pageFeedback.isEmpty()) {
-            return new ResponseEntity<>(pageFeedback, HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<>(pageFeedback, HttpStatus.OK);
-    }
-
-
-    /**
-     * @param dayOfFeedback
-     * @return ResponseEntity<>(listFeedbackDay,HttpStatus.OK)
-     * @Author TrinhCHT
-     * @Date_create: 27/06/2023
-     * @Usage_method The method used to search feedback by dayOfFeedback
-     */
-    @GetMapping("/list-feedback/search")
-    public ResponseEntity<Page<Feedback>> searchFeedback(
-            @RequestParam(name = "searchTerm", defaultValue = "") String searchTerm,
-            @RequestParam(name = "dayOfFeedback", required = false)
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dayOfFeedback,
-            Pageable pageable) {
-
-        Page<Feedback> feedbacks;
-
-        if (dayOfFeedback != null) {
-            feedbacks = feedbackService.searchByCreatorOrContentAndDayOfFeedback(searchTerm, dayOfFeedback, pageable);
-        }  else  {
-            feedbacks = feedbackService.findFeedbackByCreatorOrContent(searchTerm, pageable);
-        }
-
-        return ResponseEntity.ok(feedbacks);
-    }
-
-
-    /**
-     * @param id
-     * @return ResponseEntity<>(feedback, HttpStatus.OK)
-     * @Author TrinhCHT
-     * @Date_create: 27/06/2023
-     * @Usage_method The method used to show detail feedback
-     */
-    @GetMapping("/feedback/detail/{id}")
-    public ResponseEntity<Feedback> getFeedbackById(@PathVariable("id") Integer id) {
-        Feedback feedback = feedbackService.getFeedbackById(id);
-        if (feedback == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(feedback, HttpStatus.OK);
-    }
     /**
      * Created by: TruongNN
      * Date created: 28/06/2023

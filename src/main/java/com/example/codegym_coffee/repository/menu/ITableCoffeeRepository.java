@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface ITableCoffeeRepository extends JpaRepository<TableCoffee,Integer> {
     @Query(value = "select * from table_coffee where name_table = ?1",nativeQuery = true)
     TableCoffee findByNameTable(int tableOfBill);
+
+    @Query(value = "select * from table_coffee where status = 0 LIMIT 1",nativeQuery = true)
+    TableCoffee getAvailableTable();
 }

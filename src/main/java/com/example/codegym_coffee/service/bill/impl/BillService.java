@@ -46,5 +46,13 @@ public class BillService implements IBillService {
         return billRepository.findBillByCodeAndDay(searchTerm, dayOfBill, pageable);
     }
 
+    @Override
+    public Bill getByTableIdAndNonPayment(Integer tableId) {
+        return this.billRepository.getByTableIdAndNonPayment(tableId);
+    }
 
+    @Override
+    public Bill findBillByIdForPayment(Integer id) {
+        return this.billRepository.findBillByIdForPayment(id);
+    }
 }
