@@ -36,6 +36,7 @@ public class Employee {
 
     @Column(name = "email", columnDefinition = "Varchar(40)")
     private String email;
+
     private boolean isDelete = false;
 
     @ManyToOne
