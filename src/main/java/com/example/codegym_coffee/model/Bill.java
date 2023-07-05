@@ -1,7 +1,6 @@
 package com.example.codegym_coffee.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,6 +11,10 @@ public class Bill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_bill")
     private Integer idBill;
+
+    @Column(name = "code_bill", columnDefinition = "Varchar(40)")
+    private String codeBill;
+
     @Column(name = "day_of_bill",columnDefinition = "date")
     private LocalDate dayOfBill;
 
