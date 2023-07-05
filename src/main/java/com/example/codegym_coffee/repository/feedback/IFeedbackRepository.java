@@ -1,7 +1,6 @@
 package com.example.codegym_coffee.repository.feedback;
 
 import com.example.codegym_coffee.model.Feedback;
-import jdk.vm.ci.code.ValueUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Repository
 public interface IFeedbackRepository extends JpaRepository<Feedback, Integer> {
