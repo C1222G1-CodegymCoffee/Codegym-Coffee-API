@@ -22,7 +22,7 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/account")
+@RequestMapping("/v2/account")
 public class AccountController {
     @Autowired
     private IAccountService accountService;
@@ -65,7 +65,7 @@ public class AccountController {
         }
         Employee employee = iEmployeeInformationService.findByNameAccount(nameAccount);
         if (employee == null) {
-            return new ResponseEntity<>("Người dùng không tồn tai",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Người dùng không tồn tại ",HttpStatus.BAD_REQUEST);
         }
         Account account = accountService.findByNameAccount(employee.getAccount().getNameAccount());
         if(account==null){

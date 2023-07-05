@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Repository
 public interface IFeedbackRepository extends JpaRepository<Feedback, Integer> {
@@ -34,7 +33,6 @@ public interface IFeedbackRepository extends JpaRepository<Feedback, Integer> {
             "FROM feedback WHERE id_feedback= :id", nativeQuery = true)
     Feedback findFeedbackById(@Param("id") Integer id);
 
-//    @Query("SELECT f FROM Feedback f WHERE f.creator LIKE %:searchTerm% OR f.content LIKE %:searchTerm% ORDER BY f.dayOfFeedback DESC")
     @Query("SELECT f FROM Feedback f WHERE f.creator LIKE CONCAT('%', :searchTerm, '%') OR f.content LIKE CONCAT('%', :searchTerm, '%') ORDER BY f.dayOfFeedback DESC")
     Page<Feedback> findFeedbackByCreatorOrContent(@Param("searchTerm") String searchTerm, Pageable pageable);
 
