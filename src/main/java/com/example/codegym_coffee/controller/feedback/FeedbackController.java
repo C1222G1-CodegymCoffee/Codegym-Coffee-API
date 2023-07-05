@@ -1,5 +1,6 @@
 package com.example.codegym_coffee.controller.feedback;
 
+import com.example.codegym_coffee.dto.feedback.FeedbackDTO;
 import com.example.codegym_coffee.model.Feedback;
 import com.example.codegym_coffee.service.feedback.IFeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,14 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 
 @RestController
-@RequestMapping("api/admin/feedback")
+@RequestMapping("/api")
 @CrossOrigin("*")
 public class FeedbackController {
     @Autowired
@@ -31,7 +34,7 @@ public class FeedbackController {
 
 
 
-    @GetMapping("/")
+    @GetMapping("/admin/list-feedback")
     public ResponseEntity<Page<Feedback>> listFeedback(@PageableDefault(size = 10) Pageable pageable,
                                                        @RequestParam(value = "page", defaultValue = "0") int page) {
         pageable = PageRequest.of(page, 10);
@@ -54,7 +57,7 @@ public class FeedbackController {
      */
 
 
-    @GetMapping("/search")
+    @GetMapping("/admin/list-feedback/search")
     public ResponseEntity<Page<Feedback>> searchFeedback(
             @RequestParam(name = "searchTerm", defaultValue = "") String searchTerm,
             @RequestParam(name = "dayOfFeedback", required = false)
@@ -80,7 +83,7 @@ public class FeedbackController {
      * @Date_create: 27/06/2023
      * @Usage_method The method used to show detail feedback
      */
-    @GetMapping("/detail/{id}")
+    @GetMapping("admin/feedback/detail/{id}")
     public ResponseEntity<Feedback> getFeedbackById(@PathVariable("id") Integer id) {
         Feedback feedback = feedbackService.getFeedbackById(id);
         if (feedback == null) {
@@ -98,5 +101,21 @@ public class FeedbackController {
      * @Usage_method The method used to search feedback by searchTerm
      */
 
+    /**
+     * Created by: TruongNN
+     * Date created: 28/06/2023
+     * Function: add data feedback  into Database
+     * @param feedbackDTO
+     */
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/create-feedback")
+    public ResponseEntity<FeedbackDTO> createFeedback(@Valid @RequestBody FeedbackDTO feedbackDTO,
+                                                      BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return new ResponseEntity<>( HttpStatus.NOT_ACCEPTABLE);
+        }
+        feedbackService.createFeedback(feedbackDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
 
