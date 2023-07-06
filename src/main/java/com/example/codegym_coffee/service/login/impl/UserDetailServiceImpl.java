@@ -44,6 +44,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
             }
         }
 
-        return new MyUserPrincipal(Optional.ofNullable(account.getEmployee().getIdEmployee()).orElse(null), account.getNameAccount(), account.getPassword(), grantList);
+        Integer employeeId = null;
+
+        if (account.getEmployee() != null) {
+            employeeId = account.getEmployee().getIdEmployee();
+        }
+
+        return new MyUserPrincipal(employeeId, account.getNameAccount(), account.getPassword(), grantList);
     }
 }

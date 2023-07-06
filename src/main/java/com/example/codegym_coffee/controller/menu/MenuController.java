@@ -55,7 +55,6 @@ public class MenuController {
         Bill bill = new Bill(localDate, 0, null, tableCoffee, null);
         menuService.createBill(bill);
         Bill billToAddBD = menuService.getBillByTable(tableCoffee.getIdTable());
-
         for (int i = 0; i < listProductMenuDto.size(); i++) {
             ProductMenuDto productMenuDto = listProductMenuDto.get(i);
             Product product = new Product();

@@ -55,4 +55,9 @@ public class BillService implements IBillService {
     public Bill findBillByIdForPayment(Integer id) {
         return this.billRepository.findBillByIdForPayment(id);
     }
+
+    @Override
+    public Bill getBill() {
+        return billRepository.getNewBill();
+    }
 }

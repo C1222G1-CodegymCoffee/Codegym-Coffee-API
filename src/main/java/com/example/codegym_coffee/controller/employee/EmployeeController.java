@@ -48,13 +48,13 @@ public class EmployeeController {
         }
         return new ResponseEntity<>(listEmployee, HttpStatus.OK);
     }
-    @GetMapping("/search/{nameEmployee}&{nameAccount}&{phoneNumber}")
-    public ResponseEntity<Page<Employee>> findByEmployee(@RequestParam(value = "page", defaultValue = "0") int page, @PathVariable String nameAccount, @PathVariable String nameEmployee, @PathVariable String phoneNumber) {
+    @GetMapping("/search")
+    public ResponseEntity<Page<Employee>> findByEmployee(@RequestParam(value = "page", defaultValue = "0") int page,
+                                                         @RequestParam(required = false, defaultValue = "") String nameAccount,
+                                                         @RequestParam(required = false, defaultValue = "") String nameEmployee,
+                                                         @RequestParam(required = false, defaultValue = "") String phoneNumber) {
         Pageable pageable = PageRequest.of(page, 10);
         Page<Employee> listEmployee = employeeService.findByEmployee(nameEmployee,nameAccount,phoneNumber,pageable);
-        if (listEmployee.isEmpty()) {
-            return new ResponseEntity<>(listEmployee, HttpStatus.NOT_FOUND);
-        }
         return new ResponseEntity<>(listEmployee, HttpStatus.OK);
     }
 
