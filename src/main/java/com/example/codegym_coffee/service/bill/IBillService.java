@@ -24,4 +24,5 @@ public interface IBillService {
 
     Bill findBillByIdForPayment(Integer id);
 
+    Bill getBill();
 }

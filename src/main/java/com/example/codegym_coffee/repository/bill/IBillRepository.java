@@ -66,4 +66,6 @@ public interface IBillRepository extends JpaRepository<Bill, Integer> {
 
     @Query(value = "SELECT * FROM bill WHERE id_bill = :id AND payment_status = 0 LIMIT 1", nativeQuery = true)
     Bill findBillByIdForPayment(@Param("id") Integer id);
+@Query(value = "SELECT * FROM bill  ORDER BY id_bill DESC LIMIT 1",nativeQuery = true)
+    Bill getNewBill();
 }

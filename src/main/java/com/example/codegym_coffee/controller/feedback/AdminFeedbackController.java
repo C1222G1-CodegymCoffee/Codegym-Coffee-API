@@ -34,10 +34,6 @@ public class AdminFeedbackController {
         pageable = PageRequest.of(page, 10);
         Page<Feedback> pageFeedback = feedbackService.findAllFeedback(pageable);
 
-        if (pageFeedback.isEmpty()) {
-            return new ResponseEntity<>(pageFeedback, HttpStatus.NOT_FOUND);
-        }
-
         return new ResponseEntity<>(pageFeedback, HttpStatus.OK);
     }
 

@@ -80,7 +80,7 @@ public class LoginController {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        helper.setFrom("hoang11761311@gmail.com", "Hỗ trợ dịch vụ");
+        helper.setFrom("codegymcoffee@gmail.com", "Hỗ trợ dịch vụ");
         helper.setTo(recipientEmail);
 
         String subject = "Lấy mật khẩu";

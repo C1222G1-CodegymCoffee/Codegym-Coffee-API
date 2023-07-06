@@ -20,7 +20,7 @@ public class EmployeeUpdateDTO implements Validator {
 //    @Pattern(regexp = "^.{0,}(.png|.jpg|.jpeg)[?](alt=media&token=).{0,}$",message = "Sai định dạng ảnh, phải có dạng đuôi .jpg, .jpeg, .png")
     private String image;
     @NotBlank(message = "Không được bỏ trống")
-    @Pattern(regexp = "^(?=.*[a-zA-Z\\s])[^!@#$%^&*(),.?\":{}|<>]{4,100}$", message = "Ten khong hop le")
+    @Pattern(regexp = "^([a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\\s]+)$",message = "Tên phải nhập đúng định dạng. VD: Nguyễn Văn A")
     @Length(min = 5,max = 100,message = "Trường này ít nhất 5 ký tự và nhiều nhất 100 ký tự")
     private String nameEmployee;
     @NotBlank(message = "Không được bỏ trống")
