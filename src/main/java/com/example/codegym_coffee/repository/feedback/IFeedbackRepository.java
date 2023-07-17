@@ -15,13 +15,7 @@ import java.time.LocalDate;
 @Repository
 public interface IFeedbackRepository extends JpaRepository<Feedback, Integer> {
 
-    /**
-     * @param pageable (10)
-     * @return findAllFeedback
-     * @Author TrinhCHT
-     * @Date_create: 27/06/2023
-     * @Usage_method findAllFeedback to show list feedback
-     */
+   
     @Query(value = "SELECT id_feedback, code_feedback, day_of_feedback, email, creator, content , image\n" +
             "FROM feedback ORDER BY day_of_feedback DESC", nativeQuery = true)
     Page<Feedback> findAllFeedback(Pageable pageable);
@@ -39,11 +33,7 @@ public interface IFeedbackRepository extends JpaRepository<Feedback, Integer> {
     @Query("SELECT f FROM Feedback f WHERE (f.creator LIKE CONCAT('%', :searchTerm, '%') OR f.content LIKE CONCAT('%', :searchTerm, '%')) AND f.dayOfFeedback = :dayOfFeedback ORDER BY f.dayOfFeedback DESC")
     Page<Feedback> findByCreatorOrContentAndDayOfFeedback(@Param("searchTerm") String searchTerm, LocalDate dayOfFeedback, Pageable pageable);
 
-    /**
-     * @author TruongNN
-     * Funcition: thêm mới feedback vào database
-     * Date created: 28/06/2023
-     */
+    
     @Modifying
     @Transactional
     @Query(value = "insert into feedback(code_feedback , content, creator , email , image , day_of_feedback)" +

@@ -41,17 +41,7 @@ public class FeedbackService implements IFeedbackService {
         return feedbackRepository.findFeedbackByCreatorOrContent(searchTerm, pageable);
     }
 
-//    public static String deAccent(String str) {
-//        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
-//        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
-//        return pattern.matcher(nfdNormalizedString).replaceAll("");
-//    }
-    /**
-     * @author: TruongNN
-     * Date created: 28/06/2023
-     * function: Create feedback
-     *
-     */
+
     @Override
     public void createFeedback(FeedbackDTO feedbackDTO) {
         Feedback feedback = new Feedback();

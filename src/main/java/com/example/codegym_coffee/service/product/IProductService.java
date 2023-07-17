@@ -12,21 +12,10 @@ public interface IProductService {
     void updateProduct(String nameProduct, String ingredient,
                        Double price, String image, Integer idType, Integer idProduct);
 
-    /**
-     * Create by: NghiaLD,
-     * Date create : 27/06/2023
-     * Function : Create new product
-     */
+    
     void createProduct(ProductDTO productDTO);
 
-    /**
-     * Created by: NghiaLD
-     * Date created: 27/06/2023
-     * function: Find product by id
-     *
-     * @param id
-     * @return
-     */
+   
     Product findById(int id);
 
 }

@@ -21,15 +21,6 @@ import java.util.List;
 @CrossOrigin("*")
 public class StatisticalController {
 
-    /**
-     * create by : ThongDM ,
-     * Date Create : 27/06/2023
-     * Function : statistical controller
-     *
-     * @param dateAfter
-     * @param dateBefore
-     * @return HttpStatus.OK
-     */
     @Autowired
     private IStatisticalService iStatisticalService;
 

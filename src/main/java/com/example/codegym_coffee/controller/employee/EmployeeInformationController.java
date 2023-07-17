@@ -33,13 +33,7 @@ public class EmployeeInformationController {
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private JwtTokenFilter jwtTokenFilter;
-    /**
-     * Author:QuynhHTN
-     * Date create: 27/06/2023
-     * Function: use findByNameAccount method to find out personal information
-     * @param request
-     * @return
-     */
+   
     @GetMapping("/detail")
     public ResponseEntity<?> findByNameAccount(HttpServletRequest request) {
         String token = null;
@@ -57,15 +51,7 @@ public class EmployeeInformationController {
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
-    /**
-     * Author:QuynhHTN
-     * Date create: 27/06/2023
-     * Function:update employee data if ID is not found then return HttpStatus.NOT_FOUND,
-     if found ID then edit data in DB and return HttpStatus.OK
-     * @param employeeUpdateDTO
-     * @param bindingResult
-     * @return
-     */
+   
     @PreAuthorize("ROLE_ADMIN")
     @PatchMapping("/update")
     public ResponseEntity<?> updateEmployee(HttpServletRequest request, @Validated @RequestBody EmployeeUpdateDTO employeeUpdateDTO, BindingResult bindingResult) {

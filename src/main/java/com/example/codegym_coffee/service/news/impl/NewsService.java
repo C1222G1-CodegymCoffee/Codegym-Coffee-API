@@ -12,14 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class NewsService implements INewsService {
-    /**
-     * create by : ThongDM ,
-     * Date Create : 27/06/2023
-     * Function : Add new 1 news to db
-     *
-     * @param newsDTO
-     * @return no return value
-     */
+   
     @Autowired
     private INewsRepository inewsRepository;
     @Override
@@ -27,12 +20,7 @@ public class NewsService implements INewsService {
         inewsRepository.addNews(newsDTO.getTitle(),newsDTO.getContent(),newsDTO.getDayPost(),newsDTO.getImage(),1);
     }
 
-    /**
-     * @author: TruongNN
-     * Date created: 28/06/2023
-     * function: find all news
-     * @param pageable
-     */
+   
     @Override
     public Page<News> findAllNews(Pageable pageable) {
         return this.inewsRepository.findAllNews(
@@ -40,12 +28,7 @@ public class NewsService implements INewsService {
         );
     }
 
-    /**
-     * @author: TruongNN
-     * Date created: 28/06/2023
-     * function: find by id of News
-     * @param id
-     */
+    
     @Override
     public News findByIdNews(int id) {
         return inewsRepository.findByIdNews(id);

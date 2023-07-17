@@ -33,16 +33,7 @@ public class AccountController {
     private JwtTokenFilter jwtTokenFilter;
     @Autowired
     private IEmployeeInformationService iEmployeeInformationService;
-    /**
-     * Author:QuynhHTN
-     * Date create: 27/06/2023
-     * Function: use the changePassword method to change password.If not unsuccessful return HttpStatus.BAD_REQUEST.
-     If successful return message and return HttpStatus.OK
-
-     * @param changePasswordForm
-     * @param bindingResult
-     * @return
-     */
+   
     @PutMapping("/change-password")
     public ResponseEntity<?> changePassword(HttpServletRequest request, @Validated @RequestBody ChangePasswordForm changePasswordForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

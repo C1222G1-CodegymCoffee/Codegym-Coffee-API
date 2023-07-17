@@ -10,29 +10,10 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 
 public interface IEmployeeInformationRepository extends JpaRepository<Employee, Integer> {
-    /**
-     * Author:QuynhHTN
-     * Date create: 27/06/2023
-     * Function: use findByNameAccount method to find out personal information
-     *
-     * @param nameAccount
-     * @return
-     */
+    
     @Query(value = "select * from employee e join account a on e.id_account = a.id_account where a.name_account = :nameAccount", nativeQuery = true)
     Employee findByNameAccount(@Param("nameAccount") String nameAccount);
-    /**
-     * Author:QuynhHTN
-     * Date create: 27/06/2023
-     * Function: use the update method to update personal information
-     *
-     * @param nameEmployee
-     * @param gender
-     * @param phoneNumber
-     * @param dateOfBirth
-     * @param salary
-     * @param idPosition
-     * @param address
-     */
+    
     @Modifying
     @Transactional
     @Query(value = "update employee set name_employee=:nameEmployee,gender=:gender,phone_number=:phoneNumber,salary=:salary,date_of_birth=:dateOfBirth,image=:image,id_position=:idPosition, address=:address where id_employee = :idEmployee", nativeQuery = true)

@@ -14,24 +14,13 @@ public class EmployeeInformationService implements IEmployeeInformationService {
     @Autowired
     IEmployeeInformationRepository iEmployeeInformationRepository;
 
-    /**
-     * Author:QuynhHTN
-     * Date create: 27/06/2023
-     * Function: use findByNameAccount method to find out personal information
-     * @param nameAccount
-     * @return
-     */
+    
     @Override
     public Employee findByNameAccount(String nameAccount) {
         return iEmployeeInformationRepository.findByNameAccount(nameAccount);
     }
 
-    /**
-     * Author:QuynhHTN
-     * Date create: 27/06/2023
-     * Function: use the update method to update personal information
-     * @param employee
-     */
+    
     @Override
     public void updateEmployee(Employee employee) {
         iEmployeeInformationRepository.updateEmployee(

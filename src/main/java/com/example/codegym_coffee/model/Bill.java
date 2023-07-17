@@ -12,8 +12,6 @@ public class Bill {
     @Column(name = "id_bill",nullable = false)
     private Integer idBill;
 
-    @Column(name = "code_bill", columnDefinition = "Varchar(40)")
-    private String codeBill;
 
     @Column(name = "day_of_bill",columnDefinition = "date")
     private LocalDate dayOfBill;
@@ -42,10 +40,9 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(Integer idBill, String codeBill, LocalDate dayOfBill, Integer paymentStatus, Employee employee,
+    public Bill(Integer idBill,  LocalDate dayOfBill, Integer paymentStatus, Employee employee,
                 TableCoffee tableCoffee, Feedback feedback, List<BillDetail> billDetails) {
         this.idBill = idBill;
-        this.codeBill = codeBill;
         this.dayOfBill = dayOfBill;
         this.paymentStatus = paymentStatus;
         this.employee = employee;
@@ -69,13 +66,6 @@ public class Bill {
         this.idBill = idBill;
     }
 
-    public String getCodeBill() {
-        return codeBill;
-    }
-
-    public void setCodeBill(String codeBill) {
-        this.codeBill = codeBill;
-    }
 
     public LocalDate getDayOfBill() {
         return dayOfBill;

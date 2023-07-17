@@ -29,14 +29,7 @@ import org.springframework.web.bind.annotation.*;
 public class NewsController {
     @Autowired
     private INewsService iNewsService;
-    /**
-     * create by : ThongDM ,
-     * Date Create : 27/06/2023
-     * Function : add 1 new news to the database
-     *
-     * @param newsDTO
-     * @return HttpStatus.BAD_REQUEST if the result is an error or HttpStatus.OK if the passed parameter is successfully saved to the database
-     */
+    
     @PostMapping()
     public ResponseEntity<List<ObjectError>> createNews(@Validated @RequestBody NewsDTO newsDTO, BindingResult bindingResult) {
         newsDTO.validate(newsDTO, bindingResult);

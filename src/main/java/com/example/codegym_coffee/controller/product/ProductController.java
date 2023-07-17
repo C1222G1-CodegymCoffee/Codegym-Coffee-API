@@ -30,13 +30,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    /**
-     * Create by: NghiaLD,
-     * Date create : 28/06/2023
-     * Function : get id from product
-     *
-     * @param id
-     */
+   
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/product/{id}")
@@ -48,14 +42,7 @@ public class ProductController {
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-    /**
-     * Created by: NghiaLD
-     * Date created: 28/06/2023
-     * Function: Update data product into Database*
-     *
-     * @param productDTO
-     * @return
-     */
+    
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping("/product-update/{idProduct}")
     public ResponseEntity<List<ObjectError>> updateProduct(@PathVariable Integer idProduct, @Valid @RequestBody ProductDTO productDTO, BindingResult bindingResult) {

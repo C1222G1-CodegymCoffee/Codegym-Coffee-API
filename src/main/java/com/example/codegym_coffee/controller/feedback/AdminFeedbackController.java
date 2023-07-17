@@ -21,13 +21,7 @@ public class AdminFeedbackController {
     @Autowired
     private IFeedbackService feedbackService;
 
-    /**
-     * @param pageable (10)
-     * @return ResponseEntity<>(listFeedback,HttpStatus.OK)
-     * @Author TrinhCHT
-     * @Date_create: 27/06/2023
-     * @Usage_method The method used to show list feedback
-     */
+   
     @GetMapping()
     public ResponseEntity<Page<Feedback>> listFeedback(@PageableDefault(size = 10) Pageable pageable,
                                                        @RequestParam(value = "page", defaultValue = "0") int page) {
@@ -38,13 +32,7 @@ public class AdminFeedbackController {
     }
 
 
-    /**
-     * @param dayOfFeedback
-     * @return ResponseEntity<>(listFeedbackDay,HttpStatus.OK)
-     * @Author TrinhCHT
-     * @Date_create: 27/06/2023
-     * @Usage_method The method used to search feedback by dayOfFeedback
-     */
+ 
     @GetMapping("/search")
     public ResponseEntity<Page<Feedback>> searchFeedback(
             @RequestParam(name = "searchTerm", defaultValue = "") String searchTerm,
@@ -64,13 +52,7 @@ public class AdminFeedbackController {
     }
 
 
-    /**
-     * @param id
-     * @return ResponseEntity<>(feedback, HttpStatus.OK)
-     * @Author TrinhCHT
-     * @Date_create: 27/06/2023
-     * @Usage_method The method used to show detail feedback
-     */
+   
     @GetMapping("/detail/{id}")
     public ResponseEntity<Feedback> getFeedbackById(@PathVariable("id") Integer id) {
         Feedback feedback = feedbackService.getFeedbackById(id);

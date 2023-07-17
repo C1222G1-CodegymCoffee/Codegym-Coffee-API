@@ -12,11 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
-/**
- * Creator: THangHA
- * Date Create: 27/06/2023
- * Function : Add new employee to database
- */
+
 
 public interface IEmployeeRepository extends JpaRepository<Employee, Integer> {
 

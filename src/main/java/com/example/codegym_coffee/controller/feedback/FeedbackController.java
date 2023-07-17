@@ -24,12 +24,7 @@ public class FeedbackController {
     @Autowired
     private IFeedbackService feedbackService;
 
-    /**
-     * Created by: TruongNN
-     * Date created: 28/06/2023
-     * Function: add data feedback  into Database
-     * @param feedbackDTO
-     */
+    
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/create-feedback")
     public ResponseEntity<FeedbackDTO> createFeedback(@Valid @RequestBody FeedbackDTO feedbackDTO,

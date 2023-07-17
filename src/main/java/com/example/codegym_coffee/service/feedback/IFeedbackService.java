@@ -17,12 +17,6 @@ public interface IFeedbackService {
     Page<Feedback> findFeedbackByCreatorOrContent(String searchTerm, Pageable pageable);
 
     Page<Feedback> searchByCreatorOrContentAndDayOfFeedback(String searchTerm, LocalDate dayOfFeedback, Pageable pageable);
-    /**
-     * @author: TruongNN
-     * Date created: 28/06/2023
-     * function: Create feedback
-     *
-     * @param feedbackDTO
-     */
+    
     void createFeedback (FeedbackDTO feedbackDTO);
 }

@@ -23,13 +23,7 @@ public class BillController {
     private IBillService billService;
 
 
-    /**
-     * @param pageable (10)
-     * @return ResponseEntity<>(listBill,HttpStatus.OK)
-     * @Author ThanhNV
-     * @Date_create: 27/06/2023
-     * @Usage_method The method used to show list bill
-     */
+  
     @GetMapping("/list-bill")
     public ResponseEntity<Page<Bill>> listBill(
             @PageableDefault(size = 10) Pageable pageable,

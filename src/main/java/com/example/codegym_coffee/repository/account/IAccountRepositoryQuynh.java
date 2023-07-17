@@ -12,23 +12,11 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface IAccountRepositoryQuynh extends JpaRepository<Account,Integer> {
-    /**
-     * Author:QuynhHTN
-     * Date create: 27/06/2023
-     * Function: use findByNameAccount method to find account
-     * @param nameAccount
-     * @return
-     */
+    
     @Query(value = "SELECT * from account where name_account = :nameAccount",nativeQuery = true)
     Account findByNameAccount(String nameAccount);
 
-    /**
-     * Author:QuynhHTN
-     * Date create: 27/06/2023
-     * Function: use the updatePasswword method to user change password
-     * @param newPassword
-     * @param id
-     */
+    
     @Modifying
     @Transactional
     @Query(value = "UPDATE account SET password = :newPassword WHERE id_account = :id",nativeQuery = true)

@@ -13,36 +13,18 @@ import java.time.LocalDate;
 @Repository
 public interface IBillRepository extends JpaRepository<Bill, Integer> {
 
-    /**
-     * @param pageable (10)
-     * @return findAllBill
-     * @Author ThanhNV
-     * @Date_create: 27/06/2023
-     * @Usage_method findAllBill to show list bill
-     */
+   
     @Query(value = "select  * from bill ORDER BY day_of_bill DESC"
             , nativeQuery = true)
     Page<Bill> showListBill(Pageable pageable, @Param("search") String search);
 
-    /**
-     * @param pageable (10)
-     * @return findByDayOfBill
-     * @Author ThanhNV
-     * @Date_create: 27/06/2023
-     * @Usage_method findByDayOfBill to show list bill where day desiderate
-     */
+   
     @Query(value = "select * from bill WHERE day_of_bill = :dayOfBill"
             , nativeQuery = true)
     Page<Bill> findByDayOfBill(@Param("dayOfBill") LocalDate dayOfBill, Pageable pageable);
 
 
-    /**
-     * @param pageable (10)
-     * @return findByCodeOfBill
-     * @Author ThanhNV
-     * @Date_create: 27/06/2023
-     * @Usage_method findByCodeOfBill to show list bill where code desiderate
-     */
+   
     @Query(value = "select * from bill WHERE code_bill = :codeBill"
             , nativeQuery = true)
     Page<Bill> findByCodeOfBill(@Param("codeBill") String codeBill, Pageable pageable);

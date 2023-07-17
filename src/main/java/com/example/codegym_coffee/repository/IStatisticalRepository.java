@@ -14,12 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface IStatisticalRepository extends JpaRepository<BillDetail, Integer> {
-    /**
-     * create by : ThongDM ,
-     * Date Create : 27/06/2023
-     * Function : Daily revenue statistics
-     * @Param day_of_bill
-     */
+    
     @Transactional
     @Modifying
 

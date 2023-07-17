@@ -12,26 +12,11 @@ import java.util.List;
 
 @Transactional
 public interface IProductRepository extends JpaRepository<Product, Integer> {
-    /**
-     * Create by: NghiaLD,
-     * Date create : 27/06/2023
-     * Function : Find product by id
-     *
-     * @param id
-     */
+   
     @Query(value = "select * from product where id_product = :id_product", nativeQuery = true)
     Product findByIdProduct(@Param("id_product") Integer id);
 
-    /**
-     * Create by: NghiaLD,
-     * Date create : 27/06/2023
-     * Function : Add new product to database
-     * @param nameProduct
-     * @param ingredient
-     * @param price
-     * @param image
-     * @param idType
-     */
+   
 
     @Modifying
     @Query(value = "insert into product(name_product ,ingredient, price , image , id_type) values ( :name_product, :ingredient ,:price , :image  , :id_type )", nativeQuery = true)
@@ -43,18 +28,7 @@ public interface IProductRepository extends JpaRepository<Product, Integer> {
             @Param("id_type") Integer idType
     );
 
-    /**
-     * Create by: NghiaLD,
-     * Date create : 27/06/2023
-     * Function : Update product to database
-     *
-     *@param nameProduct
-     * @param ingredient
-     * @param price
-     * @param image
-     * @param idType
-     * @param idProduct
-     */
+    
 
 
     @Modifying
